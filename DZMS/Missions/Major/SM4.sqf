@@ -1,55 +1,59 @@
-//Bandit Supply Heli Crash by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+/*
+	Bandit Supply Heli Crash by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+	New Mission Format by Vampire
+*/
 
-private ["_coords","_MainMarker","_chopper","_wait"];
-[] execVM "\z\addons\dayz_server\Missions\SMGoMajor.sqf";
-WaitUntil {MissionGo == 1};
+private ["_coords","_ranChopper","_chopper","_crate","_crate2","_crate3"];
 
-_coords = [getMarkerPos "center",0,5500,30,0,20,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"A bandit supply helicopter has crash landed! Check your map for the location!", "PLAIN",10] call RE;
 
-Ccoords = _coords;
-publicVariable "Ccoords";
-[] execVM "debug\addmarkers.sqf";
+//DZMSAddMajMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMajMarker;
 
-_chopper = ["UH1H_DZ","Mi17_DZ"] call BIS_fnc_selectRandom;
+//We create the vehicles like normal
+_ranChopper = ["UH1H_DZ","Mi17_DZ"] call BIS_fnc_selectRandom;
+_chopper = createVehicle [_chopper,_coords,[], 0, "NONE"];
 
-_hueychop = createVehicle [_chopper,_coords,[], 0, "NONE"];
-_hueychop setVariable ["ObjectID",""];
-_hueychop setFuel 0.1;
-_hueychop setVehicleAmmo 0.2;
+//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
+[_chopper] call DZMSSetupVehicle;
 
 _crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
-_crate setVariable ["ObjectID",""];
-_crate setVariable ["permaLoot",true];
+
+//DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
+[_crate,"weapons"] call DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) + 6, _coords select 1,0],[], 90, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
+[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2] call DZMSProtectObj;
 
 _crate3 = createVehicle ["RULaunchersBox",[(_coords select 0) - 14, (_coords select 1) -10,0],[], 0, "CAN_COLLIDE"];
-[_crate3] execVM "\z\addons\dayz_server\missions\misc\fillBoxesH.sqf";
-_crate3 setVariable ["ObjectID",""];
-_crate3 setVariable ["permaLoot",true];
+[_crate3,"weapons"] call DZMSBoxSetup;
+[_crate3] call DZMSProtectObj;
 
-_aispawn = [_coords,80,6,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+//DZMSAISpawn spawns AI to the mission.
+//Usage: [_coords, count, skillLevel]
+[_coords,6,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,80,6,4,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,4,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,40,4,4,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,4,1] call DZMSAISpawn;
+sleep 5;
 
-waitUntil{{isPlayer _x && _x distance _hueychop < 10  } count playableunits > 0}; 
+//Wait until the player is within 30meters
+waitUntil{{isPlayer _x && _x distance _coords < 10  } count playableunits > 0}; 
 
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_chopper] call DZMSSaveVeh;
+
+//Let everyone know the mission is over
 [nil,nil,rTitleText,"The helicopter has been taken by survivors!", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Major SM4 Helicopter Landing Mission has Ended."];
+deleteMarker "DZMSMajMarker";
 
-
-[] execVM "debug\remmarkers.sqf";
-MissionGo = 0;
-Ccoords = 0;
-publicVariable "Ccoords";
-
-
-SM1 = 5;
-[0] execVM "\z\addons\dayz_server\missions\major\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMajDone = true;
