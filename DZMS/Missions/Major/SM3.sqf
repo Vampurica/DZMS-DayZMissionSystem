@@ -1,53 +1,50 @@
-//Medical Supply Camp by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+/*
+	Medical Supply Camp by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+	Updated to New Mission Format by Vampire
+*/
 
-private ["_coords","_MainMarker","_base","_wait"];
-[] execVM "\z\addons\dayz_server\Missions\SMGoMajor.sqf";
-WaitUntil {MissionGo == 1};
+private ["_coords","_crate","_crate2","_vehicle","_base1","_base2"];
 
-_coords = [getMarkerPos "center",0,5500,50,0,20,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"Bandits have set up a medical re-supply camp! Check your map for the location!", "PLAIN",10] call RE;
 
-Ccoords = _coords;
-publicVariable "Ccoords";
-[] execVM "debug\addmarkers.sqf";
+//DZMSAddMajMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMajMarker;
 
+//Create the scenery
+_base1 = createVehicle ["land_fortified_nest_big",[(_coords select 0) - 20, (_coords select 1) - 10,-0.2],[], 0, "CAN_COLLIDE"];
+_base2 = createVehicle ["Land_Fort_Watchtower",[(_coords select 0) - 10, (_coords select 1) + 10,-0.2],[], 0, "CAN_COLLIDE"];
+[_base1] call DZMSProtectObj;
+[_base2] call DZMSProtectObj;
 
-_baserunover = createVehicle ["land_fortified_nest_big",[(_coords select 0) - 20, (_coords select 1) - 10,-0.2],[], 0, "CAN_COLLIDE"];
-_baserunover2 = createVehicle ["Land_Fort_Watchtower",[(_coords select 0) - 10, (_coords select 1) + 10,-0.2],[], 0, "CAN_COLLIDE"];
-_hummer = createVehicle ["HMMWV_DZ",[(_coords select 0) + 25, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+//Create the vehicles
+_vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) + 25, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+[_vehicle] call DZMSSetupVehicle;
 
-_baserunover2 setVariable ["ObjectID",""];
-_baserunover setVariable ["ObjectID",""];
-_hummer setVariable ["ObjectID",""];
-
+//Create the loot
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) + 5, (_coords select 1),0],[], 0, "CAN_COLLIDE"];
-[_crate] execVM "\z\addons\dayz_server\missions\misc\fillBoxesM.sqf";
-
-_crate setVariable ["ObjectID",""];
-_crate setVariable ["permaLoot",true];
+[_crate,"medical"] call DZMSBoxSetup;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) + 12, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
+[_crate2,"weapons"] call DZMSBoxSetup;
 
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
-
-_aispawn = [_coords,80,6,3,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+//DZMSAISpawn spawns AI to the mission.
+//Usage: [_coords, count, skillLevel]
+[_coords,3,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,40,4,3,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,3,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,40,4,3,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,3,1] call DZMSAISpawn;
 
-
+//Wait until the player is within 30meters
 waitUntil{{isPlayer _x && _x distance _baserunover < 10  } count playableunits > 0}; 
 
+//Let everyone know the mission is over
 [nil,nil,rTitleText,"Survivors have taken control of the camp and medical supplies.", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Major SM3 Medical Camp Mission has Ended."];
+deleteMarker "DZMSMajMarker";
 
-[] execVM "debug\remmarkers.sqf";
-MissionGo = 0;
-Ccoords = 0;
-publicVariable "Ccoords";
-
-SM1 = 1;
-[0] execVM "\z\addons\dayz_server\missions\major\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMajDone = true;
