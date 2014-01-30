@@ -3,7 +3,7 @@
 	Modified to new format by Vampire
 */
 
-private ["_coords","_MainMarker","_wait"];
+private ["_coords","_c130wreck","_crate","_crate2","_vehicle","_vehicle1","_vehicle2"];
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
