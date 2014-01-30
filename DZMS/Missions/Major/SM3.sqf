@@ -39,7 +39,11 @@ sleep 5;
 [_coords,3,1] call DZMSAISpawn;
 
 //Wait until the player is within 30meters
-waitUntil{{isPlayer _x && _x distance _baserunover < 10  } count playableunits > 0}; 
+waitUntil{{isPlayer _x && _x distance _baserunover < 10  } count playableunits > 0};
+
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_vehicle] call DZMSSaveVeh;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"Survivors have taken control of the camp and medical supplies.", "PLAIN",6] call RE;
