@@ -1,57 +1,66 @@
-//Medical C-130 Crash by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+/*
+	Medical C-130 Crash by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+	Modified to new format by Vampire
+*/
 
 private ["_coords","_MainMarker","_wait"];
-[] execVM "\z\addons\dayz_server\Missions\SMGoMajor.sqf";
-WaitUntil {MissionGo == 1};
 
-_coords = [getMarkerPos "center",0,5600,100,0,20,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"A C-130 carrying medical supplies has crashed and bandits are securing the site! Check your map for the location!", "PLAIN",10] call RE;
 
-Ccoords = _coords;
-publicVariable "Ccoords";
-[] execVM "debug\addmarkers.sqf";
+//DZMSAddMajMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMajMarker;
 
+//We create the mission scenery
 _c130wreck = createVehicle ["C130J_wreck_EP1",[(_coords select 0) + 30, (_coords select 1) - 5,0],[], 0, "NONE"];
-_hummer = createVehicle ["HMMWV_DZ",[(_coords select 0) - 20, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_hummer1 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) - 30, (_coords select 1) - 10,0],[], 0, "CAN_COLLIDE"];
-_hummer2 = createVehicle ["SUV_DZ",[(_coords select 0) + 10, (_coords select 1) + 5,0],[], 0, "CAN_COLLIDE"];
+[_c130wreck] call DZMSProtectObj;
 
-_c130wreck setVariable ["ObjectID",""];
-_hummer setVariable ["ObjectID",""];
-_hummer1 setVariable ["ObjectID",""];
-_hummer2 setVariable ["ObjectID",""];
+//We create the mission vehicles
+_vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) - 20, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) - 30, (_coords select 1) - 10,0],[], 0, "CAN_COLLIDE"];
+_vehicle2 = createVehicle ["SUV_DZ",[(_coords select 0) + 10, (_coords select 1) + 5,0],[], 0, "CAN_COLLIDE"];
+
+//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
+[_vehicle] call DZMSSetupVehicle;
+[_vehicle1] call DZMSSetupVehicle;
+[_vehicle2] call DZMSSetupVehicle;
 
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 10, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate] execVM "\z\addons\dayz_server\missions\misc\fillBoxesM.sqf";
 
-_crate setVariable ["ObjectID",""];
-_crate setVariable ["permaLoot",true];
+//DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
+[_crate,"weapons"] call DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
 
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
+[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2] call DZMSProtectObj;
 
-_aispawn = [[(_coords select 0) + 20, _coords select 1,0],80,6,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+//DZMSAISpawn spawns AI to the mission.
+//Usage: [_coords, count, skillLevel]
+[[(_coords select 0) + 20, _coords select 1,0],6,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [[(_coords select 0) + 30, _coords select 1,0],80,6,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[[(_coords select 0) + 30, _coords select 1,0],6,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [[(_coords select 0) + 20, _coords select 1,0],40,4,4,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[[(_coords select 0) + 20, _coords select 1,0],4,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [[(_coords select 0) + 30, _coords select 1,0],40,4,4,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[[(_coords select 0) + 30, _coords select 1,0],4,1] call DZMSAISpawn;
 
-waitUntil{{isPlayer _x && _x distance _c130wreck < 5 } count playableunits > 0}; 
+//Wait until the player is within 30meters
+waitUntil{{isPlayer _x && _x distance _coords <= 30 } count playableunits > 0}; 
 
-[] execVM "debug\remmarkers.sqf";
-MissionGo = 0;
-Ccoords = 0;
-publicVariable "Ccoords";
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_vehicle] call DZMSSaveVeh;
+[_vehicle1] call DZMSSaveVeh;
+[_vehicle2] call DZMSSaveVeh;
 
-
+//Let everyone know the mission is over
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;
-SM1 = 1;
+diag_log format["[DZMS]: Major SM2 Crash Site Mission has Ended."];
+deleteMarker "DZMSMajMarker";
 
-
-[0] execVM "\z\addons\dayz_server\missions\major\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMajDone = true;
