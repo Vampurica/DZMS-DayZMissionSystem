@@ -44,7 +44,7 @@ sleep 5;
 sleep 5;
 
 //Wait until the player is within 30meters
-waitUntil{{isPlayer _x && _x distance _coords < 10  } count playableunits > 0}; 
+waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.

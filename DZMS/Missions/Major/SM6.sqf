@@ -1,51 +1,52 @@
-//Medical Crate by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+/*
+	Medical Crate by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+	Updated to new format by Vampire
+*/
 
-private ["_coords","_MainMarker","_wait"];
-[] execVM "\z\addons\dayz_server\Missions\SMGoMajor.sqf";
-WaitUntil {MissionGo == 1};
+private ["_coords","_vehicle","_vehicle1","_crate","_crate2"];
 
-_coords = [getMarkerPos "center",0,5500,30,0,2000,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"A medical supply crate has been secured by bandits! Check your map for the location!", "PLAIN",10] call RE;
 
+//DZMSAddMajMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMajMarker;
 
-Ccoords = _coords;
-publicVariable "Ccoords";
-[] execVM "debug\addmarkers.sqf";
+//We create the vehicles like normal
+_vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) + 10, (_coords select 1) - 10,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 20, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
-_hummer = createVehicle ["HMMWV_DZ",[(_coords select 0) + 10, (_coords select 1) - 10,0],[], 0, "CAN_COLLIDE"];
-_hummer1 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 20, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-
-_hummer setVariable ["ObjectID",""];
-_hummer1 setVariable ["ObjectID",""];
+//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
+[_vehicle] call DZMSSetupVehicle;
+[_vehicle1] call DZMSSetupVehicle;
 
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 1, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate] execVM "\z\addons\dayz_server\missions\misc\fillBoxesM.sqf";
-_crate setVariable ["ObjectID",""];
-_crate setVariable ["permaLoot",true];
+
+//DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
+[_crate,"medical"] call DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
+[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2] call DZMSProtectObj;
 
-_aispawn = [_coords,80,6,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,6,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,80,6,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,6,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,40,4,4,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,4,1] call DZMSAISpawn;
 
-waitUntil{{isPlayer _x && _x distance _hummer < 10  } count playableunits > 0}; 
+waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
+
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_vehicle] call DZMSSaveVeh;
+[_vehicle1] call DZMSSaveVeh;
 
 [nil,nil,rTitleText,"The medical crate is under survivor control!", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Major SM5 Medical Crate Mission has Ended."];
+deleteMarker "DZMSMajMarker";
 
-
-[] execVM "debug\remmarkers.sqf";
-MissionGo = 0;
-Ccoords = 0;
-publicVariable "Ccoords";
-
-
-
-SM1 = 5;
-[0] execVM "\z\addons\dayz_server\missions\major\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMajDone = true;

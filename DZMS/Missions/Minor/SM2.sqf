@@ -1,66 +1,71 @@
-//Medical Outpost by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
+/*
+	Medical Outpost by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
+	Updated to new format by Vampire
+*/
+private ["_coords","_base","_base1","_base2","_base3","_vehicle","_vehicle1","_crate","_crate2"];
 
-private ["_coords","_wait","_MainMarker75"];
-[] execVM "\z\addons\dayz_server\Missions\SMGoMinor.sqf";
-WaitUntil {MissionGoMinor == 1};
-
-
-_coords =  [getMarkerPos "center",0,5500,10,0,20,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"A group of bandits have taken over a Medical Outpost! Check your map for the location!", "PLAIN",10] call RE;
 
-MCoords = _coords;
-publicVariable "MCoords";
-[] execVM "debug\addmarkers75.sqf";
+//DZMSAddMinMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMinMarker;
 
-_baserunover = createVehicle ["US_WarfareBFieldhHospital_Base_EP1",[(_coords select 0) +2, (_coords select 1)+5,-0.3],[], 0, "CAN_COLLIDE"];
-_baserunover1 = createVehicle ["MASH_EP1",[(_coords select 0) - 24, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_baserunover2 = createVehicle ["MASH_EP1",[(_coords select 0) - 17, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_baserunover3 = createVehicle ["MASH_EP1",[(_coords select 0) - 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_baserunover4 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_baserunover5 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 15, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_baserunover6 = createVehicle ["SUV_DZ",[(_coords select 0) + 25, (_coords select 1) - 15,0],[], 0, "CAN_COLLIDE"];
+//We create the scenery
+_base = createVehicle ["US_WarfareBFieldhHospital_Base_EP1",[(_coords select 0) +2, (_coords select 1)+5,-0.3],[], 0, "CAN_COLLIDE"];
+_base1 = createVehicle ["MASH_EP1",[(_coords select 0) - 24, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_base2 = createVehicle ["MASH_EP1",[(_coords select 0) - 17, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_base3 = createVehicle ["MASH_EP1",[(_coords select 0) - 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
-_baserunover setVariable ["ObjectID",""];
-_baserunover1 setVariable ["ObjectID",""];
-_baserunover2 setVariable ["ObjectID",""];
-_baserunover3 setVariable ["ObjectID",""];
-_baserunover4 setVariable ["ObjectID",""];
-_baserunover5 setVariable ["ObjectID",""];
-_baserunover6 setVariable ["ObjectID",""];
+//DZMSProtectObj prevents it from disappearing
+[_base] call DZMSProtectObj;
+[_base1] call DZMSProtectObj;
+[_base2] call DZMSProtectObj;
+[_base3] call DZMSProtectObj;
 
+//We create the vehicles
+_vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 15, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
+//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
+[_vehicle] call DZMSSetupVehicle;
+[_vehicle1] call DZMSSetupVehicle;
+
+//We create and fill the crates
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate] execVM "\z\addons\dayz_server\missions\misc\fillBoxesM.sqf";
-_crate setVariable ["ObjectID",""];
-_crate setVariable ["permaLoot",true];
+
+//DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
+[_crate,"medical"] call DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 8, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
+[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2] call DZMSProtectObj;
 
-
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+//DZMSAISpawn spawns AI to the mission.
+//Usage: [_coords, count, skillLevel]
+[[(_coords select 0) - 20, (_coords select 1) - 15,0],2,0] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 10, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+[[(_coords select 0) + 10, (_coords select 1) + 15,0],2,0] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) - 10, (_coords select 1) - 15,0],40,4,2,0] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+[[(_coords select 0) - 10, (_coords select 1) - 15,0],2,0] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],40,4,2,0] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+[[(_coords select 0) + 20, (_coords select 1) + 15,0],2,0] call DZMSAISpawn;
 sleep 3;
 
+//Wait until the player is within 30meters
+waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
 
-waitUntil{{isPlayer _x && _x distance _baserunover < 5  } count playableunits > 0}; 
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_vehicle] call DZMSSaveVeh;
+[_vehicle1] call DZMSSaveVeh;
 
+//Let everyone know the mission is over
 [nil,nil,rTitleText,"The Medical Outpost is under survivor control!", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Minor SM2 Medical Outpost Mission has Ended."];
+deleteMarker "DZMSMinMarker";
 
-[] execVM "debug\remmarkers75.sqf";
-MissionGoMinor = 0;
-MCoords = 0;
-publicVariable "MCoords";
-
-
-
-SM1 = 1;
-[0] execVM "\z\addons\dayz_server\missions\minor\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMinDone = true;

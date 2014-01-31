@@ -1,36 +1,40 @@
-//Bandit Hunting Party by lazyink (Full credit to TheSzerdi & TAW_Tonic for the code)
-private ["_coords","_wait","_MainMarker75"];
+/*
+	Bandit Hunting Party by lazyink (Full credit to TheSzerdi & TAW_Tonic for the code)
+	Updated to new format by Vampire
+*/
+private ["_coords","_vehicle"];
 
-[] execVM "\z\addons\dayz_server\Missions\SMGoMinor.sqf";
-WaitUntil {MissionGoMinor == 1};
-
-
-_coords = [getMarkerPos "center",0,5500,2,0,2000,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"A bandit hunting party has been spotted! Check your map for the location!", "PLAIN",10] call RE;
 
-MCoords = _coords;
-publicVariable "MCoords";
-[] execVM "debug\addmarkers75.sqf";
+//DZMSAddMinMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMinMarker;
 
-_hummer = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_hummer setVariable ["ObjectID",""];
+//Create the vehicle as normal
+_vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
+[_vehicle] call DZMSSetupVehicle;
+
+[_coords,2,1] call DZMSAISpawn;
 sleep 5;
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+[_coords,2,1] call DZMSAISpawn;
 sleep 5;
-[_coords,80,4,2,1] execVM "\z\addons\dayz_server\missions\add_unit_server2.sqf";//AI Guards
+[_coords,2,1] call DZMSAISpawn;
 sleep 1;
 
-waitUntil{({alive _x} count (units SniperTeam)) < 1};
+waitUntil{ {isPlayer _x && _x distance _coords <= 30 } count playableunits > 0 };
 
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_vehicle] call DZMSSaveVeh;
+
+//Let everyone know the mission is over
 [nil,nil,rTitleText,"The hunting party has been wiped out!", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Minor SM1 Hunting Party Mission has Ended."];
+deleteMarker "DZMSMinMarker";
 
-[] execVM "debug\remmarkers75.sqf";
-MissionGoMinor = 0;
-MCoords = 0;
-publicVariable "MCoords";
-
-SM1 = 1;
-[0] execVM "\z\addons\dayz_server\missions\minor\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMinDone = true;

@@ -1,38 +1,42 @@
-//Bandit Heli Down! by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
-private ["_coords","_wait","_MainMarker75"];
+/*
+	Bandit Heli Down! by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
+	Updated to new format by Vampire
+*/
+private ["_coords","_crash","_crate"];
 
-[] execVM "\z\addons\dayz_server\Missions\SMGoMinor.sqf";
-WaitUntil {MissionGoMinor == 1};
-
-_coords =  [getMarkerPos "center",0,5000,10,0,1000,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"A bandit helicopter has crashed! Check your map for the location!", "PLAIN",10] call RE;
 
-MCoords = _coords;
-publicVariable "MCoords";
-[] execVM "debug\addmarkers75.sqf";
+//DZMSAddMinMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMinMarker;
 
-_chopcrash = createVehicle ["UH60Wreck_DZ",_coords,[], 0, "CAN_COLLIDE"];
-_chopcrash setVariable ["ObjectID",""];
+//Add the scenery
+_crash = createVehicle ["UH60Wreck_DZ", _coords,[], 0, "CAN_COLLIDE"];
 
-_crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
+//DZMSProtectObj prevents it from disappearing
+[_crash] call DZMSProtectObj;
 
-[_coords,40,4,3,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+//We create and fill the crates
+_crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+[_crate,"weapons"] call DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
+
+//DZMSAISpawn spawns AI to the mission.
+//Usage: [_coords, count, skillLevel]
+[_coords,3,1] call DZMSAISpawn;
 sleep 1;
-[_coords,40,4,3,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,3,1] call DZMSAISpawn;
 sleep 1;
 
-waitUntil{{isPlayer _x && _x distance _chopcrash < 5  } count playableunits > 0}; 
+//Wait until the player is within 30meters
+waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
 
+//Let everyone know the mission is over
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Minor SM4 Crash Site Mission has Ended."];
+deleteMarker "DZMSMinMarker";
 
-[] execVM "debug\remmarkers75.sqf";
-MissionGoMinor = 0;
-MCoords = 0;
-publicVariable "MCoords";
-
-SM1 = 5;
-[0] execVM "\z\addons\dayz_server\missions\minor\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMinDone = true;

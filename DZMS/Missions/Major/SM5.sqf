@@ -1,51 +1,56 @@
-//Medical Ural Attack by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+/*
+	Medical Ural Attack by lazyink (Full credit for original code to TheSzerdi & TAW_Tonic)
+	Updated to New Format by Vampire
+*/
 
-private ["_coords","_MainMarker","_chopper","_wait"];
-[] execVM "\z\addons\dayz_server\Missions\SMGoMajor.sqf";
-WaitUntil {MissionGo == 1};
+private ["_coords","_crash","_vehicle","_vehicle1","_crate","_crate2"];
 
-_coords = [getMarkerPos "center",0,5500,30,0,20,0] call BIS_fnc_findSafePos;
+//DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
+_coords = call DZMSFindPos;
 
 [nil,nil,rTitleText,"Bandits have destroyed a Ural carrying medical supplies and are securing the cargo! Check your map for the location!", "PLAIN",10] call RE;
 
-Ccoords = _coords;
-publicVariable "Ccoords";
-[] execVM "debug\addmarkers.sqf";
+//DZMSAddMajMarker is a simple script that adds a marker to the location
+[_coords] call DZMSAddMajMarker;
 
-_uralcrash = createVehicle ["UralWreck",_coords,[], 0, "CAN_COLLIDE"];
-_uralcrash setVariable ["ObjectID",""];
+//We create the scenery
+_crash = createVehicle ["UralWreck",_coords,[], 0, "CAN_COLLIDE"];
+[_crash] call DZMSProtectObj;
 
-_hummer = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 20, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_hummer1 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 30, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+//We create the vehicles like normal
+_vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 20, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 30, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
-_hummer setVariable ["ObjectID",""];
-_hummer1 setVariable ["ObjectID",""];
+//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
+[_vehicle] call DZMSSetupVehicle;
+[_vehicle1] call DZMSSetupVehicle;
 
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate] execVM "\z\addons\dayz_server\missions\misc\fillBoxesM.sqf";
-_crate setVariable ["ObjectID",""];
-_crate setVariable ["permaLoot",true];
+
+//DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
+[_crate,"medical"] call DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 10, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2] execVM "\z\addons\dayz_server\missions\misc\fillBoxesS.sqf";
-_crate2 setVariable ["ObjectID",""];
-_crate2 setVariable ["permaLoot",true];
 
-_aispawn = [_coords,80,6,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2] call DZMSProtectObj;
+
+[_coords,6,1] call DZMSAISpawn;
 sleep 5;
-_aispawn = [_coords,40,4,6,1] execVM "\z\addons\dayz_server\missions\add_unit_server.sqf";//AI Guards
+[_coords,6,1] call DZMSAISpawn;
 sleep 5;
 
-waitUntil{{isPlayer _x && _x distance _uralcrash < 5  } count playableunits > 0}; 
+waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
+
+//Call DZMSSaveVeh to attempt to save the vehicles to the database
+//If saving is off, the script will exit.
+[_vehicle] call DZMSSaveVeh;
+[_vehicle1] call DZMSSaveVeh;
 
 [nil,nil,rTitleText,"The medical supplies have been secured by survivors!", "PLAIN",6] call RE;
+diag_log format["[DZMS]: Major SM5 Medical Supplies Mission has Ended."];
+deleteMarker "DZMSMajMarker";
 
-
-[] execVM "debug\remmarkers.sqf";
-MissionGo = 0;
-Ccoords = 0;
-publicVariable "Ccoords";
-
-
-SM1 = 5;
-[0] execVM "\z\addons\dayz_server\missions\major\SMfinder.sqf";
+//Let the timer know the mission is over
+DZMSMajDone = true;
