@@ -21,14 +21,15 @@ Installation
 
 5.	Open up your server_functions.SQF in the init folder in your server.PBO.
 
-	<b>Search for the code block</b></br>
-	dayz_recordLogin = {</br>
-		private["_key"];</br>
-		_key = format["CHILD:103:%1:%2:%3:",_this select 0,_this select 1,_this select 2];</br>
-		_key call server_hiveWrite;</br>
+	Search for this code block
+	
+	dayz_recordLogin = {<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private["_key"];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_key = format["CHILD:103:%1:%2:%3:",_this select 0,_this select 1,_this select 2];<br />
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_key call server_hiveWrite;<br />
 	};
 	
-	<b>And insert this line below it.</b></br>
+	And insert this line below it.
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
 
 6.	Now just rePack your PBO and enjoy!
