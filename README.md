@@ -23,9 +23,9 @@ Installation
 
 	Search for the code block
 	```dayz_recordLogin = {
-		private["_key"];
-		_key = format["CHILD:103:%1:%2:%3:",_this select 0,_this select 1,_this select 2];
-		_key call server_hiveWrite;
+	private["_key"];
+	_key = format["CHILD:103:%1:%2:%3:",_this select 0,_this select 1,_this select 2];
+	_key call server_hiveWrite;
 	};```
 	
 	And insert this line below it.
