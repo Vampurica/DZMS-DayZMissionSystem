@@ -119,6 +119,5 @@ if (DZMSEpoch) then {
 	_object setVariable ["ObjectID", str(_status), true];
 	_object setVariable ["CharacterID", "7777", true];
 	[_object,"all"] spawn server_updateObject;
-	};
 
 };
