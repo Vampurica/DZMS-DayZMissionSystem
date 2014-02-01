@@ -58,8 +58,7 @@ if (DZMSEpoch) then {
 	PVDZE_veh_Init = _object;
 	publicVariable "PVDZE_veh_Init";
 	[_object,"all"] spawn server_updateObject;
-		_object allowDamage true;
-	};
+	_object allowDamage true;
 	
 } else {
 	
