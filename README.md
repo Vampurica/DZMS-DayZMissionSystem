@@ -29,7 +29,7 @@ Installation
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_key call server_hiveWrite;<br />
 	};
 	
-	And insert this line below it.
+	And insert this line below it.<br />
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
 
 6.	Now just rePack your PBO and enjoy!
