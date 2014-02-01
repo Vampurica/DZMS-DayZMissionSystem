@@ -27,7 +27,7 @@ while {_run} do
 	
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Major\%1.sqf",_varName];
-	diag_log format ["[DZMS]: Running Major Mission %1.",_varName,];
+	diag_log format ["[DZMS]: Running Major Mission %1.",_varName];
 	
 	//Let's wait for it to finish or timeout
 	waitUntil {DZMSMajDone};
