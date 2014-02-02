@@ -71,12 +71,16 @@ if (DZMSVersion != "1.0") then {
 
 diag_log format ["[DZMS]: Mission and Extended Configuration Loaded!"];
 
+//Lets get the map name for mission location purposes
+DZMSWorldName = toLower format ["%1", worldName];
+diag_log format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZMSWorldName];
+
 //Lets check if we are running Epoch, in case the user chooses to have mission vehicles save
 _modVariant = toLower(getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 if (_modVariant == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
 
 if (DZMSEpoch) then {
-	diag_log format ["[DZMS]: DayZ Epoch Detected! Adjusting some scripts!"];
+	diag_log format ["[DZMS]: DayZ Epoch Detected! Some Scripts Adjusted!"];
 };
 
 //Lets load our functions
@@ -86,5 +90,5 @@ call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSFunctions
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
 
-//Let's get the Marker Resetter running for JIPs to stay updated
+//Let's get the Marker Re-setter running for JIPs to stay updated
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";

@@ -13,14 +13,82 @@ DZMSSaveVeh = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scri
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-	private["_findRun","_pos"];
-	_findRun = true;
-	while {_findRun} do {
-		_pos = [getMarkerPos "center",0,5500,100,0,20,0] call BIS_fnc_findSafePos;
-		if (!(_pos == (getMarkerPos "center"))) then {
-			_findRun = false;
+	private["_findRun","_pos","_centerPos","_mapHardCenter"];
+	
+	//Lets try to use map specific "Novy Sobor Fixes".
+	//If the map is unrecognised this function will still work.
+	if (DZMSWorldName in ["chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","mbg_celle2","oring","panthera2","isladuala","smd_sahrani_a2","trinity"]) then
+	{
+		_mapHardCenter = true;
+		
+		//We have a supported map so lets set the center
+		//New map support can easily be added to these
+		if (DZMSWorldName == "chernarus") then {
+			_centerPos = [7100, 7750, 0];
 		};
-		sleep 2;
+		if (DZMSWorldName == "utes") then {
+			_centerPos = [3500, 3500, 0];
+		};
+		if (DZMSWorldName == "zargabad") then {
+			_centerPos = [4096, 4096, 0];
+		};
+		if (DZMSWorldName == "fallujah") then {
+			_centerPos = [3500, 3500, 0];
+		};
+		if (DZMSWorldName == "takistan") then {
+			_centerPos = [8000, 1900, 0];
+		};
+		if (DZMSWorldName == "tavi") then {
+			_centerPos = [13300, 2660, 0];
+		};
+		if (DZMSWorldName == "lingor") then {
+			_centerPos = [4400, 4400, 0];
+		};
+		if (DZMSWorldName == "namalsk") then {
+			_centerPos = [4352, 7348, 0];
+		};
+		if (DZMSWorldName == "mbg_celle2") then {
+			_centerPos = [8765.27, 2075.58, 0];
+		};
+		if (DZMSWorldName == "oring") then {
+			_centerPos = [1577, 3429, 0];
+		};
+		if (DZMSWorldName == "panthera2") then {
+			_centerPos = [4400, 4400, 0];
+		};
+		if (DZMSWorldName == "isladuala") then {
+			_centerPos = [4400, 4400, 0];
+		};
+		if (DZMSWorldName == "smd_sahrani_a2") then {
+			_centerPos = [13200, 8850, 0];
+		};
+		if (DZMSWorldName == "trinity") then {
+			_centerPos = [6400, 6400, 0];
+		};
+		
+	}
+	else
+	{
+		//We don't have a supported map. Let's use the norm.
+		_pos = [getMarkerPos "center",0,5500,100,0,20,0] call BIS_fnc_findSafePos;
+		
+	};
+	
+	//If we have a hardcoded center, then we need to loop for a location
+	//Else we can ignore this block of code and just return the position
+	if (_mapHardCenter) then {
+	
+		//We need to loop findSafePos until it doesn't return the map center
+		_findRun = true;
+		while {_findRun} do
+		{
+			_pos = [_centerPos,0,5500,100,0,20,0] call BIS_fnc_findSafePos;
+			if (_pos != _centerPos) then {
+				_findRun = false;
+			};
+			sleep 2;
+		};
+		
 	};
 	
 	_pos
