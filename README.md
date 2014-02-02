@@ -19,18 +19,14 @@ Installation
 
 4.	Put the "DZMS" folder into your Server.pbo.
 
-5.	Open up your server_functions.SQF in the init folder in your server.PBO.
+5.	Open up your server_moniter.SQF in the system folder in your server.PBO.
 
-	Search for this code block
+	Search for this line
 	
-	dayz_recordLogin = {<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private["_key"];<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_key = format["CHILD:103:%1:%2:%3:",_this select 0,_this select 1,_this select 2];<br />
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_key call server_hiveWrite;<br />
-	};
+	```allowConnection = true;```
 	
-	And insert this line below it.<br />
-	[] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
+	And insert this line directly above it.<br />
+	```[] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";```
 	
 	If you have DZAI or WickedAI Installed, the DZMS line should go under theirs.
 	
