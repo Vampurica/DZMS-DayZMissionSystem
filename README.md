@@ -30,8 +30,10 @@ Installation
 	};
 	
 	And insert this line below it.<br />
-	call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
-
+	[] ExecVM "\z\addons\dayz_server\DZMS\DZMSInit.sqf";
+	
+	If you have DZAI or WickedAI Installed, the DZMS line should go under theirs.
+	
 6.	Now just rePack your PBO and enjoy!
 
 --------------------------
