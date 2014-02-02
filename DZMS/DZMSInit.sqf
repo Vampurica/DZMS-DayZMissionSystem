@@ -7,9 +7,12 @@ private["_modVariant"];
 
 waitUntil{initialized};
 
+//Lets let the heavier scripts run first
+sleep 30;
+
 //Error Check
 if (!isServer) exitWith { diag_log format ["[DZMS]: <ERROR> DZMS is Installed Incorrectly! DZMS is not Running!"]; };
-if (!isnil("DZMSActive")) exitWith { diag_log format ["[DZMS]: <ERROR> DZMS is Installed Twice or Installed Incorrectly!"]; };
+if (!isnil("DZMSInstalled")) exitWith { diag_log format ["[DZMS]: <ERROR> DZMS is Installed Twice or Installed Incorrectly!"]; };
 
 // Global for other scripts to check if DZMS is installed.
 DZMSInstalled = true;
@@ -21,6 +24,7 @@ diag_log format ["[DZMS]: Starting DayZ Mission System."];
 //I would rather the user set their relations in the respective mod instead of overwrite them here.
 if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigloaded")) ) then
 {
+
 	//They weren't found, so let's set relationships
 	diag_log format ["[DZMS]: Relations not found! Using DZMS Relations."];
 	
@@ -32,7 +36,9 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 	//Make AI Hostile to Zeds
 	EAST setFriend [CIVILIAN,0];
 	CIVILIAN setFriend [EAST,0];
+	
 } else {
+
 	//Let's inform the user which relations we are using
 	DZMSRelations = 0; //Set our counter variable
 	if (!isnil("DZAI_isActive")) then {
@@ -53,6 +59,7 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 		diag_log format ["[DZMS]: If Issues Arise, Decide on a Single AI System! (DayZAI, SargeAI, or WickedAI)"];
 	};
 	DZMSRelations = nil; //Destroy the Global Var
+	
 };
 
 //Let's Load the Mission Configuration
@@ -64,6 +71,7 @@ DZMSConfigured = nil;
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSWeaponCrateList.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSAIConfig.sqf";
 
+//Lets check for a copy pasted config file
 if (DZMSVersion != "1.0") then {
 	diag_log format ["[DZMS]: Outdated Configuration Detected! Please Update DZMS!"];
 	diag_log format ["[DZMS]: Old Versions are not supported by the Mod Author!"];
@@ -75,7 +83,8 @@ diag_log format ["[DZMS]: Mission and Extended Configuration Loaded!"];
 DZMSWorldName = toLower format ["%1", worldName];
 diag_log format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZMSWorldName];
 
-//Lets check if we are running Epoch, in case the user chooses to have mission vehicles save
+//We need to detect Epoch to change the hive call for vehicle saving
+//Epoch doesn't have hive 999 calls and uses 308 publish instead
 _modVariant = toLower(getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 if (_modVariant == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
 
