@@ -1,20 +1,27 @@
 /*
 	DayZ Mission System Config by Vampire
-	
+	DZMS: https://github.com/SMVampire/DZMS-DayZMissionSystem
 */
 
 //Do you want your players to gain humanity from killing mission AI?
 DZMSMissHumanity = true;
+
 //How Much Humanity?
 DZMSCntHumanity = 25;
 
 //Do you want AI kills to count as bandit kills?
 DZMSCntBanditKls = true;
 
+//Do you want AI that players run over to not have gear?
+DZMSRunGear = false;
+
+//How long before bodies disappear? (in seconds) (default = 2400)
+DZMSBodyTime = 2400;
+
 //You can adjust the weapons that spawn in weapon crates inside DZMSWeaponCrateList.sqf
 
 //Do you want vehicles from missions to save to the Database? (this means they will stay after a restart)
-//If False, vehicles will disappear on restart.
+//If False, vehicles will disappear on restart. It will warn a player who gets inside of a vehicle.
 DZMSSaveVehicles = false;
 
 /*
