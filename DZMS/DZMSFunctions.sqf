@@ -13,7 +13,7 @@ DZMSSaveVeh = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scri
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-	private["_findRun","_pos","_centerPos","_mapHardCenter"];
+	private["_findRun","_pos","_centerPos","_mapHardCenter","_hardX","_hardY","_posX","_posY","_fin"];
 	
 	//Lets try to use map specific "Novy Sobor Fixes".
 	//If the map is unrecognised this function will still work.
@@ -78,20 +78,31 @@ DZMSFindPos = {
 	//Else we can ignore this block of code and just return the position
 	if (_mapHardCenter) then {
 	
+		_hardX = _centerPos select 0;
+		_hardY = _centerPos select 1;
+	
 		//We need to loop findSafePos until it doesn't return the map center
 		_findRun = true;
 		while {_findRun} do
 		{
 			_pos = [_centerPos,0,5500,100,0,20,0] call BIS_fnc_findSafePos;
-			if (_pos != _centerPos) then {
-				_findRun = false;
+			
+			//Apparently you can't compare two arrays and must compare values
+			_posX = _pos select 0;
+			_posY = _pos select 1;
+			
+			if (_posX != _hardX) then {
+				if (_posY != _hardY) then {
+					_findRun = false;
+				};
 			};
 			sleep 2;
 		};
 		
 	};
 	
-	_pos
+	_fin = [(_pos select 0), (_pos select 1), 0];
+	_fin
 };
 
 //Clears the cargo and sets fuel, direction, and orientation
@@ -100,7 +111,7 @@ DZMSSetupVehicle = {
 	private ["_object","_objectID"];
 	_object = _this;
 
-	_objectID = str( round( random 999999 ) );
+	_objectID = str(round(random 999999));
 	_object setVariable ["ObjectID", _objectID, true];
 	_object setVariable ["ObjectUID", _objectID, true];
 	

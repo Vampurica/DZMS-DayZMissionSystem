@@ -51,7 +51,7 @@ DZMSMinorMin = 600;
 
 //Maximum time in seconds before a minor mission will run.
 //A minor mission will always run before this much time has passed. Default = 990 (16.5 Minutes)
-DZMSMajorMax = 990;
+DZMSMinorMax = 990;
 
 
 

@@ -85,7 +85,7 @@ diag_log format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZMSWorl
 
 //We need to detect Epoch to change the hive call for vehicle saving
 //Epoch doesn't have hive 999 calls and uses 308 publish instead
-_modVariant = toLower(getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
+_modVariant = toLower( getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 if (_modVariant == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
 
 if (DZMSEpoch) then {
@@ -96,8 +96,8 @@ if (DZMSEpoch) then {
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSFunctions.sqf";
 
 //Let's get the clocks running!
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
+[] ExecVM "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
+[] ExecVM "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
 
 //Let's get the Marker Re-setter running for JIPs to stay updated
-call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
+[] ExecVM "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
