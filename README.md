@@ -30,7 +30,9 @@ Installation
 	
 	If you have DZAI or WickedAI Installed, the DZMS line should go under theirs.
 	
-6.	Now just rePack your PBO and enjoy!
+6.	(Optional) Change the settings in DZMSConfig.SQF.
+	
+7.	Now just rePack your PBO and enjoy!
 
 --------------------------
 Current Developers
