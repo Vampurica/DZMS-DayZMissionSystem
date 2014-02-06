@@ -3,11 +3,18 @@
 	by Vampire
 */
 
-DZMSAIKilled = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSAIKilled.sqf";
-DZMSAddMajMarker = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSAddMajMarker.sqf";
-DZMSBoxSetup = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSBox.sqf";
-DZMSAISpawn = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSAISpawn.sqf";
-DZMSSaveVeh = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
+DZMSMajTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
+DZMSMinTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
+DZMSMarkerLoop = "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
+
+DZMSAddMajMarker = "\z\addons\dayz_server\DZMS\Scripts\DZMSAddMajMarker.sqf";
+DZMSAddMinMarker = "\z\addons\dayz_server\DZMS\Scripts\DZMSAddMinMarker.sqf";
+
+DZMSAISpawn = "\z\addons\dayz_server\DZMS\Scripts\DZMSAISpawn.sqf";
+DZMSAIKilled = "\z\addons\dayz_server\DZMS\Scripts\DZMSAIKilled.sqf";
+
+DZMSBoxSetup = "\z\addons\dayz_server\DZMS\Scripts\DZMSBox.sqf";
+DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 
 //Attempts to find a mission location
 //If findSafePos fails it searches again until a position is found
@@ -109,7 +116,7 @@ DZMSFindPos = {
 //Direction stops the awkwardness of every vehicle bearing 0
 DZMSSetupVehicle = {
 	private ["_object","_objectID"];
-	_object = _this;
+	_object = _this select 0;
 
 	_objectID = str(round(random 999999));
 	_object setVariable ["ObjectID", _objectID, true];
@@ -145,9 +152,9 @@ DZMSSetupVehicle = {
 //Prevents an object being cleaned up by the server anti-hack
 DZMSProtectObj = {
 	private ["_object","_objectID"];
-	_object = _this;
+	_object = _this select 0;
 	
-	_objectID = str( round( random 999999 ) );
+	_objectID = str(round(random 999999));
 	_object setVariable ["ObjectID", _objectID, true];
 	_object setVariable ["ObjectUID", _objectID, true];
 	_object setvelocity [0,0,1];

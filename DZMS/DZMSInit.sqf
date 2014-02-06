@@ -96,8 +96,8 @@ if (DZMSEpoch) then {
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSFunctions.sqf";
 
 //Let's get the clocks running!
-[] ExecVM "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
-[] ExecVM "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
+[] ExecVM DZMSMajTimer;
+[] ExecVM DZMSMinTimer;
 
 //Let's get the Marker Re-setter running for JIPs to stay updated
-[] ExecVM "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
+[] ExecVM DZMSMarkerLoop;

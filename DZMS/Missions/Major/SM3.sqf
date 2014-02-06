@@ -11,7 +11,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"Bandits have set up a medical re-supply camp! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] call DZMSAddMajMarker;
+[_coords] ExecVM DZMSAddMajMarker;
 
 //Create the scenery
 _base1 = createVehicle ["land_fortified_nest_big",[(_coords select 0) - 20, (_coords select 1) - 10,-0.2],[], 0, "CAN_COLLIDE"];
@@ -25,25 +25,25 @@ _vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) + 25, (_coords select 1
 
 //Create the loot
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) + 5, (_coords select 1),0],[], 0, "CAN_COLLIDE"];
-[_crate,"medical"] call DZMSBoxSetup;
+[_crate,"medical"] ExecVM DZMSBoxSetup;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) + 12, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2,"weapons"] ExecVM DZMSBoxSetup;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[_coords,3,1] call DZMSAISpawn;
+[_coords,3,1] ExecVM DZMSAISpawn;
 sleep 5;
-[_coords,3,1] call DZMSAISpawn;
+[_coords,3,1] ExecVM DZMSAISpawn;
 sleep 5;
-[_coords,3,1] call DZMSAISpawn;
+[_coords,3,1] ExecVM DZMSAISpawn;
 
 //Wait until the player is within 30meters
 waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.
-[_vehicle] call DZMSSaveVeh;
+[_vehicle] ExecVM DZMSSaveVeh;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"Survivors have taken control of the camp and medical supplies.", "PLAIN",6] call RE;

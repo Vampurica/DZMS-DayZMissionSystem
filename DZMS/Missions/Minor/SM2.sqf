@@ -10,7 +10,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A group of bandits have taken over a Medical Outpost! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] call DZMSAddMinMarker;
+[_coords] ExecVM DZMSAddMinMarker;
 
 //We create the scenery
 _base = createVehicle ["US_WarfareBFieldhHospital_Base_EP1",[(_coords select 0) +2, (_coords select 1)+5,-0.3],[], 0, "CAN_COLLIDE"];
@@ -36,22 +36,22 @@ _vehicle1 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 15, (_coords select 
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
-[_crate,"medical"] call DZMSBoxSetup;
+[_crate,"medical"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 8, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2,"weapons"] ExecVM DZMSBoxSetup;
 [_crate2] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],2,0] call DZMSAISpawn;
+[[(_coords select 0) - 20, (_coords select 1) - 15,0],2,0] ExecVM DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 10, (_coords select 1) + 15,0],2,0] call DZMSAISpawn;
+[[(_coords select 0) + 10, (_coords select 1) + 15,0],2,0] ExecVM DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) - 10, (_coords select 1) - 15,0],2,0] call DZMSAISpawn;
+[[(_coords select 0) - 10, (_coords select 1) - 15,0],2,0] ExecVM DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],2,0] call DZMSAISpawn;
+[[(_coords select 0) + 20, (_coords select 1) + 15,0],2,0] ExecVM DZMSAISpawn;
 sleep 3;
 
 //Wait until the player is within 30meters
@@ -59,8 +59,8 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.
-[_vehicle] call DZMSSaveVeh;
-[_vehicle1] call DZMSSaveVeh;
+[_vehicle] ExecVM DZMSSaveVeh;
+[_vehicle1] ExecVM DZMSSaveVeh;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The Medical Outpost is under survivor control!", "PLAIN",6] call RE;

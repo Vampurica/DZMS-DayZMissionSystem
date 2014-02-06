@@ -11,7 +11,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"Bandits have destroyed a Ural carrying medical supplies and are securing the cargo! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] call DZMSAddMajMarker;
+[_coords] ExecVM DZMSAddMajMarker;
 
 //We create the scenery
 _crash = createVehicle ["UralWreck",_coords,[], 0, "CAN_COLLIDE"];
@@ -28,25 +28,25 @@ _vehicle1 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 30, (_coords select 
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
-[_crate,"medical"] call DZMSBoxSetup;
+[_crate,"medical"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
 _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 10, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 
-[_crate2,"weapons"] call DZMSBoxSetup;
+[_crate2,"weapons"] ExecVM DZMSBoxSetup;
 [_crate2] call DZMSProtectObj;
 
-[_coords,6,1] call DZMSAISpawn;
+[_coords,6,1] ExecVM DZMSAISpawn;
 sleep 5;
-[_coords,6,1] call DZMSAISpawn;
+[_coords,6,1] ExecVM DZMSAISpawn;
 sleep 5;
 
 waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.
-[_vehicle] call DZMSSaveVeh;
-[_vehicle1] call DZMSSaveVeh;
+[_vehicle] ExecVM DZMSSaveVeh;
+[_vehicle1] ExecVM DZMSSaveVeh;
 
 [nil,nil,rTitleText,"The medical supplies have been secured by survivors!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Major SM5 Medical Supplies Mission has Ended."];

@@ -10,7 +10,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A group of bandits have set up a stash house! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] call DZMSAddMinMarker;
+[_coords] ExecVM DZMSAddMinMarker;
 
 //We create the scenery
 _base = createVehicle ["Land_HouseV_1I3",[(_coords select 0) +2, (_coords select 1) +5,-0.3],[], 0, "CAN_COLLIDE"];
@@ -32,14 +32,14 @@ _vehicle1 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) - 25, (_coor
 
 //We create and fill the crate
 _crate = createVehicle ["USVehicleBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate,"weapons"] call DZMSBoxSetup;
+[_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],2,0] call DZMSAISpawn;
+[[(_coords select 0) - 20, (_coords select 1) - 15,0],2,0] ExecVM DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],2,0] call DZMSAISpawn;
+[[(_coords select 0) + 20, (_coords select 1) + 15,0],2,0] ExecVM DZMSAISpawn;
 sleep 3;
 
 //Wait until the player is within 30meters
@@ -47,8 +47,8 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.
-[_vehicle] call DZMSSaveVeh;
-[_vehicle1] call DZMSSaveVeh;
+[_vehicle] ExecVM DZMSSaveVeh;
+[_vehicle1] ExecVM DZMSSaveVeh;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The stash house is under survivor control!", "PLAIN",6] call RE;

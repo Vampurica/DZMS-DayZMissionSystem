@@ -10,7 +10,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A Humvee has crashed! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] call DZMSAddMinMarker;
+[_coords] ExecVM DZMSAddMinMarker;
 
 //Add the scenery
 _crash = createVehicle ["HMMWVwreck",_coords,[], 0, "CAN_COLLIDE"];
@@ -20,14 +20,14 @@ _crash = createVehicle ["HMMWVwreck",_coords,[], 0, "CAN_COLLIDE"];
 
 //Add and fill the crate
 _crate = createVehicle ["RULaunchersBox",[(_coords select 0) - 14, _coords select 1,0],[], 0, "CAN_COLLIDE"];
-[_crate,"weapons"] call DZMSBoxSetup;
+[_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[_coords,3,1] call DZMSAISpawn;
+[_coords,3,1] ExecVM DZMSAISpawn;
 sleep 1;
-[_coords,3,1] call DZMSAISpawn;
+[_coords,3,1] ExecVM DZMSAISpawn;
 sleep 1;
 
 //Wait until the player is within 30meters

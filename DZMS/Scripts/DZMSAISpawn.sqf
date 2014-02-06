@@ -2,7 +2,7 @@
 	DZMSAISpawn.sqf by Vampire
 	Usage: [position,unitcount,skillLevel] execVM "dir\DZMSAISpawn.sqf";
 */																		//
-private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_wp","_wppos"];
+private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wp","_wppos"];
 _position = _this select 0;
 _unitcount = _this select 1;
 _skill = _this select 2;
@@ -68,10 +68,10 @@ for "_x" from 1 to _unitcount do {
 	_aipack = DZMSPacklist call BIS_fnc_selectRandom;
 
 	//Lets add it to the Unit
-	_unit addweapon _weapon;
 	for "_i" from 1 to 3 do {
-		_unit addMagazine _magazine;
+		_unit addMagazineGlobal _magazine;
 	};
+	_unit addWeaponGlobal _weapon;
 	
 	_unit addBackpack _aipack;
 	
@@ -79,7 +79,7 @@ for "_x" from 1 to _unitcount do {
 		_unit addMagazine _x
 	} forEach _gearmagazines;
 	{
-		_unit addweapon _x
+		_unit addWeapon _x
 	} forEach _geartools;
 	
 	//Lets set the skills
@@ -96,7 +96,7 @@ for "_x" from 1 to _unitcount do {
 	ai_ground_units = (ai_ground_units + 1);
 	
 	//Lets prepare the unit for cleanup
-	_unit addEventHandler ["Killed",{[_this select 0, _this select 1] call DZMSAIKilled;}];
+	_unit addEventHandler ["Killed",{[_this select 0, _this select 1] ExecVM DZMSAIKilled;}];
 	_unit setVariable ["DZMSAI", true];
 };
 
