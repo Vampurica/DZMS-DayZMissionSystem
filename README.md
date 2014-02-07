@@ -3,6 +3,8 @@
 
 A Logic and Usability Rewrite of the DayZChernarus Mission System.
 
+Current Version is Release Client 1.0
+
 If you are interested in helping, please contact me on OpenDayz.net.
 
 --------------------------
