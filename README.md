@@ -53,5 +53,5 @@ Credits
 --------------------------
 License
 --------------------------
-All the code and information provided here is provided under a Commons License.<br />
-	> http://creativecommons.org/licenses/by-sa/3.0/
+All the code and information provided here is provided under a Commons License.
+http://creativecommons.org/licenses/by-sa/3.0/
