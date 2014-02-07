@@ -7,7 +7,9 @@ _position = _this select 0;
 _unitcount = _this select 1;
 _skill = _this select 2;
 
-_wpRadius = 60;
+//diag_log format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
+
+_wpRadius = 40;
 
 _xpos = _position select 0;
 _ypos = _position select 1;
@@ -42,18 +44,15 @@ for "_x" from 1 to _unitcount do {
 	removeAllWeapons _unit;
 	removeAllItems _unit;
 	
-	/*															//
-		Now we need to figure out their loadout, and assign it
-	*/															//
+	//Now we need to figure out their loadout, and assign it
 	
 	//Get the weapon array based on skill
-	switch (_skill) do {
-		case 0 : {_aiweapon = DZMSWeps1;};
-		case 1 : {_aiweapon = DZMSWeps2;};
-		case 2 : {_aiweapon = DZMSWeps3;};
-	};
-	_weapon = _aiweapon call BIS_fnc_selectRandom;
-	_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;
+	_weaponArray = [_skill] call DZMSGetWeapon;
+	
+	_weapon = _weaponArray select 0;
+	_magazine = _weaponArray select 1;
+	
+	//diag_log format ["[DZMS]: AI Weapon:%1 / AI Magazine:%2",_weapon,_magazine];
 	
 	//Get the gear array
 	_aigearArray = [DZMSGear0,DZMSGear1,DZMSGear2,DZMSGear3,DZMSGear4];
@@ -76,22 +75,24 @@ for "_x" from 1 to _unitcount do {
 	{
 		_unit addMagazine _x
 	} forEach _gearmagazines;
+	
 	{
 		_unit addWeapon _x
 	} forEach _geartools;
 	
 	//Lets set the skills
 	switch (_skill) do {
-		case 0 : {_aicskill = DZMSSkills1;};
-		case 1 : {_aicskill = DZMSSkills2;};
-		case 2 : {_aicskill = DZMSSkills3;};
+		case 0: {_aicskill = DZMSSkills1;};
+		case 1: {_aicskill = DZMSSkills2;};
+		case 2: {_aicskill = DZMSSkills3;};
 	};
+	
 	{
-	_unit setSkill [(_x select 0),(_x select 1)]
+		_unit setSkill [(_x select 0),(_x select 1)]
 	} forEach _aicskill;
 	
 	//Lets prepare the unit for cleanup
-	_unit addEventHandler ["Killed",{[_this select 0, _this select 1] ExecVM DZMSAIKilled;}];
+	_unit addEventHandler ["Killed",{ [(_this select 0), (_this select 1)] ExecVM DZMSAIKilled; }];
 	_unit setVariable ["DZMSAI", true];
 };
 
@@ -103,4 +104,4 @@ for "_x" from 1 to 4 do {
 _wp = _unitGroup addWaypoint [[_xpos,_ypos,0], _wpRadius];
 _wp setWaypointType "CYCLE";
 
-diag_log format ["[DZMS]: Spawned %1 AI at %2.",_unitcount,_position];
+//diag_log format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];

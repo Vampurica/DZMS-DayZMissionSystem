@@ -168,6 +168,27 @@ DZMSProtectObj = {
 	true
 };
 
+//Gets the weapon and magazine based on skill level
+DZMSGetWeapon = {
+	private ["_skill","_aiweapon","_weapon","_magazine","_fin"];
+	
+	_skill = _this select 0;
+	
+	//diag_log format ["[DZMS]: AI Skill Func:%1",_skill];
+	
+	switch (_skill) do {
+		case 0: {_aiweapon = DZMSWeps1;};
+		case 1: {_aiweapon = DZMSWeps2;};
+		case 2: {_aiweapon = DZMSWeps3;};
+	};
+	_weapon = _aiweapon call BIS_fnc_selectRandom;
+	_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;
+	
+	_fin = [_weapon,_magazine];
+	
+	_fin
+};
+
 
 //------------------------------------------------------------------//
 diag_log format ["[DZMS]: Mission Functions Script Loaded!"];

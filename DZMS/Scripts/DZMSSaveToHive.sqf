@@ -5,7 +5,7 @@ _pos = getPos _object;
 _worldspace = [_dir,_pos];
 
 //If they have vehicle saving off, then this script needs to do nothing.
-if (DZMSSaveVehicles) exitWith {};
+if (!(DZMSSaveVehicles)) exitWith {};
 
 //Get a random fuel count to set
 _ranFuel = random 1;
