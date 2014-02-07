@@ -7,7 +7,7 @@ _position = _this select 0;
 _unitcount = _this select 1;
 _skill = _this select 2;
 
-_wpRadius = 80;
+_wpRadius = 60;
 
 _xpos = _position select 0;
 _ypos = _position select 1;
@@ -48,15 +48,12 @@ for "_x" from 1 to _unitcount do {
 	
 	//Get the weapon array based on skill
 	switch (_skill) do {
-		case 0 : {_aiweapon = DZMSWeps0;};
-		case 1 : {_aiweapon = DZMSWeps1;};
-		case 2 : {_aiweapon = DZMSWeps2;};
-		case 3 : {_aiweapon = DZMSWeps3;};
-		case 4 : {_aiweapon = DZMSWeps4;};
+		case 0 : {_aiweapon = DZMSWeps1;};
+		case 1 : {_aiweapon = DZMSWeps2;};
+		case 2 : {_aiweapon = DZMSWeps3;};
 	};
-	_weaponandmag = _aiweapon call BIS_fnc_selectRandom;
-	_weapon = _weaponandmag select 0;
-	_magazine = _weaponandmag select 1;
+	_weapon = _aiweapon call BIS_fnc_selectRandom;
+	_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;
 	
 	//Get the gear array
 	_aigearArray = [DZMSGear0,DZMSGear1,DZMSGear2,DZMSGear3,DZMSGear4];
@@ -69,9 +66,10 @@ for "_x" from 1 to _unitcount do {
 
 	//Lets add it to the Unit
 	for "_i" from 1 to 3 do {
-		_unit addMagazineGlobal _magazine;
+		_unit addMagazine _magazine;
 	};
-	_unit addWeaponGlobal _weapon;
+	_unit addWeapon _weapon;
+	_unit selectWeapon _weapon;
 	
 	_unit addBackpack _aipack;
 	
@@ -91,9 +89,6 @@ for "_x" from 1 to _unitcount do {
 	{
 	_unit setSkill [(_x select 0),(_x select 1)]
 	} forEach _aicskill;
-	
-	//To make sure we get the right count, lets add one to the loop
-	ai_ground_units = (ai_ground_units + 1);
 	
 	//Lets prepare the unit for cleanup
 	_unit addEventHandler ["Killed",{[_this select 0, _this select 1] ExecVM DZMSAIKilled;}];
