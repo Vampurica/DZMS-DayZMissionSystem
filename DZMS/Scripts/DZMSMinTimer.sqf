@@ -1,5 +1,8 @@
-//DayZ Mission System Timer by Vampire
-//Based on fnc_hTime by TAW_Tonic and SMFinder by Craig
+/*
+	DayZ Mission System Timer by Vampire
+	Based on fnc_hTime by TAW_Tonic and SMFinder by Craig
+	This function is launched by the Init and runs continuously.
+*/
 private["_run","_timeDiff","_timeVar","_wait","_cntMis","_ranMis","_varName"];
 
 //Let's get our time Min and Max

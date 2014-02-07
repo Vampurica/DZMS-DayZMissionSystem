@@ -1,3 +1,8 @@
+/*
+	Save To Hive by Vampire
+	This function attempts to save vehicles to the database if enabled when a mission ends.
+	Usage: [Vehicle]
+*/
 _object = _this select 0;
 _class = typeOf _object;
 _dir = getDir _object;

@@ -1,5 +1,8 @@
-//Adds a marker for Major Missions. Only runs once.
-//DZMSMarkerLoop.sqf keeps this marker updated.
+/*
+	Adds a marker for Major Missions. Only runs once.
+	DZMSMarkerLoop.sqf keeps this marker updated.
+	Usage: [coordinates]
+*/
 private["_nul"];
 DZMSMajCoords = _this select 0;
 
