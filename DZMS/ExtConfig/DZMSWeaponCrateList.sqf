@@ -6,7 +6,7 @@
 DZMSpistolList = ["Colt1911","glock17_EP1","M9","M9SD","Makarov","MakarovSD","revolver_EP1","UZI_EP1"];
 
 //Sniper Rifles
-DZMSsniperList = ["SVD_CAMO","DMR_DZ","huntingrifle","M14_EP1","M24","M40A3","M16A4_ACOG"];
+DZMSsniperList = ["SVD_CAMO","DMR_DZ","huntingrifle","M14_EP1","M24","M40A3","M16A4_ACG"];
 
 //Light Machineguns
 DZMSmgList = ["M240_DZ","M249_DZ","Mk_48_DZ","bizon_silenced","MP5A5","MP5SD","RPK_74"];
