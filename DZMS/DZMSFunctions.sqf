@@ -100,7 +100,9 @@ DZMSFindPos = {
 			
 			if (_posX != _hardX) then {
 				if (_posY != _hardY) then {
-					_findRun = false;
+					if (!surfaceIsWater _pos) then {
+						_findRun = false;
+					};
 				};
 			};
 			sleep 2;
