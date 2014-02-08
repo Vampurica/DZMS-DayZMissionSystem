@@ -5,14 +5,14 @@
 		UnitCount is the number of units to spawn
 		SkillLevel is the skill number defined in DZMSAIConfig.sqf
 */																		//
-private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wp","_wppos"];
+private ["_position","_unitcount","_skill","_wpRadius","_xpos","_ypos","_unitGroup","_aiskin","_unit","_weapon","_magazine","_wppos1","_wppos2","_wppos3","_wppos4","_wp1","_wp2","_wp3","_wp4","_wpfin"];
 _position = _this select 0;
 _unitcount = _this select 1;
 _skill = _this select 2;
 
 //diag_log format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
 
-_wpRadius = 40;
+_wpRadius = 20;
 
 _xpos = _position select 0;
 _ypos = _position select 1;
@@ -99,12 +99,24 @@ for "_x" from 1 to _unitcount do {
 	_unit setVariable ["DZMSAI", true];
 };
 
-for "_x" from 1 to 4 do {
-	_wppos = [_xpos+(_x*20), _ypos+(_x*20), _wpRadius];
-	_wp = _unitGroup addWaypoint [_wppos, _wpRadius];
-	_wp setWaypointType "MOVE";
-};
-_wp = _unitGroup addWaypoint [[_xpos,_ypos,0], _wpRadius];
-_wp setWaypointType "CYCLE";
+// These are 4 waypoints in a NorthSEW around the center
+_wppos1 = [_xpos, _ypos+20, 0];
+_wppos2 = [_xpos+20, _ypos, 0];
+_wppos3 = [_xpos, _ypos-20, 0];
+_wppos4 = [_xpos-20, _ypos, 0];
+
+// We add the 4 waypoints
+_wp1 = _unitGroup addWaypoint [_wppos1, _wpRadius];
+_wp1 setWaypointType "MOVE";
+_wp2 = _unitGroup addWaypoint [_wppos2, _wpRadius];
+_wp2 setWaypointType "MOVE";
+_wp3 = _unitGroup addWaypoint [_wppos3, _wpRadius];
+_wp3 setWaypointType "MOVE";
+_wp4 = _unitGroup addWaypoint [_wppos4, _wpRadius];
+_wp4 setWaypointType "MOVE";
+
+// Then we add a center waypoint that tells them to visit the rest
+_wpfin = _unitGroup addWaypoint [[_xpos,_ypos, 0], _wpRadius];
+_wpfin setWaypointType "CYCLE";
 
 //diag_log format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];
