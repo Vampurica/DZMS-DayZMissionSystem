@@ -72,7 +72,7 @@ call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZM
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSAIConfig.sqf";
 
 // Lets check for a copy-pasted config file
-if (DZMSVersion != "RC1.0") then {
+if (DZMSVersion != "1.0") then {
 	diag_log format ["[DZMS]: Outdated Configuration Detected! Please Update DZMS!"];
 	diag_log format ["[DZMS]: Old Versions are not supported by the Mod Author!"];
 };
