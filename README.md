@@ -15,7 +15,7 @@ Installation
 	> https://github.com/SMVampire/DZMS-DayZMissionSystem/archive/master.zip
 	
 2.	Extract it to your Desktop or somewhere where you won't lose it.
-	Inside the Zip is this Readme.MD and a folder called DZMS.
+	Inside the Zip is this Readme.MD, a folder called Documentation, and one called DZMS.
 	
 3.	Open your Server.PBO with the PBO unPacker of your choice.
 
