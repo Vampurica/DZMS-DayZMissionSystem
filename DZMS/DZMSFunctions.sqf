@@ -160,6 +160,11 @@ DZMSProtectObj = {
 	_object setVariable ["ObjectID", _objectID, true];
 	_object setVariable ["ObjectUID", _objectID, true];
 	_object setvelocity [0,0,1];
+	
+	if (_object isKindOf "ReammoBox") then {
+		// PermaLoot on top of ObjID because that "arma logic"
+		_object setVariable ["permaLoot",true];
+	};
 
 	if (DZMSEpoch) then {
 		PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor, _object];
