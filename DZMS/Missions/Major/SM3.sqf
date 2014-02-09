@@ -40,6 +40,8 @@ sleep 5;
 [_coords,3,1] ExecVM DZMSAISpawn;
 sleep 5;
 [_coords,3,1] ExecVM DZMSAISpawn;
+sleep 5;
+[_coords,3,1] ExecVM DZMSAISpawn;
 
 //Wait until the player is within 30meters
 waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};

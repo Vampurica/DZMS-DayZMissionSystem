@@ -32,6 +32,8 @@ _crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select
 sleep 1;
 [_coords,3,1] ExecVM DZMSAISpawn;
 sleep 1;
+[_coords,3,1] ExecVM DZMSAISpawn;
+sleep 1;
 
 //Wait until the player is within 30meters
 waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 

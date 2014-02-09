@@ -26,6 +26,8 @@ sleep 5;
 [_coords,2,1] ExecVM DZMSAISpawn;
 sleep 5;
 [_coords,2,1] ExecVM DZMSAISpawn;
+sleep 5;
+[_coords,2,1] ExecVM DZMSAISpawn;
 sleep 1;
 
 waitUntil{ {isPlayer _x && _x distance _coords <= 30 } count playableunits > 0 };
