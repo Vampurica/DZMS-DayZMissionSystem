@@ -3,7 +3,10 @@
 	Updated to New Format by Vampire
 */
 
-private ["_coords","_crash","_vehicle","_vehicle1","_crate","_crate2"];
+private ["_missName","_coords","_crash","_vehicle","_vehicle1","_crate","_crate2"];
+
+//Name of the Mission
+_missName = "Medical Ural Crash";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -11,7 +14,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"Bandits have destroyed a Ural carrying medical supplies and are securing the cargo! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMajMarker;
+[_coords,_missname] ExecVM DZMSAddMajMarker;
 
 //We create the scenery
 _crash = createVehicle ["UralWreck",_coords,[], 0, "CAN_COLLIDE"];
@@ -51,6 +54,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"The medical supplies have been secured by survivors!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Major SM5 Medical Supplies Mission has Ended."];
 deleteMarker "DZMSMajMarker";
+deleteMarker "DZMSMajDot";
 
 //Let the timer know the mission is over
 DZMSMajDone = true;

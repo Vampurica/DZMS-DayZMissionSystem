@@ -3,7 +3,10 @@
 	New Mission Format by Vampire
 */
 
-private ["_coords","_ranChopper","_chopper","_crate","_crate2","_crate3"];
+private ["_missName","_coords","_ranChopper","_chopper","_crate","_crate2","_crate3"];
+
+//Name of the Mission
+_missName = "Bandit Heli Crash";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -11,7 +14,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A bandit supply helicopter has crash landed! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMajMarker;
+[_coords,_missname] ExecVM DZMSAddMajMarker;
 
 //We create the vehicles like normal
 _ranChopper = ["UH1H_DZ","Mi17_DZ"] call BIS_fnc_selectRandom;
@@ -54,6 +57,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"The helicopter has been taken by survivors!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Major SM4 Helicopter Landing Mission has Ended."];
 deleteMarker "DZMSMajMarker";
+deleteMarker "DZMSMajDot";
 
 //Let the timer know the mission is over
 DZMSMajDone = true;

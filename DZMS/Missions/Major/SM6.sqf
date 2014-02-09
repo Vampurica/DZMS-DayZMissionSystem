@@ -3,7 +3,10 @@
 	Updated to new format by Vampire
 */
 
-private ["_coords","_vehicle","_vehicle1","_crate","_crate2"];
+private ["_missName","_coords","_vehicle","_vehicle1","_crate","_crate2"];
+
+//Name of the Mission
+_missName = "Medical Supply Cache";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -11,7 +14,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A medical supply crate has been secured by bandits! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMajMarker;
+[_coords,_missname] ExecVM DZMSAddMajMarker;
 
 //We create the vehicles like normal
 _vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) + 10, (_coords select 1) - 10,0],[], 0, "CAN_COLLIDE"];
@@ -47,6 +50,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"The medical crate is under survivor control!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Major SM5 Medical Crate Mission has Ended."];
 deleteMarker "DZMSMajMarker";
+deleteMarker "DZMSMajDot";
 
 //Let the timer know the mission is over
 DZMSMajDone = true;

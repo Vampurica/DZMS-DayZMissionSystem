@@ -2,7 +2,10 @@
 	Medical Outpost by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
 	Updated to new format by Vampire
 */
-private ["_coords","_base","_base1","_base2","_base3","_vehicle","_vehicle1","_crate","_crate2"];
+private ["_missName","_coords","_base","_base1","_base2","_base3","_vehicle","_vehicle1","_crate","_crate2"];
+
+//Name of the Mission
+_missName = "Bandit Medical Outpost";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -10,7 +13,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A group of bandits have taken over a Medical Outpost! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMinMarker;
+[_coords,_missName] ExecVM DZMSAddMinMarker;
 
 //We create the scenery
 _base = createVehicle ["US_WarfareBFieldhHospital_Base_EP1",[(_coords select 0) +2, (_coords select 1)+5,-0.3],[], 0, "CAN_COLLIDE"];
@@ -66,6 +69,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"The Medical Outpost is under survivor control!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Minor SM2 Medical Outpost Mission has Ended."];
 deleteMarker "DZMSMinMarker";
+deleteMarker "DZMSMinDot";
 
 //Let the timer know the mission is over
 DZMSMinDone = true;

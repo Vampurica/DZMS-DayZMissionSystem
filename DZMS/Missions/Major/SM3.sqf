@@ -3,7 +3,10 @@
 	Updated to New Mission Format by Vampire
 */
 
-private ["_coords","_crate","_crate2","_vehicle","_base1","_base2"];
+private ["_missName","_coords","_crate","_crate2","_vehicle","_base1","_base2"];
+
+//Name of the Mission
+_missName = "Bandit Medical Camp";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -11,7 +14,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"Bandits have set up a medical re-supply camp! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMajMarker;
+[_coords,_missname] ExecVM DZMSAddMajMarker;
 
 //Create the scenery
 _base1 = createVehicle ["land_fortified_nest_big",[(_coords select 0) - 20, (_coords select 1) - 10,-0.2],[], 0, "CAN_COLLIDE"];
@@ -49,6 +52,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"Survivors have taken control of the camp and medical supplies.", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Major SM3 Medical Camp Mission has Ended."];
 deleteMarker "DZMSMajMarker";
+deleteMarker "DZMSMajDot";
 
 //Let the timer know the mission is over
 DZMSMajDone = true;

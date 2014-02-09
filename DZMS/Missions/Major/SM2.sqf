@@ -3,7 +3,10 @@
 	Modified to new format by Vampire
 */
 
-private ["_coords","_c130wreck","_crate","_crate2","_vehicle","_vehicle1","_vehicle2"];
+private ["_missName","_coords","_c130wreck","_crate","_crate2","_vehicle","_vehicle1","_vehicle2"];
+
+//Name of the Mission
+_missName = "Medical C-130 Crash";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -11,7 +14,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A C-130 carrying medical supplies has crashed and bandits are securing the site! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMajMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMajMarker;
+[_coords,_missname] ExecVM DZMSAddMajMarker;
 
 //We create the mission scenery
 _c130wreck = createVehicle ["C130J_wreck_EP1",[(_coords select 0) + 30, (_coords select 1) - 5,0],[], 0, "NONE"];
@@ -61,6 +64,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30 } count playableunits > 0};
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Major SM2 Crash Site Mission has Ended."];
 deleteMarker "DZMSMajMarker";
+deleteMarker "DZMSMajDot";
 
 //Let the timer know the mission is over
 DZMSMajDone = true;

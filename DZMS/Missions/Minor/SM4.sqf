@@ -2,7 +2,10 @@
 	Bandit Heli Down! by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
 	Updated to new format by Vampire
 */
-private ["_coords","_crash","_crate"];
+private ["_missName","_coords","_crash","_crate"];
+
+//Name of the Mission
+_missName = "Bandit Heli Crash";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -10,7 +13,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A bandit helicopter has crashed! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMinMarker;
+[_coords,_missName] ExecVM DZMSAddMinMarker;
 
 //Add the scenery
 _crash = createVehicle ["UH60Wreck_DZ", _coords,[], 0, "CAN_COLLIDE"];
@@ -37,6 +40,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Minor SM4 Crash Site Mission has Ended."];
 deleteMarker "DZMSMinMarker";
+deleteMarker "DZMSMinDot";
 
 //Let the timer know the mission is over
 DZMSMinDone = true;

@@ -1,13 +1,18 @@
 /*
 	Adds a marker for Major Missions. Only runs once.
 	DZMSMarkerLoop.sqf keeps this marker updated.
-	Usage: [coordinates]
+	Usage: [coordinates,missionname]
 */
-private["_nil"];
+private["_nul","_nil"];
 DZMSMinCoords = _this select 0;
+DZMSMinName = _this select 1;
 
-_nil = createMarker ["DZMSMinMarker", DZMSMinCoords];
+_nul = createMarker ["DZMSMinMarker", DZMSMinCoords];
 "DZMSMinMarker" setMarkerColor "ColorRed";
 "DZMSMinMarker" setMarkerShape "ELLIPSE";
 "DZMSMinMarker" setMarkerBrush "Grid";
 "DZMSMinMarker" setMarkerSize [150,150];
+_nil = createMarker ["DZMSMinDot", DZMSMinCoords];
+"DZMSMinDot" setMarkerColor "ColorBlack";
+"DZMSMinDot" setMarkerType "mil_dot";
+"DZMSMinDot" setMarkerText DZMSMinName;

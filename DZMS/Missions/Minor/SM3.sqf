@@ -2,7 +2,10 @@
 	Bandit Stash House by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
 	Updated to new format by Vampire
 */
-private ["_coords","_base","_base1","_base2","_vehicle","_vehicle1","_crate"];
+private ["_missName","_coords","_base","_base1","_base2","_vehicle","_vehicle1","_crate"];
+
+//Name of the Mission
+_missName = "Bandit Stash House";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -10,7 +13,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A group of bandits have set up a stash house! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMinMarker;
+[_coords,_missName] ExecVM DZMSAddMinMarker;
 
 //We create the scenery
 _base = createVehicle ["Land_HouseV_1I3",[(_coords select 0) +2, (_coords select 1) +5,-0.3],[], 0, "CAN_COLLIDE"];
@@ -54,6 +57,7 @@ waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
 [nil,nil,rTitleText,"The stash house is under survivor control!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Minor SM3 Stash House Mission has Ended."];
 deleteMarker "DZMSMinMarker";
+deleteMarker "DZMSMinDot";
 
 //Let the timer know the mission is over
 DZMSMinDone = true;

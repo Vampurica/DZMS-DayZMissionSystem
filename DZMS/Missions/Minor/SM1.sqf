@@ -2,7 +2,10 @@
 	Bandit Hunting Party by lazyink (Full credit to TheSzerdi & TAW_Tonic for the code)
 	Updated to new format by Vampire
 */
-private ["_coords","_vehicle"];
+private ["_missName","_coords","_vehicle"];
+
+//Name of the Mission
+_missName = "Bandit Hunting Party";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
@@ -10,7 +13,7 @@ _coords = call DZMSFindPos;
 [nil,nil,rTitleText,"A bandit hunting party has been spotted! Check your map for the location!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
-[_coords] ExecVM DZMSAddMinMarker;
+[_coords,_missName] ExecVM DZMSAddMinMarker;
 
 //Create the vehicle as normal
 _vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
@@ -35,6 +38,7 @@ waitUntil{ {isPlayer _x && _x distance _coords <= 30 } count playableunits > 0 }
 [nil,nil,rTitleText,"The hunting party has been wiped out!", "PLAIN",6] call RE;
 diag_log format["[DZMS]: Minor SM1 Hunting Party Mission has Ended."];
 deleteMarker "DZMSMinMarker";
+deleteMarker "DZMSMinDot";
 
 //Let the timer know the mission is over
 DZMSMinDone = true;
