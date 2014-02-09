@@ -12,6 +12,9 @@ _worldspace = [_dir,_pos];
 //If they have vehicle saving off, then this script needs to do nothing.
 if (!(DZMSSaveVehicles)) exitWith {};
 
+//Check if vehicle is null or dead
+if (isNull _object OR !alive _object OR (damage _object) > .97) exitWith {};
+
 //Get a random fuel count to set
 _ranFuel = random 1;
 if (_ranFuel < .1) then {_ranFuel = .1;};
