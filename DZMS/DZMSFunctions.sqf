@@ -98,9 +98,18 @@ DZMSFindPos = {
 			_posX = _pos select 0;
 			_posY = _pos select 1;
 			
+			//Water Feelers. Checks for nearby water within 50meters.
+			_feel1 = [_posX, _posY+50, 0];
+			_feel2 = [_posX+50, _posY, 0];
+			_feel3 = [_posX, _posY-50, 0];
+			_feel4 = [_posX-50, _posY, 0];
+			
+			//Water Check
+			_noWater = (!surfaceIsWater _pos && !surfaceIsWater _feel1 && !surfaceIsWater _feel2 && !surfaceIsWater _feel3 && !surfaceIsWater _feel4);
+			
 			if (_posX != _hardX) then {
 				if (_posY != _hardY) then {
-					if (!surfaceIsWater _pos) then {
+					if (_noWater) then {
 						_findRun = false;
 					};
 				};
@@ -117,7 +126,7 @@ DZMSFindPos = {
 //Clears the cargo and sets fuel, direction, and orientation
 //Direction stops the awkwardness of every vehicle bearing 0
 DZMSSetupVehicle = {
-	private ["_object","_objectID"];
+	private ["_object","_objectID","_ranFuel"];
 	_object = _this select 0;
 
 	_objectID = str(round(random 999999));
