@@ -24,7 +24,7 @@ DZMSFindPos = {
 	
 	//Lets try to use map specific "Novy Sobor Fixes".
 	//If the map is unrecognised this function will still work.
-	if (DZMSWorldName in ["chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","mbg_celle2","oring","panthera2","isladuala","smd_sahrani_a2","trinity"]) then
+	if (DZMSWorldName in ["chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","napf","mbg_celle2","oring","panthera2","isladuala","smd_sahrani_a2","trinity"]) then
 	{
 		_mapHardCenter = true;
 		
@@ -53,6 +53,9 @@ DZMSFindPos = {
 		};
 		if (DZMSWorldName == "namalsk") then {
 			_centerPos = [4352, 7348, 0];
+		};
+		if (DZMSWorldName == "napf") then {
+			_centerPos = [10240, 10240, 0];
 		};
 		if (DZMSWorldName == "mbg_celle2") then {
 			_centerPos = [8765.27, 2075.58, 0];
