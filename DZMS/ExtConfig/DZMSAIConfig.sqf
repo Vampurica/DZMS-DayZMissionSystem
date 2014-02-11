@@ -7,7 +7,7 @@
 
 ///////////////////////////////////////////////
 // Array of skin classnames for the AI to use
-DZMSBanditSkins = ["Bandit1_DZ","BanditW1_DZ","BanditW2_DZ","Bandit2_DZ"];
+DZMSBanditSkins = ["Bandit1_DZ","BanditW1_DZ"];
 
 ////////////////////////
 // Array of AI Skills
