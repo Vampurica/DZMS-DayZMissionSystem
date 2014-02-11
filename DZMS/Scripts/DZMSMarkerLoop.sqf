@@ -23,7 +23,7 @@ while {_run} do
 		"DZMSMajMarker" setMarkerSize [175,175];
 		_zap = createMarker ["DZMSMajDot", DZMSMajCoords];
 		"DZMSMajDot" setMarkerColor "ColorBlack";
-		"DZMSMajDot" setMarkerType "mil_dot";
+		"DZMSMajDot" setMarkerType "Vehicle";
 		"DZMSMajDot" setMarkerText DZMSMajName;
 	};
 	//Lets do the same for the minor mission
@@ -38,7 +38,7 @@ while {_run} do
 		"DZMSMinMarker" setMarkerSize [150,150];
 		_zip = createMarker ["DZMSMinDot", DZMSMinCoords];
 		"DZMSMinDot" setMarkerColor "ColorBlack";
-		"DZMSMinDot" setMarkerType "mil_dot";
+		"DZMSMinDot" setMarkerType "Vehicle";
 		"DZMSMinDot" setMarkerText DZMSMinName;
 	};
 	//Now we wait another 25 seconds

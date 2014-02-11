@@ -14,5 +14,5 @@ _nul = createMarker ["DZMSMajMarker", DZMSMajCoords];
 "DZMSMajMarker" setMarkerSize [175,175];
 _nil = createMarker ["DZMSMajDot", DZMSMajCoords];
 "DZMSMajDot" setMarkerColor "ColorBlack";
-"DZMSMajDot" setMarkerType "mil_dot";
+"DZMSMajDot" setMarkerType "Vehicle";
 "DZMSMajDot" setMarkerText DZMSMajName;
