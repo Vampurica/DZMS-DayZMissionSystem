@@ -74,9 +74,7 @@ DZMSFindPos = {
             _noWater = (!surfaceIsWater _pos && !surfaceIsWater _feel1 && !surfaceIsWater _feel2 && !surfaceIsWater _feel3 && !surfaceIsWater _feel4);
            
             if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater) then {
-				if ((_pos distance DZMSMajCoords >= 1000) AND (_pos distance DZMSMinCoords >= 1000)) then {
-					_findRun = false;
-				};
+				_findRun = false;
             };
             sleep 2;
         };
