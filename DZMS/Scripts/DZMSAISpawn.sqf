@@ -40,7 +40,7 @@ for "_x" from 1 to _unitcount do {
 	_unit enableAI "MOVE";
 	_unit enableAI "ANIM";
 	_unit enableAI "FSM";
-	_unit setCombatMode "RED";
+	_unit setCombatMode "YELLOW";
 	_unit setBehaviour "COMBAT";
 	
 	//Remove the items he spawns with by default
