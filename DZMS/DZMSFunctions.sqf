@@ -20,110 +20,73 @@ DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-	private["_findRun","_pos","_centerPos","_mapHardCenter","_hardX","_hardY","_posX","_posY","_fin"];
-	
-	//Lets try to use map specific "Novy Sobor Fixes".
-	//If the map is unrecognised this function will still work.
-	if (DZMSWorldName in ["chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","napf","mbg_celle2","oring","panthera2","isladuala","smd_sahrani_a2","trinity"]) then
-	{
-		_mapHardCenter = true;
-		
-		//We have a supported map so lets set the center
-		//New map support can easily be added to these
-		if (DZMSWorldName == "chernarus") then {
-			_centerPos = [7100, 7750, 0];
-		};
-		if (DZMSWorldName == "utes") then {
-			_centerPos = [3500, 3500, 0];
-		};
-		if (DZMSWorldName == "zargabad") then {
-			_centerPos = [4096, 4096, 0];
-		};
-		if (DZMSWorldName == "fallujah") then {
-			_centerPos = [3500, 3500, 0];
-		};
-		if (DZMSWorldName == "takistan") then {
-			_centerPos = [8000, 1900, 0];
-		};
-		if (DZMSWorldName == "tavi") then {
-			_centerPos = [13300, 2660, 0];
-		};
-		if (DZMSWorldName == "lingor") then {
-			_centerPos = [4400, 4400, 0];
-		};
-		if (DZMSWorldName == "namalsk") then {
-			_centerPos = [4352, 7348, 0];
-		};
-		if (DZMSWorldName == "napf") then {
-			_centerPos = [10240, 10240, 0];
-		};
-		if (DZMSWorldName == "mbg_celle2") then {
-			_centerPos = [8765.27, 2075.58, 0];
-		};
-		if (DZMSWorldName == "oring") then {
-			_centerPos = [1577, 3429, 0];
-		};
-		if (DZMSWorldName == "panthera2") then {
-			_centerPos = [4400, 4400, 0];
-		};
-		if (DZMSWorldName == "isladuala") then {
-			_centerPos = [4400, 4400, 0];
-		};
-		if (DZMSWorldName == "smd_sahrani_a2") then {
-			_centerPos = [13200, 8850, 0];
-		};
-		if (DZMSWorldName == "trinity") then {
-			_centerPos = [6400, 6400, 0];
-		};
-		
-	}
-	else
-	{
+    private["_findRun","_pos","_centerPos","_mapHardCenter","_hardX","_hardY","_posX","_posY","_fin"];
+  
+    //Lets try to use map specific "Novy Sobor Fixes".
+    //If the map is unrecognised this function will still work.
+	//Better code thanks to Halv
+	_mapHardCenter = true;
+	_centerPos = [0,0,0];
+	switch (DZMSWorldName) do {
+		case "chernarus":{_centerPos = [7100, 7750, 0]};
+		case "utes":{_centerPos = [3500, 3500, 0]};
+		case "zargabad":{_centerPos = [4096, 4096, 0]};
+		case "fallujah":{_centerPos = [3500, 3500, 0]};
+		case "takistan":{_centerPos = [8000, 1900, 0]};
+		case "tavi":{_centerPos = [13300, 2660, 0]};
+		case "lingor":{_centerPos = [4400, 4400, 0]};
+		case "namalsk":{_centerPos = [4352, 7348, 0]};
+		case "napf":{_centerPos = [10240, 10240, 0]};
+		case "mbg_celle2":{_centerPos = [8765.27, 2075.58, 0]};
+		case "oring":{_centerPos = [1577, 3429, 0]};
+		case "panthera2":{_centerPos = [4400, 4400, 0]};
+		case "isladuala":{_centerPos = [4400, 4400, 0]};
+		case "smd_sahrani_a2":{_centerPos = [13200, 8850, 0]};
+		case "trinity":{_centerPos = [6400, 6400, 0]};
 		//We don't have a supported map. Let's use the norm.
-		_pos = [getMarkerPos "center",0,5500,100,0,20,0] call BIS_fnc_findSafePos;
-		
+		default{_pos = [getMarkerPos "center",0,5500,100,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
 	};
-	
-	//If we have a hardcoded center, then we need to loop for a location
-	//Else we can ignore this block of code and just return the position
-	if (_mapHardCenter) then {
-	
-		_hardX = _centerPos select 0;
-		_hardY = _centerPos select 1;
-	
-		//We need to loop findSafePos until it doesn't return the map center
-		_findRun = true;
-		while {_findRun} do
-		{
-			_pos = [_centerPos,0,5500,100,0,20,0] call BIS_fnc_findSafePos;
-			
-			//Apparently you can't compare two arrays and must compare values
-			_posX = _pos select 0;
-			_posY = _pos select 1;
-			
-			//Water Feelers. Checks for nearby water within 50meters.
-			_feel1 = [_posX, _posY+50, 0];
-			_feel2 = [_posX+50, _posY, 0];
-			_feel3 = [_posX, _posY-50, 0];
-			_feel4 = [_posX-50, _posY, 0];
-			
-			//Water Check
-			_noWater = (!surfaceIsWater _pos && !surfaceIsWater _feel1 && !surfaceIsWater _feel2 && !surfaceIsWater _feel3 && !surfaceIsWater _feel4);
-			
-			if (_posX != _hardX) then {
-				if (_posY != _hardY) then {
-					if (_noWater) then {
-						_findRun = false;
-					};
-				};
-			};
-			sleep 2;
-		};
-		
-	};
-	
-	_fin = [(_pos select 0), (_pos select 1), 0];
-	_fin
+
+    //If we have a hardcoded center, then we need to loop for a location
+    //Else we can ignore this block of code and just return the position
+    if (_mapHardCenter) then {
+   
+        _hardX = _centerPos select 0;
+        _hardY = _centerPos select 1;
+   
+        //We need to loop findSafePos until it doesn't return the map center
+        _findRun = true;
+        while {_findRun} do
+        {
+            _pos = [_centerPos,0,5500,100,0,20,0] call BIS_fnc_findSafePos;
+           
+            //Apparently you can't compare two arrays and must compare values
+            _posX = _pos select 0;
+            _posY = _pos select 1;
+           
+            //Water Feelers. Checks for nearby water within 50meters.
+            _feel1 = [_posX, _posY+50, 0];
+            _feel2 = [_posX+50, _posY, 0];
+            _feel3 = [_posX, _posY-50, 0];
+            _feel4 = [_posX-50, _posY, 0];
+           
+            //Water Check
+            _noWater = (!surfaceIsWater _pos && !surfaceIsWater _feel1 && !surfaceIsWater _feel2 && !surfaceIsWater _feel3 && !surfaceIsWater _feel4);
+           
+            if (_posX != _hardX) then {
+                if (_posY != _hardY) then {
+                    if (_noWater) then {
+                        _findRun = false;
+                    };
+                };
+            };
+            sleep 2;
+        };
+       
+    };
+   
+    _fin = [(_pos select 0), (_pos select 1), 0];
+    _fin
 };
 
 //Clears the cargo and sets fuel, direction, and orientation
