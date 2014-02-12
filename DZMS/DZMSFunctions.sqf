@@ -26,7 +26,6 @@ DZMSFindPos = {
     //If the map is unrecognised this function will still work.
 	//Better code thanks to Halv
 	_mapHardCenter = true;
-	_centerPos = [0,0,0];
 	switch (DZMSWorldName) do {
 		case "chernarus":{_centerPos = [7100, 7750, 0]};
 		case "utes":{_centerPos = [3500, 3500, 0]};
@@ -53,6 +52,10 @@ DZMSFindPos = {
    
         _hardX = _centerPos select 0;
         _hardY = _centerPos select 1;
+		
+		if (DZMSWorldName = "tavi") then {
+			_isTavi = true;
+		};
    
         //We need to loop findSafePos until it doesn't return the map center
         _findRun = true;
@@ -72,9 +75,21 @@ DZMSFindPos = {
            
             //Water Check
             _noWater = (!surfaceIsWater _pos && !surfaceIsWater _feel1 && !surfaceIsWater _feel2 && !surfaceIsWater _feel3 && !surfaceIsWater _feel4);
+			
+			//Lets test the height on Taviana
+			if (_isTavi) then {
+				_tavTest = createVehicle ["Can_Small",[(_pos select 0),(_pos select 1),0],[], 0, "CAN_COLLIDE"];
+				_tavHeight = (getPosASL _tavTest) select 2;
+				deleteVehicle _tavTest;
+			};
            
             if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater) then {
-				_findRun = false;
+				if (!(_isTavi)) then {
+					_findRun = false;
+				};
+				if (_isTavi AND (_tavHeight < 185)) then {
+					_findRun = false;
+				};
             };
             sleep 2;
         };
