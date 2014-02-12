@@ -44,7 +44,7 @@ DZMSFindPos = {
 		case "smd_sahrani_a2":{_centerPos = [13200, 8850, 0]};
 		case "trinity":{_centerPos = [6400, 6400, 0]};
 		//We don't have a supported map. Let's use the norm.
-		default{_pos = [getMarkerPos "center",0,5500,100,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
+		default{_pos = [getMarkerPos "center",0,5500,60,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
 	};
 
     //If we have a hardcoded center, then we need to loop for a location
@@ -58,7 +58,7 @@ DZMSFindPos = {
         _findRun = true;
         while {_findRun} do
         {
-            _pos = [_centerPos,0,5500,100,0,20,0] call BIS_fnc_findSafePos;
+            _pos = [_centerPos,0,5500,60,0,20,0] call BIS_fnc_findSafePos;
            
             //Apparently you can't compare two arrays and must compare values
             _posX = _pos select 0;
