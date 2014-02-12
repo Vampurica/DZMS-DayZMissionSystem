@@ -44,6 +44,12 @@ Current Developers
 * Vampire - Head Developer - http://opendayz.net/members/vampire.13088/
 
 --------------------------
+Thanks To
+--------------------------
+* Halvhjearne - For Debugging and Code Modifications.
+* OpenDayz.net - For the knowledge I have today about Arma Coding.
+
+--------------------------
 Credits
 --------------------------
 * TAW_Tonic - One of the Original DayZ Mission Developers. - http://sealteamsloth.com/
