@@ -26,13 +26,14 @@ DZMSFindPos = {
     //If the map is unrecognised this function will still work.
 	//Better code thanks to Halv
 	_mapHardCenter = true;
+	_isTavi = false;
 	switch (DZMSWorldName) do {
 		case "chernarus":{_centerPos = [7100, 7750, 0]};
 		case "utes":{_centerPos = [3500, 3500, 0]};
 		case "zargabad":{_centerPos = [4096, 4096, 0]};
 		case "fallujah":{_centerPos = [3500, 3500, 0]};
 		case "takistan":{_centerPos = [8000, 1900, 0]};
-		case "tavi":{_centerPos = [13300, 2660, 0]};
+		case "tavi":{_centerPos = [13300, 2660, 0];_isTavi = true;};
 		case "lingor":{_centerPos = [4400, 4400, 0]};
 		case "namalsk":{_centerPos = [4352, 7348, 0]};
 		case "napf":{_centerPos = [10240, 10240, 0]};
@@ -52,10 +53,6 @@ DZMSFindPos = {
    
         _hardX = _centerPos select 0;
         _hardY = _centerPos select 1;
-		
-		if (DZMSWorldName = "tavi") then {
-			_isTavi = true;
-		};
    
         //We need to loop findSafePos until it doesn't return the map center
         _findRun = true;
@@ -78,7 +75,7 @@ DZMSFindPos = {
 			
 			//Lets test the height on Taviana
 			if (_isTavi) then {
-				_tavTest = createVehicle ["Can_Small",[(_pos select 0),(_pos select 1),0],[], 0, "CAN_COLLIDE"];
+				_tavTest = createVehicle ["Can_Small",[_posX,_posY,0],[], 0, "CAN_COLLIDE"];
 				_tavHeight = (getPosASL _tavTest) select 2;
 				deleteVehicle _tavTest;
 			};
