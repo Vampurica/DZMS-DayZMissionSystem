@@ -42,6 +42,7 @@ DZMSFindPos = {
 		case "panthera2":{_centerPos = [4400, 4400, 0]};
 		case "isladuala":{_centerPos = [4400, 4400, 0]};
 		case "smd_sahrani_a2":{_centerPos = [13200, 8850, 0]};
+		case "sauerland":{_centerPos = [13591.66, 12495.667, 0]};
 		case "trinity":{_centerPos = [6400, 6400, 0]};
 		//We don't have a supported map. Let's use the norm.
 		default{_pos = [getMarkerPos "center",0,5500,60,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
