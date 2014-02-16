@@ -40,6 +40,7 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 } else {
 
 	// Let's inform the user which relations we are using
+	// This could be made better in a future version
 	DZMSRelations = 0; //Set our counter variable
 	if (!isnil("DZAI_isActive")) then {
 		diag_log format ["[DZMS]: DZAI Found! Using DZAI's Relations!"];
@@ -71,8 +72,11 @@ DZMSConfigured = nil;
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSWeaponCrateList.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSAIConfig.sqf";
 
+// Report the version
+diag_log format ["[DZMS]: Currently Running Version: %1", DZMSVersion];
+
 // Lets check for a copy-pasted config file
-if (DZMSVersion != "1.0") then {
+if (DZMSVersion != "1.0 FIN") then {
 	diag_log format ["[DZMS]: Outdated Configuration Detected! Please Update DZMS!"];
 	diag_log format ["[DZMS]: Old Versions are not supported by the Mod Author!"];
 };

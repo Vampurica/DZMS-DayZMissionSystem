@@ -85,15 +85,18 @@ DZMSFindPos = {
 			_disMaj = (_pos distance DZMSMajCoords);
 			_disMin = (_pos distance DZMSMinCoords);
 			_okDis = ((_disMaj > 1000) AND (_disMin > 1000));
-           
+			
+			//Lets combine all our checks to possibly end the loop
             if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis) then {
 				if (!(_isTavi)) then {
 					_findRun = false;
 				};
-				if (_isTavi AND (_tavHeight < 185)) then {
+				if (_isTavi AND (_tavHeight <= 185)) then {
 					_findRun = false;
 				};
             };
+			// If the missions never spawn after running, use this to debug the loop. noWater=true / Dis > 1000 / TaviHeight <= 185
+			//diag_log format ["[DZMS]: DEBUG: Pos:[%1,%2] / noWater?:%3 / okDistance?:%4 / TaviHeight:%5", _posX, _posY, _noWater, _okDis, _tavHeight];
             sleep 2;
         };
        
