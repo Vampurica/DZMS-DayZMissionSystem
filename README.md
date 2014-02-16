@@ -3,7 +3,7 @@
 
 A Logic and Usability Rewrite of the DayZChernarus Mission System.
 
-Current Version is v1.0 Final
+Current Version is RC v1.1
 
 If you are interested in helping, please contact me on OpenDayz.net.
 
