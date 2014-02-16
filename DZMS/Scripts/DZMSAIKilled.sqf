@@ -53,6 +53,11 @@ if (isPlayer _player) then {
 	
 };
 
+if (DZMSCleanDeath) then {
+	deleteVehicle _unit;
+	if (DZMSCleanDeath) exitWith {};
+};
+
 //Dead body timer and cleanup
 sleep DZMSBodyTime;
-deletevehicle _unit;
+deleteVehicle _unit;

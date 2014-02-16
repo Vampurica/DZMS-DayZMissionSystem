@@ -13,7 +13,11 @@ DZMSCntHumanity = 25;
 // Do you want AI kills to count as bandit kills?
 DZMSCntBanditKls = true;
 
+// Do you want AI to disappear instantly when killed?
+DZMSCleanDeath = false;
+
 // Do you want AI that players run over to not have gear?
+// (If DZMSCleanDeath is true, this doesn't matter)
 DZMSRunGear = false;
 
 // How long before bodies disappear? (in seconds) (default = 2400)
@@ -65,5 +69,5 @@ DZMSMinorMax = 990;
 /*=============================================================================================*/
 // Do Not Edit Below This Line
 /*=============================================================================================*/
-DZMSVersion = "1.0";
+DZMSVersion = "1.0 FIN";
 DZMSConfigured = true;
