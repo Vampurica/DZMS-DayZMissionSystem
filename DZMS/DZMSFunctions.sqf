@@ -80,8 +80,13 @@ DZMSFindPos = {
 				_tavHeight = (getPosASL _tavTest) select 2;
 				deleteVehicle _tavTest;
 			};
+			
+			//Lets check for minimum mission separation distance
+			_disMaj = (_pos distance DZMSMajCoords);
+			_disMin = (_pos distance DZMSMinCoords);
+			_okDis = ((_disMaj > 1000) AND (_disMin > 1000));
            
-            if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater) then {
+            if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis) then {
 				if (!(_isTavi)) then {
 					_findRun = false;
 				};
