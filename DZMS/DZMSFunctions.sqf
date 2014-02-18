@@ -50,7 +50,7 @@ DZMSFindPos = {
 
     //If we have a hardcoded center, then we need to loop for a location
     //Else we can ignore this block of code and just return the position
-    if (_mapHardCenter) then {
+    if (_mapHardCenter AND (!(DZMSStaticPlc))) then {
    
         _hardX = _centerPos select 0;
         _hardY = _centerPos select 1;
@@ -101,6 +101,10 @@ DZMSFindPos = {
         };
        
     };
+	
+	if (DZMSStaticPlc) then {
+		_pos = DZMSStatLocs call BIS_fnc_selectRandom;
+	};
    
     _fin = [(_pos select 0), (_pos select 1), 0];
     _fin

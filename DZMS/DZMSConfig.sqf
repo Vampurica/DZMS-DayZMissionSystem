@@ -32,13 +32,24 @@ DZMSBodyTime = 2400;
 // You can adjust the AI's gear inside DZMSAIConfig.sqf in the ExtConfig folder also.
 //////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////////////////
+// Do you want to use static coords for missions?
+// Leave this false unless you know what you are doing.
+DZMSStaticPlc = false;
+
+// Array of static locations. X,Y,Z
+DZMSStatLocs = [
+[0,0,0],
+[0,0,0]
+];
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Do you want vehicles from missions to save to the Database? (this means they will stay after a restart)
 // If False, vehicles will disappear on restart. It will warn a player who gets inside of a vehicle.
 // This is experimental, and off by default in this version.
 DZMSSaveVehicles = false;
 
-/*
+/*///////////////////////////////////////////////////////////////////////////////////////////
 There are two types of missions that run simultaneously on a the server.
 The two types are Major and Minor missions.
 

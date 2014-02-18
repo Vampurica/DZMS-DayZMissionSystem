@@ -5,8 +5,9 @@
 
 [FIXED] Height Checking on Taviana due to Scope.
 
-[ADDED] Option for AI to use NVGs
 [ADDED] Revamped Major Missions. First In-Depth Mission. First Prototype Epoch Specific Mission.
+[ADDED] Option for AI to use NVGs.
+[ADDED] Option to use static Coordinates.
 
 [ADJUSTED] Crate Balancing
 
