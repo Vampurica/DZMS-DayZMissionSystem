@@ -21,7 +21,7 @@ Installation
 
 4.	Put the "DZMS" folder into your Server.pbo.
 
-5.	Open up your server_moniter.SQF in the system folder in your server.PBO.
+5.	Open up your server_monitor.SQF in the system folder in your server.PBO.
 
 	Search for this line
 	
