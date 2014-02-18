@@ -7,6 +7,8 @@
 
 [ADDED] Option for AI to use NVGs
 
+[ADJUSTED] Crate Balancing
+
 //////////////////////////////
 //	Special Thanks
 -- All the users who are enjoying and giving me feedback about the system!

@@ -22,10 +22,10 @@ _money = ["ItemSilverBar","ItemSilverBar10oz","ItemGoldBar","ItemGoldBar10oz"];
 if (_type == "medical") then {
 	// load medical
 	_scount = count _medical;
-	for "_x" from 0 to 20 do {
+	for "_x" from 0 to 40 do {
 		_sSelect = floor(random _sCount);
 		_item = _medical select _sSelect;
-		_crate addMagazineCargoGlobal [_item,(round(random 4))];
+		_crate addMagazineCargoGlobal [_item,(round(random 2))];
 	};
 };
 
@@ -110,10 +110,10 @@ if (_type == "supply") then {
 	
 	// load construction
 	_scount = count DZMSConSupply;
-	for "_x" from 0 to 12 do {
+	for "_x" from 0 to 30 do {
 		_sSelect = floor(random _sCount);
 		_item = DZMSConSupply select _sSelect;
-		_crate addMagazineCargoGlobal [_item,(round(random 2))];
+		_crate addMagazineCargoGlobal [_item,1];
 	};
 };
 
