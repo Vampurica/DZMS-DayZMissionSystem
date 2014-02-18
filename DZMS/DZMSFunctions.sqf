@@ -20,7 +20,7 @@ DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-    private["_findRun","_pos","_centerPos","_mapHardCenter","_hardX","_hardY","_posX","_posY","_fin"];
+    private["_mapHardCenter","_isTavi","_centerPos","_pos","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis"];
   
     //Lets try to use map specific "Novy Sobor Fixes".
     //If the map is unrecognised this function will still work.
@@ -151,7 +151,6 @@ DZMSProtectObj = {
 	_objectID = str(round(random 999999));
 	_object setVariable ["ObjectID", _objectID, true];
 	_object setVariable ["ObjectUID", _objectID, true];
-	_object setvelocity [0,0,1];
 	
 	if (_object isKindOf "ReammoBox") then {
 		// PermaLoot on top of ObjID because that "arma logic"
