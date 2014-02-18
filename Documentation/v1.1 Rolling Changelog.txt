@@ -3,7 +3,7 @@
 ////	DZMS v1.1
 //////////////////////////////
 
--
+[FIXED] Height Checking on Taviana due to Scope.
 
 //////////////////////////////
 //	Special Thanks
