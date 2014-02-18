@@ -75,6 +75,10 @@ for "_x" from 1 to _unitcount do {
 	
 	_unit addBackpack _aipack;
 	
+	if (DZMSUseNVG) then {
+		_unit addWeapon "NVGoggles";
+	};
+	
 	{
 		_unit addMagazine _x
 	} forEach _gearmagazines;

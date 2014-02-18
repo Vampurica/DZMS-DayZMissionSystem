@@ -10,6 +10,10 @@ DZMSMissHumanity = true;
 // How Much Humanity?
 DZMSCntHumanity = 25;
 
+// Do You Want AI to use NVGs?
+//(They are deleted on death)
+DZMSUseNVG = true;
+
 // Do you want AI kills to count as bandit kills?
 DZMSCntBanditKls = true;
 

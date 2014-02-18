@@ -5,6 +5,8 @@
 
 [FIXED] Height Checking on Taviana due to Scope.
 
+[ADDED] Option for AI to use NVGs
+
 //////////////////////////////
 //	Special Thanks
 -- All the users who are enjoying and giving me feedback about the system!

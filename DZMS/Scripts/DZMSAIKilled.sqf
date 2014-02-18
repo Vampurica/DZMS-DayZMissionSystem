@@ -53,6 +53,10 @@ if (isPlayer _player) then {
 	
 };
 
+if (DZMSUseNVG) then {
+	_unit removeWeapon "NVGoggles";
+};
+
 if (DZMSCleanDeath) then {
 	deleteVehicle _unit;
 	if (DZMSCleanDeath) exitWith {};
