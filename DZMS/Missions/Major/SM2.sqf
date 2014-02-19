@@ -149,8 +149,6 @@ clearMagazineCargoGlobal _boxFin;
 clearBackpackCargoGlobal _boxFin;
 [_boxFin,"weapons"] ExecVM DZMSBoxSetup;
 [_boxFin] call DZMSProtectObj;
-_boxFin addWeaponCargoGlobal ["BAF_L85A2_RIS_CWS",1];
-_boxFin addWeaponCargoGlobal ["Binocular_Vector",1];
 
 //Wait until the player is within 30meters
 waitUntil{{isPlayer _x && _x distance _boxFin <= 30 } count playableunits > 0}; 
