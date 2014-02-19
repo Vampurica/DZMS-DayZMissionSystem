@@ -22,7 +22,7 @@ _wreck setDir -30.165445;
 [_wreck] call DZMSProtectObj;
 
 //Lets open it up
-_wreck setVehicleInit "_nil = [this] execVM ""\z\addons\dayz_server\DZMS\Scripts\DZMSOpenRamp.sqf"";";
+_wreck setVehicleInit "_nil = [this] execVM DZMSOpenRamp;";
 
 //And lets keep people out
 _wreck setHit ["motor", 1];

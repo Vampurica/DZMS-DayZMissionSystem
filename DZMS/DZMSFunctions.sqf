@@ -16,6 +16,8 @@ DZMSAIKilled = "\z\addons\dayz_server\DZMS\Scripts\DZMSAIKilled.sqf";
 DZMSBoxSetup = "\z\addons\dayz_server\DZMS\Scripts\DZMSBox.sqf";
 DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 
+DZMSOpenRamp = "\z\addons\dayz_server\DZMS\Scripts\DZMSOpenRamp.sqf";
+
 //Attempts to find a mission location
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
