@@ -65,8 +65,6 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 
 // Let's Load the Mission Configuration
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSConfig.sqf";
-waitUntil {DZMSConfigured};
-DZMSConfigured = nil;
 
 // These are Extended configuration files the user can adjust if wanted
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSWeaponCrateList.sqf";
