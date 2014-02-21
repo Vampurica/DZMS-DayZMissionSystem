@@ -53,13 +53,20 @@ if (isPlayer _player) then {
 	
 };
 
+if (DZMSCleanDeath) then {
+	deleteVehicle _unit;
+	if (DZMSCleanDeath) exitWith {};
+};
+
 if (DZMSUseNVG) then {
 	_unit removeWeapon "NVGoggles";
 };
 
-if (DZMSCleanDeath) then {
-	deleteVehicle _unit;
-	if (DZMSCleanDeath) exitWith {};
+if (DZMSUseRPG AND ("RPG7V" in (weapons _unit))) then {
+	_unit removeWeapon "RPG7V";
+	{
+		_unit removeMagazine _x
+	} forEach "PG7V" in (magazines _unit);
 };
 
 //Dead body timer and cleanup

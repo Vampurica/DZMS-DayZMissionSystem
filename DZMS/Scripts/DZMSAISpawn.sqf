@@ -103,6 +103,14 @@ for "_x" from 1 to _unitcount do {
 	_unit setVariable ["DZMSAI", true];
 };
 
+//Lets give a launcher if enabled
+//The last _unit should still be defined from the FOR above
+if (DZMSUseRPG) then {
+	_unit addWeapon "RPG7V";
+	_unit addMagazine "PG7V";
+	_unit addMagazine "PG7V";
+};
+
 // These are 4 waypoints in a NorthSEW around the center
 _wppos1 = [_xpos, _ypos+20, 0];
 _wppos2 = [_xpos+20, _ypos, 0];

@@ -14,6 +14,10 @@ DZMSCntHumanity = 25;
 //(They are deleted on death)
 DZMSUseNVG = true;
 
+// Do you want AI to use RPG7V's?
+//(Only one unit per group spawn will have one)
+DZMSUseRPG = false;
+
 // Do you want AI kills to count as bandit kills?
 DZMSCntBanditKls = true;
 

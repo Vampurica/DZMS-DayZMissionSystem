@@ -8,6 +8,7 @@
 [ADDED] Revamped Major Missions. First In-Depth Mission. First Prototype Epoch Specific Mission.
 [ADDED] Option for AI to use NVGs.
 [ADDED] Option to use static Coordinates.
+[ADDED] Option to have AI spawn with RPG's. They are removed on death. Each RPG unit has 2 shots.
 
 [ADJUSTED] Crate Balancing
 
