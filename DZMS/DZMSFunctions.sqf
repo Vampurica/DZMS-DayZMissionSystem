@@ -20,12 +20,13 @@ DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-    private["_mapHardCenter","_isTavi","_centerPos","_pos","_disCorner","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis"];
+    private["_mapHardCenter","_mapRadii","_isTavi","_centerPos","_pos","_disCorner","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis"];
   
     //Lets try to use map specific "Novy Sobor Fixes".
     //If the map is unrecognised this function will still work.
 	//Better code thanks to Halv
 	_mapHardCenter = true;
+	_mapRadii = 5500;
 	_isTavi = false;
 	switch (DZMSWorldName) do {
 		case "chernarus":{_centerPos = [7100, 7750, 0]};
@@ -47,15 +48,6 @@ DZMSFindPos = {
 		//We don't have a supported map. Let's use the norm.
 		default{_pos = [getMarkerPos "center",0,5500,60,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
 	};
-	
-	//Lets get a dirty map radius based on distance to map center from corner.
-	//This uses a global so it only runs once
-	//Might have issues on non-square maps
-	//Pythagorean theorem - a^2 + b^2 = c^2 / We Know C, Lets Get A
-	if (isNil "DZMSMapRadii") then {
-		_disCorner = (_centerPos distance [0,0,0]);
-		DZMSMapRadii = sqrt((_disCorner * _disCorner) / 2);
-	};
 
     //If we have a hardcoded center, then we need to loop for a location
     //Else we can ignore this block of code and just return the position
@@ -68,7 +60,7 @@ DZMSFindPos = {
         _findRun = true;
         while {_findRun} do
         {
-            _pos = [_centerPos,0,DZMSMapRadii,60,0,20,0] call BIS_fnc_findSafePos;
+            _pos = [_centerPos,0,_mapRadii,60,0,20,0] call BIS_fnc_findSafePos;
            
             //Apparently you can't compare two arrays and must compare values
             _posX = _pos select 0;
