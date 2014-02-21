@@ -22,7 +22,8 @@ _wreck setDir -30.165445;
 [_wreck] call DZMSProtectObj;
 
 //Lets open it up
-_wreck setVehicleInit "_nil = [this] execVM DZMSOpenRamp;";
+_wreck animate ["ramp_top",1];
+_wreck animate ["ramp_bottom",1];
 
 //And lets keep people out
 _wreck setHit ["motor", 1];
