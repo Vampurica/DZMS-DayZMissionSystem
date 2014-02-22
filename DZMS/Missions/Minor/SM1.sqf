@@ -21,16 +21,17 @@ _vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coord
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;
 
-[_coords,2,1,0] ExecVM DZMSAISpawn;
+[_coords,2,1,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 5;
-[_coords,2,1,0] ExecVM DZMSAISpawn;
+[_coords,2,1,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 5;
-[_coords,2,1,0] ExecVM DZMSAISpawn;
+[_coords,2,1,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 5;
-[_coords,2,1,0] ExecVM DZMSAISpawn;
+[_coords,2,1,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 1;
 
-waitUntil{ {isPlayer _x && _x distance _coords <= 30 } count playableunits > 0 };
+//Wait until the player is within 30 meters and also meets the kill req
+[_coords,"DZMSUnitsMinor"] call DZMSWaitMissionComp;
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.

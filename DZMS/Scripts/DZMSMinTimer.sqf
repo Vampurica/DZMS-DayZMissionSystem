@@ -29,9 +29,6 @@ while {_run} do
 	_ranMis = floor (random _cntMis);
 	_varName = DZMSMinorArray select _ranMis;
     
-    // create array of units if it doesn't exist
-    if (isNil "DZMS_UNITS_MINOR") then { DZMS_UNITS_MINOR = []; };
-    
     // clean up all the existing units before starting a new one
     {
         _x enableSimulation false;
@@ -49,10 +46,10 @@ while {_run} do
         deleteVehicle _x;
         deleteGroup (group _x);
         _x = nil;
-    } forEach DZMS_UNITS_MINOR;
+    } forEach DZMSUnitsMinor;
     
     // rebuild the array for the next mission
-    DZMS_UNITS_MINOR = [];
+    DZMSUnitsMinor = [];
     
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Minor\%1.sqf",_varName];

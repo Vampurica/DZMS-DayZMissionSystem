@@ -101,16 +101,17 @@ _crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6.8277, (_coords 
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 0.5635,(_coords select 1) + 0.3173,0],3,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 
-//Wait until the player is within 30meters
-waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0};
+
+//Wait until the player is within 30 meters and also meets the kill req
+[_coords,"DZMSUnitsMajor"] call DZMSWaitMissionComp;
 
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.

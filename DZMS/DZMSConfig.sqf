@@ -31,6 +31,9 @@ DZMSRunGear = false;
 // How long before bodies disappear? (in seconds) (default = 2400)
 DZMSBodyTime = 2400;
 
+// Percentage of AI that must be dead before mission completes (default = 0)
+DZMSRequiredKillPercent = 0;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // You can adjust the weapons that spawn in weapon crates inside DZMSWeaponCrateList.sqf
 // You can adjust the AI's gear inside DZMSAIConfig.sqf in the ExtConfig folder also.
