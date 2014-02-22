@@ -41,7 +41,8 @@ Installation
 --------------------------
 Current Developers
 --------------------------
-* Vampire - Head Developer - http://opendayz.net/members/vampire.13088/
+* Vampire - Developer - http://opendayz.net/members/vampire.13088/
+* Mudzereli - Developer - http://epochmod.com/forum/index.php?/user/9461-mudzereli/
 
 --------------------------
 Thanks To
