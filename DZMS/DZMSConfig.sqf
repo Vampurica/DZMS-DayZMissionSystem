@@ -83,7 +83,15 @@ DZMSMinorMin = 600;
 // A minor mission will always run before this much time has passed. Default = 990 (16.5 Minutes)
 DZMSMinorMax = 990;
 
-
+// Blacklist Zone Array -- missions will not spawn in these areas
+// format: [[x,y,z],radius]
+DZMSBlacklistZones = [
+    [[06325,07807,0],300], //stary
+    [[04063,11664,0],300], //klen
+    [[11447,11364,0],300], //bash
+    [[01606,07803,0],200], //hero
+    [[12944,12766,0],200]  //bandit
+];
 
 /*=============================================================================================*/
 // Do Not Edit Below This Line
