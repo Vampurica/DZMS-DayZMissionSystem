@@ -66,7 +66,7 @@ if (DZMSUseRPG AND ("RPG7V" in (weapons _unit))) then {
 	_unit removeWeapon "RPG7V";
 	{
 		_unit removeMagazine _x
-	} forEach "PG7V" in (magazines _unit);
+	} forEach ["PG7V"] in (magazines _unit);
 };
 
 //Dead body timer and cleanup
