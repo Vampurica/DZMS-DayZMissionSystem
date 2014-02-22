@@ -40,7 +40,7 @@ sleep 1;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The crash site has been secured by survivors!", "PLAIN",6] call RE;
-diag_log format["[DZMS]: Minor SM4 Crash Site Mission has Ended."];
+diag_log text format["[DZMS]: Minor SM4 Crash Site Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";
 

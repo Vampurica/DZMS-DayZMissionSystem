@@ -11,7 +11,7 @@ _unitcount = _this select 1;
 _skill = _this select 2;
 _unitArrayName = _this select 3;
 
-//diag_log format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
+//diag_log text format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
 
 _wpRadius = 20;
 
@@ -56,7 +56,7 @@ for "_x" from 1 to _unitcount do {
 	_weapon = _weaponArray select 0;
 	_magazine = _weaponArray select 1;
 	
-	//diag_log format ["[DZMS]: AI Weapon:%1 / AI Magazine:%2",_weapon,_magazine];
+	//diag_log text format ["[DZMS]: AI Weapon:%1 / AI Magazine:%2",_weapon,_magazine];
 	
 	//Get the gear array
 	_aigearArray = [DZMSGear0,DZMSGear1,DZMSGear2,DZMSGear3,DZMSGear4];
@@ -132,11 +132,11 @@ _wp4 setWaypointType "MOVE";
 _wpfin = _unitGroup addWaypoint [[_xpos,_ypos, 0], _wpRadius];
 _wpfin setWaypointType "CYCLE";
 
-//diag_log format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];
+//diag_log text format ["[DZMS]: Spawned %1 AI at %2",_unitcount,_position];
 
 // load the unit groups into a passed array name so they can be cleaned up later
 call compile format["
 %1 = %1 + (units _unitGroup); 
 _unitMissionCount = count %1;
 ",_unitArrayName];
-diag_log format["[DZMS]: (%3) %1 AI Spawned, %2 units in mission.",count (units _unitGroup),_unitMissionCount,_unitArrayName];
+diag_log text format["[DZMS]: (%3) %1 AI Spawned, %2 units in mission.",count (units _unitGroup),_unitMissionCount,_unitArrayName];

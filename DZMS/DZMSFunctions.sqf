@@ -3,7 +3,7 @@
 	by Vampire
 */
 
-diag_log "[DZMS]: loading execVM sqf scripts.";
+diag_log text "[DZMS]: loading execVM sqf scripts.";
 DZMSMajTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
 DZMSMinTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
 DZMSMarkerLoop = "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
@@ -16,11 +16,11 @@ DZMSAIKilled = "\z\addons\dayz_server\DZMS\Scripts\DZMSAIKilled.sqf";
 DZMSBoxSetup = "\z\addons\dayz_server\DZMS\Scripts\DZMSBox.sqf";
 DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 
-diag_log "[DZMS]: loading compiled functions.";
+diag_log text "[DZMS]: loading compiled functions.";
 // compiled functions
 DZMSAISpawn = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSAISpawn.sqf";
 
-diag_log "[DZMS]: loading all other functions.";
+diag_log text "[DZMS]: loading all other functions.";
 //Attempts to find a mission location
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
@@ -108,7 +108,7 @@ DZMSFindPos = {
 				};
             };
 			// If the missions never spawn after running, use this to debug the loop. noWater=true / Dis > 1000 / TaviHeight <= 185
-			//diag_log format ["[DZMS]: DEBUG: Pos:[%1,%2] / noWater?:%3 / okDistance?:%4 / TaviHeight:%5 / BlackListed?:%6", _posX, _posY, _noWater, _okDis, _tavHeight, _isBlack];
+			//diag_log text format ["[DZMS]: DEBUG: Pos:[%1,%2] / noWater?:%3 / okDistance?:%4 / TaviHeight:%5 / BlackListed?:%6", _posX, _posY, _noWater, _okDis, _tavHeight, _isBlack];
             sleep 2;
         };
        
@@ -188,7 +188,7 @@ DZMSGetWeapon = {
 	
 	_skill = _this select 0;
 	
-	//diag_log format ["[DZMS]: AI Skill Func:%1",_skill];
+	//diag_log text format ["[DZMS]: AI Skill Func:%1",_skill];
 	
 	switch (_skill) do {
 		case 0: {_aiweapon = DZMSWeps1;};
@@ -209,9 +209,9 @@ DZMSWaitMissionComp = {
     _unitArrayName = _this select 1;
     call compile format["_numSpawned = count %1;",_unitArrayName];
     _numKillReq = ceil(DZMSRequiredKillPercent * _numSpawned);
-    diag_log format["[DZMS]: (%3) waiting for %1/%2 units or less to be alive and a player to be near objective.",(_numSpawned - _numKillReq),_numSpawned,_unitArrayName];
+    diag_log text format["[DZMS]: (%3) waiting for %1/%2 units or less to be alive and a player to be near objective.",(_numSpawned - _numKillReq),_numSpawned,_unitArrayName];
     call compile format["waitUntil{sleep 1; ({isPlayer _x && _x distance _objective <= 30} count playableUnits > 0) && ({alive _x} count %1 <= (_numSpawned - _numKillReq));};",_unitArrayName];
 };
 
 //------------------------------------------------------------------//
-diag_log format ["[DZMS]: Mission Functions Script Loaded!"];
+diag_log text format ["[DZMS]: Mission Functions Script Loaded!"];

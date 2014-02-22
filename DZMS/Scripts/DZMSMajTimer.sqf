@@ -9,7 +9,7 @@ private["_run","_timeDiff","_timeVar","_wait","_cntMis","_ranMis","_varName","_s
 _timeDiff = DZMSMajorMax - DZMSMajorMin;
 _timeVar = _timeDiff + DZMSMajorMin;
 
-diag_log format ["[DZMS]: Major Mission Clock Starting!"];
+diag_log text format ["[DZMS]: Major Mission Clock Starting!"];
 
 //Lets get the loop going
 _run = true;
@@ -53,7 +53,7 @@ while {_run} do
     
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Major\%1.sqf",_varName];
-	diag_log format ["[DZMS]: Running Major Mission %1.",_varName];
+	diag_log text format ["[DZMS]: Running Major Mission %1.",_varName];
 	
 	//Let's wait for it to finish or timeout
 	waitUntil {DZMSMajDone};

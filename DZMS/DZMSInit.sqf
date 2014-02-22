@@ -11,13 +11,13 @@ waitUntil{initialized};
 sleep 60;
 
 // Error Check
-if (!isServer) exitWith { diag_log format ["[DZMS]: <ERROR> DZMS is Installed Incorrectly! DZMS is not Running!"]; };
-if (!isnil("DZMSInstalled")) exitWith { diag_log format ["[DZMS]: <ERROR> DZMS is Installed Twice or Installed Incorrectly!"]; };
+if (!isServer) exitWith { diag_log text format ["[DZMS]: <ERROR> DZMS is Installed Incorrectly! DZMS is not Running!"]; };
+if (!isnil("DZMSInstalled")) exitWith { diag_log text format ["[DZMS]: <ERROR> DZMS is Installed Twice or Installed Incorrectly!"]; };
 
 // Global for other scripts to check if DZMS is installed.
 DZMSInstalled = true;
 
-diag_log format ["[DZMS]: Starting DayZ Mission System."];
+diag_log text format ["[DZMS]: Starting DayZ Mission System."];
 
 // Let's see if we need to set relationships
 // Checking for DayZAI, SargeAI, and WickedAI (Three AI Systems that already set relations)
@@ -26,7 +26,7 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 {
 
 	// They weren't found, so let's set relationships
-	diag_log format ["[DZMS]: Relations not found! Using DZMS Relations."];
+	diag_log text format ["[DZMS]: Relations not found! Using DZMS Relations."];
 	
 	// Create the groups if they aren't created already
 	createCenter east;
@@ -43,21 +43,21 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 	// This could be made better in a future version
 	DZMSRelations = 0; //Set our counter variable
 	if (!isnil("DZAI_isActive")) then {
-		diag_log format ["[DZMS]: DZAI Found! Using DZAI's Relations!"];
+		diag_log text format ["[DZMS]: DZAI Found! Using DZAI's Relations!"];
 		DZMSRelations = DZMSRelations + 1;
 	};
 	if (!isnil("SAR_version")) then {
-		diag_log format ["[DZMS]: SargeAI Found! Using SargeAI's Relations!"];
+		diag_log text format ["[DZMS]: SargeAI Found! Using SargeAI's Relations!"];
 		DZMSRelations = DZMSRelations + 1;
 	};
 	if (!isnil("WAIconfigloaded")) then {
-		diag_log format ["[DZMS]: WickedAI Found! Using WickedAI's Relations!"];
+		diag_log text format ["[DZMS]: WickedAI Found! Using WickedAI's Relations!"];
 		DZMSRelations = DZMSRelations + 1;
 	};
 	// If we have multiple relations running, lets warn the user
 	if (DZMSRelations > 1) then {
-		diag_log format ["[DZMS]: Multiple Relations Detected! Unwanted AI Behaviour May Occur!"];
-		diag_log format ["[DZMS]: If Issues Arise, Decide on a Single AI System! (DayZAI, SargeAI, or WickedAI)"];
+		diag_log text format ["[DZMS]: Multiple Relations Detected! Unwanted AI Behaviour May Occur!"];
+		diag_log text format ["[DZMS]: If Issues Arise, Decide on a Single AI System! (DayZAI, SargeAI, or WickedAI)"];
 	};
 	DZMSRelations = nil; //Destroy the Global Var
 	
@@ -71,19 +71,19 @@ call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZM
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZMSAIConfig.sqf";
 
 // Report the version
-diag_log format ["[DZMS]: Currently Running Version: %1", DZMSVersion];
+diag_log text format ["[DZMS]: Currently Running Version: %1", DZMSVersion];
 
 // Lets check for a copy-pasted config file
 if (DZMSVersion != "RC1.1") then {
-	diag_log format ["[DZMS]: Outdated Configuration Detected! Please Update DZMS!"];
-	diag_log format ["[DZMS]: Old Versions are not supported by the Mod Author!"];
+	diag_log text format ["[DZMS]: Outdated Configuration Detected! Please Update DZMS!"];
+	diag_log text format ["[DZMS]: Old Versions are not supported by the Mod Author!"];
 };
 
-diag_log format ["[DZMS]: Mission and Extended Configuration Loaded!"];
+diag_log text format ["[DZMS]: Mission and Extended Configuration Loaded!"];
 
 // Lets get the map name for mission location purposes
 DZMSWorldName = toLower format ["%1", worldName];
-diag_log format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZMSWorldName];
+diag_log text format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZMSWorldName];
 
 // We need to detect Epoch to change the hive call for vehicle saving
 // Epoch doesn't have hive 999 calls and uses 308 publish instead
@@ -91,7 +91,7 @@ _modVariant = toLower( getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 if (_modVariant == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
 
 if (DZMSEpoch) then {
-	diag_log format ["[DZMS]: DayZ Epoch Detected! Some Scripts Adjusted!"];
+	diag_log text format ["[DZMS]: DayZ Epoch Detected! Some Scripts Adjusted!"];
 };
 
 // Lets load our functions

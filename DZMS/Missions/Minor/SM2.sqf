@@ -67,7 +67,7 @@ sleep 3;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The Medical Outpost is under survivor control!", "PLAIN",6] call RE;
-diag_log format["[DZMS]: Minor SM2 Medical Outpost Mission has Ended."];
+diag_log text format["[DZMS]: Minor SM2 Medical Outpost Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";
 

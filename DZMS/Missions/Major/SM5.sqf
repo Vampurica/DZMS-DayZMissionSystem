@@ -74,7 +74,7 @@ sleep 5;
 [_vehicle] ExecVM DZMSSaveVeh;
 
 [nil,nil,rTitleText,"The Ural Supplies have been Secured by Survivors!", "PLAIN",6] call RE;
-diag_log format["[DZMS]: Major SM5 Ural Ambush Mission has Ended."];
+diag_log text format["[DZMS]: Major SM5 Ural Ambush Mission has Ended."];
 deleteMarker "DZMSMajMarker";
 deleteMarker "DZMSMajDot";
 
