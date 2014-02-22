@@ -29,22 +29,22 @@ DZMSFindPos = {
 	_mapRadii = 5500;
 	_isTavi = false;
 	switch (DZMSWorldName) do {
-		case "chernarus":{_centerPos = [7100, 7750, 0]};
-		case "utes":{_centerPos = [3500, 3500, 0]};
-		case "zargabad":{_centerPos = [4096, 4096, 0]};
-		case "fallujah":{_centerPos = [3500, 3500, 0]};
+		case "chernarus":{_centerPos = [7100, 7750, 0];_mapRadii = 5500;};
+		case "utes":{_centerPos = [3500, 3500, 0];_mapRadii = 3500;};
+		case "zargabad":{_centerPos = [4096, 4096, 0];_mapRadii = 4096;};
+		case "fallujah":{_centerPos = [3500, 3500, 0];_mapRadii = 3500;};
 		case "takistan":{_centerPos = [8000, 1900, 0]};
-		case "tavi":{_centerPos = [13300, 2660, 0];_isTavi = true;};
-		case "lingor":{_centerPos = [4400, 4400, 0]};
+		case "tavi":{_centerPos = [10370, 11510, 0];_mapRadii = 14090;_isTavi = true;};
+		case "lingor":{_centerPos = [4400, 4400, 0];_mapRadii = 4400;};
 		case "namalsk":{_centerPos = [4352, 7348, 0]};
-		case "napf":{_centerPos = [10240, 10240, 0]};
+		case "napf":{_centerPos = [10240, 10240, 0];_mapRadii = 10240;};
 		case "mbg_celle2":{_centerPos = [8765.27, 2075.58, 0]};
 		case "oring":{_centerPos = [1577, 3429, 0]};
-		case "panthera2":{_centerPos = [4400, 4400, 0]};
-		case "isladuala":{_centerPos = [4400, 4400, 0]};
+		case "panthera2":{_centerPos = [4400, 4400, 0];_mapRadii = 4400;};
+		case "isladuala":{_centerPos = [4400, 4400, 0];_mapRadii = 4400;};
 		case "smd_sahrani_a2":{_centerPos = [13200, 8850, 0]};
-		case "sauerland":{_centerPos = [13591.66, 12495.667, 0]};
-		case "trinity":{_centerPos = [6400, 6400, 0]};
+		case "sauerland":{_centerPos = [12800, 12800, 0];_mapRadii = 12800;};
+		case "trinity":{_centerPos = [6400, 6400, 0];_mapRadii = 6400;};
 		//We don't have a supported map. Let's use the norm.
 		default{_pos = [getMarkerPos "center",0,5500,60,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
 	};
