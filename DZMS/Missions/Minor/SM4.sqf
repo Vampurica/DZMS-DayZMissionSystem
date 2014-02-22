@@ -28,11 +28,11 @@ _crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel]
-[_coords,3,1] ExecVM DZMSAISpawn;
+[_coords,3,1,0] ExecVM DZMSAISpawn;
 sleep 1;
-[_coords,3,1] ExecVM DZMSAISpawn;
+[_coords,3,1,0] ExecVM DZMSAISpawn;
 sleep 1;
-[_coords,3,1] ExecVM DZMSAISpawn;
+[_coords,3,1,0] ExecVM DZMSAISpawn;
 sleep 1;
 
 //Wait until the player is within 30meters

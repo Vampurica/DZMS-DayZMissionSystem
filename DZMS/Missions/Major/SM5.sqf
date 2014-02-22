@@ -59,11 +59,11 @@ _crate3 = createVehicle ["USBasicAmmunitionBox",[(_coords select 0) + 2.5405,(_c
 [_crate3] call DZMSProtectObj;
 _crate3 setDir -27.93351;
 
-[[(_coords select 0) - 6.9458,(_coords select 1) - 3.5352, 0],6,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) - 6.9458,(_coords select 1) - 3.5352, 0],6,1,1] ExecVM DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) + 4.4614,(_coords select 1) + 2.5898, 0],6,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 4.4614,(_coords select 1) + 2.5898, 0],6,1,1] ExecVM DZMSAISpawn;
 sleep 5;
-[[(_coords select 0) + 4.4614,(_coords select 1) + 2.5898, 0],4,1] ExecVM DZMSAISpawn;
+[[(_coords select 0) + 4.4614,(_coords select 1) + 2.5898, 0],4,1,1] ExecVM DZMSAISpawn;
 sleep 5;
 
 waitUntil{{isPlayer _x && _x distance _coords <= 30  } count playableunits > 0}; 

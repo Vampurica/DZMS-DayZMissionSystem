@@ -21,13 +21,13 @@ _vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coord
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;
 
-[_coords,2,1] ExecVM DZMSAISpawn;
+[_coords,2,1,0] ExecVM DZMSAISpawn;
 sleep 5;
-[_coords,2,1] ExecVM DZMSAISpawn;
+[_coords,2,1,0] ExecVM DZMSAISpawn;
 sleep 5;
-[_coords,2,1] ExecVM DZMSAISpawn;
+[_coords,2,1,0] ExecVM DZMSAISpawn;
 sleep 5;
-[_coords,2,1] ExecVM DZMSAISpawn;
+[_coords,2,1,0] ExecVM DZMSAISpawn;
 sleep 1;
 
 waitUntil{ {isPlayer _x && _x distance _coords <= 30 } count playableunits > 0 };
