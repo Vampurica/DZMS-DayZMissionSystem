@@ -22,7 +22,7 @@ _net = createVehicle ["Land_CamoNetB_NATO",[(_coords select 0) - 0.0649, (_coord
 
 //We create the vehicles like normal
 _vehicle = createVehicle ["SUV_TK_CIV_EP1",[(_coords select 0) + 10.0303, (_coords select 1) - 12.2979,10],[], 0, "CAN_COLLIDE"];
-_vehicle1 = createVehicle ["Ural_INS",[(_coords select 0) - 4869.2983, (_coords select 1) - 9663.6406,10],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle ["Ural_INS",[(_coords select 0) - 6.2764, (_coords select 1) - 14.086,10],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;

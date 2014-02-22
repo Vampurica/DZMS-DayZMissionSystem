@@ -52,11 +52,11 @@ _base7 = createVehicle ["WeaponHolder_ItemToolbox",[(_coords select 0) - 7.7041,
 _base7 setDir -106.46461;
 [_base7] call DZMSProtectObj;
 
-_base8 = createVehicle ["Land_CamoNetVar_EAST",[(_coords select 0) + 4.1738, (_coords select 1) - 9680.4238],[], 0, "CAN_COLLIDE"];
+_base8 = createVehicle ["Land_CamoNetVar_EAST",[(_coords select 0) + 4.1738, (_coords select 1) - 7.9112],[], 0, "CAN_COLLIDE"];
 _base8 setDir -27.004126;
 [_base8] call DZMSProtectObj;
 _base8 setVehicleLock "LOCKED";
-_base8 setPos [(_coords select 0) + 4.1738, (_coords select 1) - 9680.4238];
+_base8 setPos [(_coords select 0) + 4.1738, (_coords select 1) - 7.9112];
 
 _base9 = createVehicle ["PowGen_Big",[(_coords select 0) - 0.8936, (_coords select 1) + 8.1582,0],[], 0, "CAN_COLLIDE"];
 _base9 setDir -56.044361;
