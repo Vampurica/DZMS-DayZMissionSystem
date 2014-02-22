@@ -28,9 +28,6 @@ while {_run} do
 	//Lets pick a mission
 	_ranMis = floor (random _cntMis);
 	_varName = DZMSMajorArray select _ranMis;
-	
-    // create array of units if it doesn't exist
-    if (isNil "DZMS_UNITS_MAJOR") then { DZMS_UNITS_MAJOR = []; };
     
     // clean up all the existing units before starting a new one
     {
@@ -49,10 +46,10 @@ while {_run} do
         deleteVehicle _x;
         deleteGroup (group _x);
         _x = nil;
-    } forEach DZMS_UNITS_MAJOR;
+    } forEach DZMSUnitsMajor;
     
     // rebuild the array for the next mission
-    DZMS_UNITS_MAJOR = [];
+    DZMSUnitsMajor = [];
     
 	//Let's Run the Mission
 	[] execVM format ["\z\addons\dayz_server\DZMS\Missions\Major\%1.sqf",_varName];
