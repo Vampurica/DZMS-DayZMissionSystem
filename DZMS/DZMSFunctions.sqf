@@ -178,7 +178,9 @@ DZMSProtectObj = {
 	} else {
 		dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];
 	};
-
+    if (!((typeOf _object) in ["USVehicleBox","USLaunchersBox","AmmoBoxSmall_556","AmmoBoxSmall_762","MedBox0","USBasicWeaponsBox","USBasicAmmunitionBox","RULaunchersBox"]) || DZMSSceneryDespawnLoot) then {
+        _object setVariable["DZMSCleanup",true];
+    };
 	true
 };
 
@@ -203,6 +205,7 @@ DZMSGetWeapon = {
 	_fin
 };
 
+//function to wait for mission completion
 DZMSWaitMissionComp = {
     private["_objective","_unitArrayName","_numSpawned","_numKillReq"];
     _objective = _this select 0;
@@ -211,6 +214,47 @@ DZMSWaitMissionComp = {
     _numKillReq = ceil(DZMSRequiredKillPercent * _numSpawned);
     diag_log format["[DZMS]: (%3) waiting for %1/%2 units or less to be alive and a player to be near objective.",(_numSpawned - _numKillReq),_numSpawned,_unitArrayName];
     call compile format["waitUntil{sleep 1; ({isPlayer _x && _x distance _objective <= 30} count playableUnits > 0) && ({alive _x} count %1 <= (_numSpawned - _numKillReq));};",_unitArrayName];
+    if (DZMSSceneryDespawnTimer > 0) then {_objective spawn DZMSCleanupThread;};
+};
+
+//sleep function that uses diag_tickTime for accuracy
+DZMSSleep = {
+    private["_sleepTime","_checkInterval","_startTime"];
+    _sleepTime = _this select 0;
+    _checkInterval = _this select 1;
+    _startTime = diag_tickTime;
+    waitUntil{sleep _checkInterval; (diag_tickTime - _startTime) > _sleepTime;};
+};
+
+//function to purge objects
+DZMSPurgeObject = {
+    _this enableSimulation false;
+    _this removeAllMPEventHandlers "mpkilled";
+    _this removeAllMPEventHandlers "mphit";
+    _this removeAllMPEventHandlers "mprespawn";
+    _this removeAllEventHandlers "FiredNear";
+    _this removeAllEventHandlers "HandleDamage";
+    _this removeAllEventHandlers "Killed";
+    _this removeAllEventHandlers "Fired";
+    _this removeAllEventHandlers "GetOut";
+    _this removeAllEventHandlers "GetIn";
+    _this removeAllEventHandlers "Local";
+    clearVehicleInit _this;
+    deleteVehicle _this;
+    deleteGroup (group _this);
+    _this = nil;
+};
+
+//function to clean up mission objects
+DZMSCleanupThread = {
+    //sleep for the despawn timer length
+    [DZMSSceneryDespawnTimer,20] call DZMSSleep;
+    //delete flagged nearby objects
+    {
+        if (_x getVariable ["DZMSCleanup",false]) then {
+            _x call DZMSPurgeObject;
+        };
+    } forEach (_this nearObjects 50);
 };
 
 //------------------------------------------------------------------//

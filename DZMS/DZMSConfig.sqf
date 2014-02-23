@@ -34,6 +34,12 @@ DZMSBodyTime = 2400;
 // Percentage of AI that must be dead before mission completes (default = 0)
 DZMSRequiredKillPercent = 0;
 
+// How long in seconds before mission scenery disappears (default = 1800 / 0 = disabled)
+DZMSSceneryDespawnTimer = 1800;
+
+// Should crates despawn with scenery? (default = false)
+DZMSSceneryDespawnLoot = false;
+
 //////////////////////////////////////////////////////////////////////////////////////////
 // You can adjust the weapons that spawn in weapon crates inside DZMSWeaponCrateList.sqf
 // You can adjust the AI's gear inside DZMSAIConfig.sqf in the ExtConfig folder also.
