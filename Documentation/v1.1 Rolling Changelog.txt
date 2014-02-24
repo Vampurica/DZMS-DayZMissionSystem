@@ -11,6 +11,8 @@
 [ADDED] Option to use static Coordinates.
 [ADDED] Option to have AI spawn with RPG's. They are removed on death. Each RPG unit has 2 shots.
 [ADDED] Option to Blacklist Areas thanks to @mudzereli.
+[ADDED] Option to Force a % of AI be killed before completion of the mission. @mudzereli
+[ADDED] Adjustable Crate and Scenery Cleanup. @mudzereli
 
 [ADJUSTED] Crate Balancing
 [ADJUSTED] Better Mission and Cleanup timing thanks to @mudzereli.
