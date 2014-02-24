@@ -55,7 +55,7 @@ sleep 3;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The stash house is under survivor control!", "PLAIN",6] call RE;
-diag_log format["[DZMS]: Minor SM3 Stash House Mission has Ended."];
+diag_log text format["[DZMS]: Minor SM3 Stash House Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";
 

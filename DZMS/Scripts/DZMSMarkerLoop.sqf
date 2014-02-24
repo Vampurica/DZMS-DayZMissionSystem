@@ -4,7 +4,7 @@
 */
 private["_run","_nul","_nil"];
 
-diag_log format ["[DZMS]: Mission Marker Loop for JIPs Starting!"];
+diag_log text format ["[DZMS]: Mission Marker Loop for JIPs Starting!"];
 
 //Lets define these
 if (isNil "DZMSMajCoords")then{DZMSMajCoords = [0,0,0];};

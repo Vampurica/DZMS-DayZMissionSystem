@@ -39,7 +39,7 @@ sleep 1;
 
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The hunting party has been wiped out!", "PLAIN",6] call RE;
-diag_log format["[DZMS]: Minor SM1 Hunting Party Mission has Ended."];
+diag_log text format["[DZMS]: Minor SM1 Hunting Party Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";
 
