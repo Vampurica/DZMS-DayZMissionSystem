@@ -28,24 +28,26 @@ while {_run} do
 	//Lets pick a mission
 	_ranMis = floor (random _cntMis);
 	_varName = DZMSMajorArray select _ranMis;
-    
+
     // clean up all the existing units before starting a new one
     {
-        _x enableSimulation false;
-        _x removeAllMPEventHandlers "mpkilled";
-        _x removeAllMPEventHandlers "mphit";
-        _x removeAllMPEventHandlers "mprespawn";
-        _x removeAllEventHandlers "FiredNear";
-        _x removeAllEventHandlers "HandleDamage";
-        _x removeAllEventHandlers "Killed";
-        _x removeAllEventHandlers "Fired";
-        _x removeAllEventHandlers "GetOut";
-        _x removeAllEventHandlers "GetIn";
-        _x removeAllEventHandlers "Local";
-        clearVehicleInit _x;
-        deleteVehicle _x;
-        deleteGroup (group _x);
-        _x = nil;
+        if (alive _x) then {
+            _x enableSimulation false;
+            _x removeAllMPEventHandlers "mpkilled";
+            _x removeAllMPEventHandlers "mphit";
+            _x removeAllMPEventHandlers "mprespawn";
+            _x removeAllEventHandlers "FiredNear";
+            _x removeAllEventHandlers "HandleDamage";
+            _x removeAllEventHandlers "Killed";
+            _x removeAllEventHandlers "Fired";
+            _x removeAllEventHandlers "GetOut";
+            _x removeAllEventHandlers "GetIn";
+            _x removeAllEventHandlers "Local";
+            clearVehicleInit _x;
+            deleteVehicle _x;
+            deleteGroup (group _x);
+            _x = nil;
+        };
     } forEach DZMSUnitsMajor;
     
     // rebuild the array for the next mission
