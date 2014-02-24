@@ -14,7 +14,7 @@ if (isNil "DZMSMinCoords")then{DZMSMinCoords = [0,0,0];};
 _run = true;
 while {_run} do
 {
-	sleep 25; //Sleep 25 seconds
+    [25,5] call DZMSSleep; // sleep 25 seconds
 	//If the marker exists (meaning the mission is active) lets delete it and re-add it
 	if (!(getMarkerColor "DZMSMajMarker" == "")) then {
 		deleteMarker "DZMSMajMarker";
