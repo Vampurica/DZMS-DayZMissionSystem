@@ -43,7 +43,7 @@ _crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 7.1718,(_coords 
 [_crate2] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
-//Usage: [_coords, count, skillLevel]
+//Usage: [_coords, count, skillLevel, unitArray]
 [[(_coords select 0) - 8.4614,(_coords select 1) - 5.0527,0],6,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
 [[(_coords select 0) - 8.4614,(_coords select 1) - 5.0527,0],4,1,"DZMSUnitsMajor"] call DZMSAISpawn;

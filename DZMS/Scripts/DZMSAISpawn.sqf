@@ -139,4 +139,5 @@ call compile format["
 %1 = %1 + (units _unitGroup); 
 _unitMissionCount = count %1;
 ",_unitArrayName];
+
 diag_log text format["[DZMS]: (%3) %1 AI Spawned, %2 units in mission.",count (units _unitGroup),_unitMissionCount,_unitArrayName];

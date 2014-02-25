@@ -41,7 +41,7 @@ _crate3 = createVehicle ["AmmoBoxSmall_556",[(_coords select 0) + 4.0996,(_coord
 [_crate3] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
-//Usage: [_coords, count, skillLevel]
+//Usage: [_coords, count, skillLevel, unitArray]
 [[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],6,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
 [[(_coords select 0) + 0.0352,(_coords select 1) - 6.8799, 0],6,1,"DZMSUnitsMajor"] call DZMSAISpawn;

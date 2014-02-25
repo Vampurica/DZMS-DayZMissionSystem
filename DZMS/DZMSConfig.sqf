@@ -32,6 +32,7 @@ DZMSRunGear = false;
 DZMSBodyTime = 2400;
 
 // Percentage of AI that must be dead before mission completes (default = 0)
+//( 0 is 0% of AI / 0.50 is 50% / 1 is 100% )
 DZMSRequiredKillPercent = 0;
 
 // How long in seconds before mission scenery disappears (default = 1800 / 0 = disabled)

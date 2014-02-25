@@ -5,22 +5,18 @@
 private ["_missName","_coords","_vehicle"];
 
 //Name of the Mission
-_missName = "Bandit Hunting Party";
+_missName = "Bandit Squad";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
 
-[nil,nil,rTitleText,"A bandit hunting party has been spotted! Check your map for the location!", "PLAIN",10] call RE;
+[nil,nil,rTitleText,"A Bandit Squad has been spotted!\nStop them from completing their patrol!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
 [_coords,_missName] ExecVM DZMSAddMinMarker;
 
-//Create the vehicle as normal
-_vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-
-//DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
-[_vehicle] call DZMSSetupVehicle;
-
+//DZMSAISpawn spawns AI to the mission.
+//Usage: [_coords, count, skillLevel, unitArray]
 [_coords,2,1,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 5;
 [_coords,2,1,"DZMSUnitsMinor"] call DZMSAISpawn;
@@ -33,13 +29,9 @@ sleep 1;
 //Wait until the player is within 30 meters and also meets the kill req
 [_coords,"DZMSUnitsMinor"] call DZMSWaitMissionComp;
 
-//Call DZMSSaveVeh to attempt to save the vehicles to the database
-//If saving is off, the script will exit.
-[_vehicle] ExecVM DZMSSaveVeh;
-
 //Let everyone know the mission is over
-[nil,nil,rTitleText,"The hunting party has been wiped out!", "PLAIN",6] call RE;
-diag_log text format["[DZMS]: Minor SM1 Hunting Party Mission has Ended."];
+[nil,nil,rTitleText,"The Bandit Squad has been Wiped Out!", "PLAIN",6] call RE;
+diag_log text format["[DZMS]: Minor SM1 Bandit Squad Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";
 

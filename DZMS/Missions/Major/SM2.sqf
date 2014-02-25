@@ -47,7 +47,7 @@ _pilot addWeapon 'ItemGPS';
 sleep 5;
 
 //DZMSAISpawn spawns AI to the mission.
-//Usage: [_coords, count, skillLevel]
+//Usage: [_coords, count, skillLevel, unitArray]
 [_coords,6,1,"DZMSUnitsMajor"] call DZMSAISpawn;
 sleep 5;
 [_coords,6,1,"DZMSUnitsMajor"] call DZMSAISpawn;

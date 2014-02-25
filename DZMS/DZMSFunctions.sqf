@@ -3,7 +3,7 @@
 	by Vampire
 */
 
-diag_log text "[DZMS]: loading execVM sqf scripts.";
+diag_log text "[DZMS]: Loading ExecVM Functions.";
 DZMSMajTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMajTimer.sqf";
 DZMSMinTimer = "\z\addons\dayz_server\DZMS\Scripts\DZMSMinTimer.sqf";
 DZMSMarkerLoop = "\z\addons\dayz_server\DZMS\Scripts\DZMSMarkerLoop.sqf";
@@ -16,11 +16,11 @@ DZMSAIKilled = "\z\addons\dayz_server\DZMS\Scripts\DZMSAIKilled.sqf";
 DZMSBoxSetup = "\z\addons\dayz_server\DZMS\Scripts\DZMSBox.sqf";
 DZMSSaveVeh = "\z\addons\dayz_server\DZMS\Scripts\DZMSSaveToHive.sqf";
 
-diag_log text "[DZMS]: loading compiled functions.";
+diag_log text "[DZMS]: Loading Compiled Functions.";
 // compiled functions
 DZMSAISpawn = compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\Scripts\DZMSAISpawn.sqf";
 
-diag_log text "[DZMS]: loading all other functions.";
+diag_log text "[DZMS]: Loading All Other Functions.";
 //Attempts to find a mission location
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
@@ -178,6 +178,7 @@ DZMSProtectObj = {
 	} else {
 		dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];
 	};
+	
     if (!((typeOf _object) in ["USVehicleBox","USLaunchersBox","AmmoBoxSmall_556","AmmoBoxSmall_762","MedBox0","USBasicWeaponsBox","USBasicAmmunitionBox","RULaunchersBox"]) || DZMSSceneryDespawnLoot) then {
         _object setVariable["DZMSCleanup",true];
     };
@@ -208,20 +209,27 @@ DZMSGetWeapon = {
 //function to wait for mission completion
 DZMSWaitMissionComp = {
     private["_objective","_unitArrayName","_numSpawned","_numKillReq"];
+	
     _objective = _this select 0;
     _unitArrayName = _this select 1;
+	
     call compile format["_numSpawned = count %1;",_unitArrayName];
     _numKillReq = ceil(DZMSRequiredKillPercent * _numSpawned);
-    diag_log text format["[DZMS]: (%3) waiting for %1/%2 units or less to be alive and a player to be near objective.",(_numSpawned - _numKillReq),_numSpawned,_unitArrayName];
+	
+    diag_log text format["[DZMS]: (%3) Waiting for %1/%2 Units or Less to be Alive and a Player to be Near the Objective.",(_numSpawned - _numKillReq),_numSpawned,_unitArrayName];
+	
     call compile format["waitUntil{sleep 1; ({isPlayer _x && _x distance _objective <= 30} count playableUnits > 0) && ({alive _x} count %1 <= (_numSpawned - _numKillReq));};",_unitArrayName];
+	
     if (DZMSSceneryDespawnTimer > 0) then {_objective spawn DZMSCleanupThread;};
 };
 
 //sleep function that uses diag_tickTime for accuracy
 DZMSSleep = {
     private["_sleepTime","_checkInterval","_startTime"];
+	
     _sleepTime = _this select 0;
     _checkInterval = _this select 1;
+	
     _startTime = diag_tickTime;
     waitUntil{sleep _checkInterval; (diag_tickTime - _startTime) > _sleepTime;};
 };
@@ -249,6 +257,7 @@ DZMSPurgeObject = {
 DZMSCleanupThread = {
     //sleep for the despawn timer length
     [DZMSSceneryDespawnTimer,20] call DZMSSleep;
+	
     //delete flagged nearby objects
     {
         if (_x getVariable ["DZMSCleanup",false]) then {
