@@ -89,6 +89,7 @@ diag_log text format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZM
 // Epoch doesn't have hive 999 calls and uses 308 publish instead
 _modVariant = toLower( getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 if (_modVariant == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
+if ((!(DZMSEpoch)) AND (!(isNil "PVDZE_serverObjectMonitor"))) then {DZMSEpoch = true;};
 
 if (DZMSEpoch) then {
 	diag_log text format ["[DZMS]: DayZ Epoch Detected! Some Scripts Adjusted!"];
