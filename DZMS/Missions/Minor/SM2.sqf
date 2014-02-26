@@ -2,7 +2,7 @@
 	Medical Outpost by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
 	Updated to new format by Vampire
 */
-private ["_missName","_coords","_base","_base1","_base2","_base3","_vehicle","_vehicle1","_crate","_crate2"];
+private ["_missName","_coords","_base","_base1","_base2","_base3","_veh1","_veh2","_vehicle","_vehicle1","_crate","_crate2"];
 
 //Name of the Mission
 _missName = "Bandit Medical Outpost";
@@ -28,8 +28,10 @@ _base3 = createVehicle ["MASH_EP1",[(_coords select 0) - 10, (_coords select 1) 
 [_base3] call DZMSProtectObj;
 
 //We create the vehicles
-_vehicle = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_vehicle1 = createVehicle ["HMMWV_DZ",[(_coords select 0) + 15, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_veh1 = ["small"] call DZMSGetVeh;
+_veh2 = ["small"] call DZMSGetVeh;
+_vehicle = createVehicle [_veh1,[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle [_veh2,[(_coords select 0) + 15, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;

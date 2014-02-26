@@ -206,6 +206,23 @@ DZMSGetWeapon = {
 	_fin
 };
 
+//This gets the random vehicle to spawn at a mission
+DZMSGetVeh = {
+	private ["_type","_vehArray","_choseVic"];
+	
+	_type = _this select 0;
+	
+	switch (_type) do {
+		case "heli": {_vehArray = DZMSChoppers;};
+		case "small": {_vehArray = DZMSSmallVic;};
+		case "large": {_vehArray = DZMSLargeVic;};
+	};
+	
+	_choseVic = _vehArray call BIS_fnc_selectRandom;
+	
+	_choseVic
+};
+
 //function to wait for mission completion
 DZMSWaitMissionComp = {
     private["_objective","_unitArrayName","_numSpawned","_numKillReq"];

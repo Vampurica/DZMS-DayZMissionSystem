@@ -3,7 +3,7 @@
 	Modified to new format by Vampire
 */
 
-private ["_missName","_coords","_wreck","_trash","_trash1","_trash2","_trash3","_trash4","_trash5","_vehicle","_vehicle1","_crate","_crate1"];
+private ["_missName","_coords","_wreck","_trash","_trash1","_trash2","_trash3","_trash4","_trash5","_veh1","_veh2","_vehicle","_vehicle1","_crate","_crate1"];
 
 //Name of the Mission
 _missName = "C130 Crash";
@@ -64,8 +64,10 @@ _trash5 setDir -28.122475;
 [_trash5] call DZMSProtectObj;
 
 //We create the mission vehicles
-_vehicle = createVehicle ["hilux1_civil_3_open_EP1",[(_coords select 0) + 14.1426, (_coords select 1) - 0.6202,0],[], 0, "CAN_COLLIDE"];
-_vehicle1 = createVehicle ["hilux1_civil_3_open_EP1",[(_coords select 0) - 6.541, (_coords select 1) - 11.5557,0],[], 0, "CAN_COLLIDE"];
+_veh1 = ["small"] call DZMSGetVeh;
+_veh2 = ["small"] call DZMSGetVeh;
+_vehicle = createVehicle [_veh1,[(_coords select 0) + 14.1426, (_coords select 1) - 0.6202,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle [_veh2,[(_coords select 0) - 6.541, (_coords select 1) - 11.5557,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;

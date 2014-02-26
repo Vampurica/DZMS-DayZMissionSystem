@@ -3,7 +3,7 @@
 	Updated to New Format by Vampire
 */
 
-private ["_missName","_coords","_crash","_vehicle","_vehicle1","_crate","_crate2"];
+private ["_missName","_coords","_crash","_body","_body1","_body2","_body3","_veh1","_vehicle","_vehicle1","_crate","_crate2"];
 
 //Name of the Mission
 _missName = "Ural Ambush";
@@ -38,7 +38,8 @@ _body3 setDir 23.664057;
 [_body3] call DZMSProtectObj;
 
 //We create the vehicles like normal
-_vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) + 5.7534, (_coords select 1) - 9.2149,0],[], 0, "CAN_COLLIDE"];
+_veh1 = ["small"] call DZMSGetVeh;
+_vehicle = createVehicle [_veh1,[(_coords select 0) + 5.7534, (_coords select 1) - 9.2149,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;

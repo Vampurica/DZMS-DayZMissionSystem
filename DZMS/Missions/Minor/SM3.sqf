@@ -2,7 +2,7 @@
 	Bandit Stash House by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
 	Updated to new format by Vampire
 */
-private ["_missName","_coords","_base","_base1","_base2","_vehicle","_vehicle1","_crate"];
+private ["_missName","_coords","_base","_base1","_base2","_veh1","_veh2","_vehicle","_vehicle1","_crate"];
 
 //Name of the Mission
 _missName = "Bandit Stash House";
@@ -26,8 +26,10 @@ _base2 = createVehicle ["Land_hut06",[(_coords select 0) - 7, (_coords select 1)
 [_base2] call DZMSProtectObj;
 
 //We create the vehicles
-_vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_vehicle1 = createVehicle ["UAZ_Unarmed_UN_EP1",[(_coords select 0) - 25, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_veh1 = ["small"] call DZMSGetVeh;
+_veh2 =["small"] call DZMSGetVeh;
+_vehicle = createVehicle [_veh1,[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle [_veh2,[(_coords select 0) - 25, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;

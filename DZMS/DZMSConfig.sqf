@@ -63,6 +63,19 @@ DZMSStatLocs = [
 // This is experimental, and off by default in this version.
 DZMSSaveVehicles = false;
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+// These are arrays of vehicle classnames for the missions.
+// Adjust to your liking.
+
+//Armed Choppers (Huey)
+DZMSChoppers = ["UH1H_DZ","Mi17_DZ"];
+
+//Small Vehicles (Humvees)
+DZMSSmallVic = ["hilux1_civil_3_open_EP1","SUV_TK_CIV_EP1","Ural_INS","HMMWV_DZ","UAZ_Unarmed_UN_EP1"];
+
+//Large Vehicles (Urals)
+DZMSLargeVic = ["Ural_TK_CIV_EP1"];
+
 /*///////////////////////////////////////////////////////////////////////////////////////////
 There are two types of missions that run simultaneously on a the server.
 The two types are Major and Minor missions.

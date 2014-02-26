@@ -3,7 +3,7 @@
 	New Mission Format by Vampire
 */																					//
 
-private ["_missName","_coords","_net","_vehicle","_vehicle1","_crate","_crate1","_crate2","_crate3"];
+private ["_missName","_coords","_net","_veh1","_veh2","_vehicle","_vehicle1","_crate","_crate1","_crate2","_crate3"];
 
 //Name of the Mission
 _missName = "NATO Weapons Cache";
@@ -21,8 +21,10 @@ _net = createVehicle ["Land_CamoNetB_NATO",[(_coords select 0) - 0.0649, (_coord
 [_net] call DZMSProtectObj;
 
 //We create the vehicles like normal
-_vehicle = createVehicle ["SUV_TK_CIV_EP1",[(_coords select 0) + 10.0303, (_coords select 1) - 12.2979,10],[], 0, "CAN_COLLIDE"];
-_vehicle1 = createVehicle ["Ural_INS",[(_coords select 0) - 6.2764, (_coords select 1) - 14.086,10],[], 0, "CAN_COLLIDE"];
+_veh1 = ["small"] call DZMSGetVeh;
+_veh2 = ["large"] call DZMSGetVeh;
+_vehicle = createVehicle [_veh1,[(_coords select 0) + 10.0303, (_coords select 1) - 12.2979,10],[], 0, "CAN_COLLIDE"];
+_vehicle1 = createVehicle [_veh2,[(_coords select 0) - 6.2764, (_coords select 1) - 14.086,10],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;

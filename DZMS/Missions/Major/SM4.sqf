@@ -17,7 +17,7 @@ _coords = call DZMSFindPos;
 [_coords,_missname] ExecVM DZMSAddMajMarker;
 
 //We create the vehicles like normal
-_ranChopper = ["UH1H_DZ","Mi17_DZ"] call BIS_fnc_selectRandom;
+_ranChopper = ["heli"] call DZMSGetVeh;
 _chopper = createVehicle [_ranChopper,_coords,[], 0, "NONE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such

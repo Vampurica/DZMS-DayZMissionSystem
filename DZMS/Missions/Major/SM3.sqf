@@ -3,7 +3,7 @@
 	Updated to New Mission Format by Vampire
 */
 
-private ["_missName","_coords","_base1","_base2","_base3","_base4","_base5","_base6","_base7","_base8","_base9","_base10","_base11","_base12","_base13","_base14","_base15","_base16","_base17","_vehicle","_crate"];
+private ["_missName","_coords","_base1","_base2","_base3","_base4","_base5","_base6","_base7","_base8","_base9","_base10","_base11","_base12","_base13","_base14","_base15","_base16","_base17","_veh1","_vehicle","_crate"];
 
 //Name of the Mission
 _missName = "Bandit Medical Camp";
@@ -92,7 +92,8 @@ _base17 setDir 55.969147;
 [_base17] call DZMSProtectObj;
 
 //Create the vehicles
-_vehicle = createVehicle ["HMMWV_DZ",[(_coords select 0) - 17.5078, (_coords select 1) + 5.2578,0],[], 0, "CAN_COLLIDE"];
+_veh1 = ["small"] call DZMSGetVeh;
+_vehicle = createVehicle [_veh1,[(_coords select 0) - 17.5078, (_coords select 1) + 5.2578,0],[], 0, "CAN_COLLIDE"];
 [_vehicle] call DZMSSetupVehicle;
 
 //Create the loot
