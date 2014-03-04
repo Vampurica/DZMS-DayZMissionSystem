@@ -194,9 +194,10 @@ DZMSGetWeapon = {
 	//diag_log text format ["[DZMS]: AI Skill Func:%1",_skill];
 	
 	switch (_skill) do {
-		case 0: {_aiweapon = DZMSWeps1;};
-		case 1: {_aiweapon = DZMSWeps2;};
-		case 2: {_aiweapon = DZMSWeps3;};
+		case 0: {_aiweapon = DZMSWeps0;};
+		case 1: {_aiweapon = DZMSWeps1;};
+		case 2: {_aiweapon = DZMSWeps2;};
+		case 3: {_aiweapon = DZMSWeps3;};
 	};
 	_weapon = _aiweapon call BIS_fnc_selectRandom;
 	_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;

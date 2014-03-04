@@ -90,9 +90,10 @@ for "_x" from 1 to _unitcount do {
 	
 	//Lets set the skills
 	switch (_skill) do {
-		case 0: {_aicskill = DZMSSkills1;};
-		case 1: {_aicskill = DZMSSkills2;};
-		case 2: {_aicskill = DZMSSkills3;};
+		case 0: {_aicskill = DZMSSkills0;};
+		case 1: {_aicskill = DZMSSkills1;};
+		case 2: {_aicskill = DZMSSkills2;};
+		case 3: {_aicskill = DZMSSkills3;};
 	};
 	
 	{
