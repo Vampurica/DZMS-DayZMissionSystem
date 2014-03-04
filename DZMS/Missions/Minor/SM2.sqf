@@ -5,12 +5,12 @@
 private ["_missName","_coords","_base","_base1","_base2","_base3","_veh1","_veh2","_vehicle","_vehicle1","_crate","_crate2"];
 
 //Name of the Mission
-_missName = "Bandit Medical Outpost";
+_missName = "Medical Outpost";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
 
-[nil,nil,rTitleText,"A group of bandits have taken over a Medical Outpost! Check your map for the location!", "PLAIN",10] call RE;
+[nil,nil,rTitleText,"Bandits have established a Medical Outpost!\nGo Secure their Medical Supplies!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
 [_coords,_missName] ExecVM DZMSAddMinMarker;
@@ -68,7 +68,7 @@ sleep 3;
 [_vehicle1] ExecVM DZMSSaveVeh;
 
 //Let everyone know the mission is over
-[nil,nil,rTitleText,"The Medical Outpost is under survivor control!", "PLAIN",6] call RE;
+[nil,nil,rTitleText,"The Medical Outpost is under Survivor Control!", "PLAIN",6] call RE;
 diag_log text format["[DZMS]: Minor SM2 Medical Outpost Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";

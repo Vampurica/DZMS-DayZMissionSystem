@@ -2,49 +2,51 @@
 	Bandit Stash House by lazyink (Full credit for code to TheSzerdi & TAW_Tonic)
 	Updated to new format by Vampire
 */
-private ["_missName","_coords","_base","_base1","_base2","_veh1","_veh2","_vehicle","_vehicle1","_crate"];
+private ["_missName","_coords","_base","_base1","_veh1","_vehicle","_crate","_crate1"];
 
 //Name of the Mission
-_missName = "Bandit Stash House";
+_missName = "Stash House";
 
 //DZMSFindPos loops BIS_fnc_findSafePos until it gets a valid result
 _coords = call DZMSFindPos;
 
-[nil,nil,rTitleText,"A group of bandits have set up a stash house! Check your map for the location!", "PLAIN",10] call RE;
+[nil,nil,rTitleText,"Bandits have set up a Weapon Stash House!\nGo Empty it Out!", "PLAIN",10] call RE;
 
 //DZMSAddMinMarker is a simple script that adds a marker to the location
 [_coords,_missName] ExecVM DZMSAddMinMarker;
 
 //We create the scenery
-_base = createVehicle ["Land_HouseV_1I3",[(_coords select 0) +2, (_coords select 1) +5,-0.3],[], 0, "CAN_COLLIDE"];
-_base1 = createVehicle ["Land_hut06",[(_coords select 0) - 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_base2 = createVehicle ["Land_hut06",[(_coords select 0) - 7, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_base = createVehicle ["Land_HouseV_1I4",_coords,[], 0, "CAN_COLLIDE"];
+_base setDir 152.66766;
+_base setPos _coords;
+_base1 = createVehicle ["Land_kulna",[(_coords select 0) + 5.4585, (_coords select 1) - 2.885,0],[], 0, "CAN_COLLIDE"];
+_base1 setDir -28.282881;
+_base1 setPos [(_coords select 0) + 5.4585, (_coords select 1) - 2.885,0];
 
 //DZMSProtectObj prevents it from disappearing
 [_base] call DZMSProtectObj;
 [_base1] call DZMSProtectObj;
-[_base2] call DZMSProtectObj;
 
 //We create the vehicles
 _veh1 = ["small"] call DZMSGetVeh;
-_veh2 =["small"] call DZMSGetVeh;
-_vehicle = createVehicle [_veh1,[(_coords select 0) + 10, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
-_vehicle1 = createVehicle [_veh2,[(_coords select 0) - 25, (_coords select 1) - 5,0],[], 0, "CAN_COLLIDE"];
+_vehicle = createVehicle [_veh1,[(_coords select 0) - 10.6206, (_coords select 1) - 0.49,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSSetupVehicle prevents the vehicle from disappearing and sets fuel and such
 [_vehicle] call DZMSSetupVehicle;
-[_vehicle1] call DZMSSetupVehicle;
 
 //We create and fill the crate
-_crate = createVehicle ["USVehicleBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle ["USBasicAmmunitionBox",[(_coords select 0) + 0.7408, (_coords select 1) + 1.565, 0.10033049],[], 0, "CAN_COLLIDE"];
 [_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
+_crate1 = createVehicle ["USBasicAmmunitionBox",[(_coords select 0) - 0.2387, (_coords select 1) + 1.043, 0.10033049],[], 0, "CAN_COLLIDE"];
+[_crate1,"weapons"] ExecVM DZMSBoxSetup;
+[_crate1] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel, unitArray]
-[[(_coords select 0) - 20, (_coords select 1) - 15,0],6,0,"DZMSUnitsMinor"] call DZMSAISpawn;
+[[(_coords select 0) - 4.0796, (_coords select 1) - 11.709,0],6,2,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 3;
-[[(_coords select 0) + 20, (_coords select 1) + 15,0],6,0,"DZMSUnitsMinor"] call DZMSAISpawn;
+[[(_coords select 0) + 2.8872, (_coords select 1) + 18.964,0],6,2,"DZMSUnitsMinor"] call DZMSAISpawn;
 sleep 3;
 
 //Wait until the player is within 30 meters and also meets the kill req
@@ -53,10 +55,9 @@ sleep 3;
 //Call DZMSSaveVeh to attempt to save the vehicles to the database
 //If saving is off, the script will exit.
 [_vehicle] ExecVM DZMSSaveVeh;
-[_vehicle1] ExecVM DZMSSaveVeh;
 
 //Let everyone know the mission is over
-[nil,nil,rTitleText,"The stash house is under survivor control!", "PLAIN",6] call RE;
+[nil,nil,rTitleText,"The Stash House is under Survivor Control!", "PLAIN",6] call RE;
 diag_log text format["[DZMS]: Minor SM3 Stash House Mission has Ended."];
 deleteMarker "DZMSMinMarker";
 deleteMarker "DZMSMinDot";
