@@ -66,7 +66,7 @@ DZMSSkills3 = [
 //////////////////////////////////////////////////////////////
 // This is the primary weaponlist that can be assigned to AI
 // These are assigned based on AI difficulty level
-DZMSWeps1 = [
+DZMSWeps0 = [
 "M16A2",
 "M16A2GL",
 "AK_74",
@@ -85,7 +85,7 @@ DZMSWeps1 = [
 "M4A3_CCO_EP1"
 ];
 
-DZMSWeps2 = [
+DZMSWeps1 = [
 "M16A2",
 "M16A2GL",
 "M249_DZ",
@@ -114,7 +114,7 @@ DZMSWeps2 = [
 "Sa58V_EP1"
 ];
 
-DZMSWeps3 = [
+DZMSWeps2 = [
 "FN_FAL",
 "FN_FAL_ANPVS4",
 "Mk_48_DZ",
@@ -132,7 +132,7 @@ DZMSWeps3 = [
 "RPK_74"
 ];
 
-DZMSWeps4 = [
+DZMSWeps3 = [
 "FN_FAL",
 "FN_FAL_ANPVS4",
 "Mk_48_DZ",
