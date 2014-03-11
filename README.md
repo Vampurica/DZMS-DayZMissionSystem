@@ -53,9 +53,9 @@ Thanks To
 --------------------------
 Credits
 --------------------------
-* TAW_Tonic - One of the Original DayZ Mission Developers. - http://sealteamsloth.com/
-* TheSzerdi - One of the Original DayZ Mission Developers. - http://opendayz.net/members/theszerdi.3761/
-* Lazyink - Modified the Original Mission system to work on Chernarus. - http://opendayz.net/members/lazyink.3595/
+* TAW_Tonic - Original Mission Creator. - http://www.altisliferpg.com/
+* TheSzerdi - Original DayZ Mission Developer. - http://opendayz.net/members/theszerdi.3761/
+* Lazyink - Modified the DayZ Mission system to work on Chernarus. - http://opendayz.net/members/lazyink.3595/
 
 --------------------------
 License
