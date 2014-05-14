@@ -40,5 +40,5 @@ while {_run} do
 	
 	//Let's wait for it to finish or timeout
 	waitUntil {DZMSMinDone};
-	DZMSMinDone = nil;
+	DZMSMinDone = false;
 };
