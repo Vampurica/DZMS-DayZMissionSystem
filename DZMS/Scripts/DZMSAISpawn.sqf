@@ -88,6 +88,8 @@ for "_x" from 1 to _unitcount do {
 		_unit addWeapon _x
 	} forEach _geartools;
 	
+	_aicskill = DZMSSkills1;
+	
 	//Lets set the skills
 	switch (_skill) do {
 		case 0: {_aicskill = DZMSSkills0;};
