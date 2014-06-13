@@ -39,7 +39,7 @@ DZMSFindPos = {
 		case "utes":{_centerPos = [3500, 3500, 0];_mapRadii = 3500;};
 		case "zargabad":{_centerPos = [4096, 4096, 0];_mapRadii = 4096;};
 		case "fallujah":{_centerPos = [3500, 3500, 0];_mapRadii = 3500;};
-		case "takistan":{_centerPos = [8000, 1900, 0]};
+		case "takistan":{_centerPos = [5500, 6500, 0];_mapRadii = 5000;};
 		case "tavi":{_centerPos = [10370, 11510, 0];_mapRadii = 14090;_isTavi = true;};
 		case "lingor":{_centerPos = [4400, 4400, 0];_mapRadii = 4400;};
 		case "namalsk":{_centerPos = [4352, 7348, 0]};
