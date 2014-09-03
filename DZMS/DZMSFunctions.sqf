@@ -201,8 +201,6 @@ DZMSGetWeapon = {
 		case 1: {_aiweapon = DZMSWeps1;};
 		case 2: {_aiweapon = DZMSWeps2;};
 		case 3: {_aiweapon = DZMSWeps3;};
-		case 4: {_aiweapon = DZMSWeps4;};
-		case 5: {_aiweapon = DZMSWeps5;};
 	};
 	_weapon = _aiweapon call BIS_fnc_selectRandom;
 	_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;
