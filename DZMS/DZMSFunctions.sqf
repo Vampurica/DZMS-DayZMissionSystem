@@ -25,7 +25,7 @@ diag_log text "[DZMS]: Loading All Other Functions.";
 //If findSafePos fails it searches again until a position is found
 //This fixes the issue with missions spawning in Novy Sobor on Chernarus
 DZMSFindPos = {
-    private["_mapHardCenter","_mapRadii","_isTavi","_centerPos","_pos","_disCorner","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis","_isBlack"];
+    private["_mapHardCenter","_mapRadii","_isTavi","_centerPos","_pos","_disCorner","_hardX","_hardY","_findRun","_posX","_posY","_feel1","_feel2","_feel3","_feel4","_noWater","_tavTest","_tavHeight","_disMaj","_disMin","_okDis","_isBlack","_playerNear"];
   
     //Lets try to use map specific "Novy Sobor Fixes".
     //If the map is unrecognised this function will still work.
@@ -52,7 +52,7 @@ DZMSFindPos = {
 		case "sauerland":{_centerPos = [12800, 12800, 0];_mapRadii = 12800;};
 		case "trinity":{_centerPos = [6400, 6400, 0];_mapRadii = 6400;};
 		//We don't have a supported map. Let's use the norm.
-		default{_pos = [getMarkerPos "center",0,5500,60,0,20,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
+		default{_pos = [getMarkerPos "center",0,5500,60,0,10,0] call BIS_fnc_findSafePos;_mapHardCenter = false;};
 	};
 
     //If we have a hardcoded center, then we need to loop for a location
@@ -66,7 +66,7 @@ DZMSFindPos = {
         _findRun = true;
         while {_findRun} do
         {
-            _pos = [_centerPos,0,_mapRadii,60,0,20,0] call BIS_fnc_findSafePos;
+            _pos = [_centerPos,0,_mapRadii,60,0,10,0] call BIS_fnc_findSafePos;
            
             //Apparently you can't compare two arrays and must compare values
             _posX = _pos select 0;
@@ -99,8 +99,10 @@ DZMSFindPos = {
                 if ((_pos distance (_x select 0)) <= (_x select 1)) then {_isBlack = true;};
             } forEach DZMSBlacklistZones;
             
+			_playerNear = {isPlayer _x} count (_pos nearEntities ["CAManBase", 500]) > 1;
+			
 			//Lets combine all our checks to possibly end the loop
-            if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis AND !_isBlack) then {
+            if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis AND !_isBlack AND !_playerNear) then {
 				if (!(_isTavi)) then {
 					_findRun = false;
 				};
@@ -109,7 +111,7 @@ DZMSFindPos = {
 				};
             };
 			// If the missions never spawn after running, use this to debug the loop. noWater=true / Dis > 1000 / TaviHeight <= 185
-			//diag_log text format ["[DZMS]: DEBUG: Pos:[%1,%2] / noWater?:%3 / okDistance?:%4 / TaviHeight:%5 / BlackListed?:%6", _posX, _posY, _noWater, _okDis, _tavHeight, _isBlack];
+			//diag_log text format ["[DZMS]: DEBUG: Pos:[%1,%2] / noWater?:%3 / okDistance?:%4 / TaviHeight:%5 / BlackListed?:%6 / PlayerNear?:%7", _posX, _posY, _noWater, _okDis, _tavHeight, _isBlack, _playerNear];
             sleep 2;
         };
        
@@ -199,6 +201,8 @@ DZMSGetWeapon = {
 		case 1: {_aiweapon = DZMSWeps1;};
 		case 2: {_aiweapon = DZMSWeps2;};
 		case 3: {_aiweapon = DZMSWeps3;};
+		case 4: {_aiweapon = DZMSWeps4;};
+		case 5: {_aiweapon = DZMSWeps5;};
 	};
 	_weapon = _aiweapon call BIS_fnc_selectRandom;
 	_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;
