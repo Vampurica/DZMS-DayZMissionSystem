@@ -99,7 +99,7 @@ DZMSFindPos = {
                 if ((_pos distance (_x select 0)) <= (_x select 1)) then {_isBlack = true;};
             } forEach DZMSBlacklistZones;
             
-			_playerNear = {isPlayer _x} count (_pos nearEntities ["CAManBase", 500]) > 1;
+			_playerNear = {isPlayer _x} count (_pos nearEntities ["CAManBase", 500]) > 0;
 			
 			//Lets combine all our checks to possibly end the loop
             if ((_posX != _hardX) AND (_posY != _hardY) AND _noWater AND _okDis AND !_isBlack AND !_playerNear) then {
