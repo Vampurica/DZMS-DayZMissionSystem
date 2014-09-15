@@ -99,6 +99,7 @@ _vehicle = createVehicle [_veh1,[(_coords select 0) - 17.5078, (_coords select 1
 //Create the loot
 _crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6.8277, (_coords select 1) + 5.6748,0],[], 0, "CAN_COLLIDE"];
 [_crate,"medical"] ExecVM DZMSBoxSetup;
+[_crate] call DZMSProtectObj;
 
 //DZMSAISpawn spawns AI to the mission.
 //Usage: [_coords, count, skillLevel, unitArray]
