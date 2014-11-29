@@ -22,7 +22,7 @@ while {_run} do
 	//Let's check that there are missions in the array.
 	//If there are none, lets end the timer.
 	_cntMis = count DZMSMinorArray;
-	if (_cntMis == 0) then { _run = false; };
+	if (_cntMis == 0) exitWith { /* Exit The Loop */ };
 	
 	//Lets pick a mission
 	_ranMis = floor (random _cntMis);
