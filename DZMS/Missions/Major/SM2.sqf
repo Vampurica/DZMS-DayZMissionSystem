@@ -153,6 +153,10 @@ clearBackpackCargoGlobal _boxFin;
 //Wait until the player is within 30 meters and also meets the kill req
 [position _boxFin,"DZMSUnitsMajor"] call DZMSWaitMissionComp;
 
+//Clean up the pilot and plane (if they exist)
+if (!isNull _plane) then {deleteVehicle _plane;};
+if (!isNull _pilot) then {deleteVehicle _pilot;};
+
 //Let everyone know the mission is over
 [nil,nil,rTitleText,"The AN2 Cargo has been Secured by Survivors!", "PLAIN",6] call RE;
 diag_log text format["[DZMS]: Major SM2 AN2 Drop Mission has Ended."];
