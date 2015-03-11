@@ -3,7 +3,6 @@
 	This is the file that every other file branches off from.
 	It checks that it is safe to run, sets relations, and starts mission timers.
 */
-private["_modVariant"];
 
 waitUntil{initialized};
 
@@ -82,13 +81,11 @@ if (DZMSVersion != "1.1FIN") then {
 diag_log text format ["[DZMS]: Mission and Extended Configuration Loaded!"];
 
 // Lets get the map name for mission location purposes
-DZMSWorldName = toLower format ["%1", worldName];
-diag_log text format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZMSWorldName];
+diag_log text format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", worldName];
 
 // We need to detect Epoch to change the hive call for vehicle saving
 // Epoch doesn't have hive 999 calls and uses 308 publish instead
-_modVariant = toLower( getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
-if (_modVariant == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
+if (getText (configFile >> "CfgMods" >> "DayZ" >> "dir") == "@dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
 if ((!(DZMSEpoch)) AND (!(isNil "PVDZE_serverObjectMonitor"))) then {DZMSEpoch = true;};
 
 if (DZMSEpoch) then {
