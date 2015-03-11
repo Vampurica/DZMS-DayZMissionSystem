@@ -34,7 +34,7 @@ DZMSFindPos = {
 	_mapRadii = 5500;
 	_isTavi = false;
 	_tavHeight = 0;
-	switch (DZMSWorldName) do {
+	switch (worldName) do {
 		case "chernarus":{_centerPos = [7100, 7750, 0];_mapRadii = 5500;};
 		case "utes":{_centerPos = [3500, 3500, 0];_mapRadii = 3500;};
 		case "zargabad":{_centerPos = [4096, 4096, 0];_mapRadii = 4096;};
