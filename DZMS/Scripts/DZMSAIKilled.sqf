@@ -58,6 +58,8 @@ if (DZMSCleanDeath) then {
 	if (DZMSCleanDeath) exitWith {};
 };
 
+_unit setVariable ["bodyName","unknown",false]; //Only needed on server to prevent immediate cleanup in sched_corpses.sqf
+
 if (DZMSUseNVG) then {
 	_unit removeWeapon "NVGoggles";
 };
