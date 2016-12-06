@@ -183,7 +183,7 @@ DZMSGear4 = [
 DZMSPacklist = [
 "DZ_Patrol_Pack_EP1",
 "DZ_Assault_Pack_EP1",
-"DZ_Czech_Vest_Puch",
+"DZ_Czech_Vest_Pouch",
 "DZ_ALICE_Pack_EP1",
 "DZ_TK_Assault_Pack_EP1",
 "DZ_British_ACU",
