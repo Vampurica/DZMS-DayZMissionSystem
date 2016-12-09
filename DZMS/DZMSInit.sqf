@@ -3,8 +3,6 @@
 	This is the file that every other file branches off from.
 	It checks that it is safe to run, sets relations, and starts mission timers.
 */
-private["_modVariant"];
-
 waitUntil{initialized};
 
 // Lets let the heavier scripts run first
@@ -87,8 +85,7 @@ diag_log text format["[DZMS]: %1 Detected. Map Specific Settings Adjusted!", DZM
 
 // We need to detect Epoch to change the hive call for vehicle saving
 // Epoch doesn't have hive 999 calls and uses 308 publish instead
-_modVariant = toLower( getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
-if (_modVariant == "dayz_epoch") then {DZMSEpoch = true;} else {DZMSEpoch = false;};
+DZMSEpoch = isClass (configFile >> "CfgWeapons" >> "Chainsaw");
 
 if (DZMSEpoch) then {
 	diag_log text format ["[DZMS]: DayZ Epoch Detected! Some Scripts Adjusted!"];
