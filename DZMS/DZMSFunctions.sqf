@@ -175,7 +175,7 @@ DZMSProtectObj = {
 
 	dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];
 	
-    if (!((typeOf _object) in ["USVehicleBox","USLaunchersBox","DZ_AmmoBoxUS","DZ_AmmoBoxRU","DZ_MedBox","USBasicWeaponsBox","USBasicAmmunitionBox"]) || DZMSSceneryDespawnLoot) then {
+    if (!((typeOf _object) in ["USVehicleBox","USLaunchersBox","DZ_AmmoBoxUS","DZ_AmmoBoxRU","DZ_MedBox","USBasicWeaponsBox","USBasicAmmunitionBox","RULaunchersBox"]) || DZMSSceneryDespawnLoot) then {
         _object setVariable["DZMSCleanup",true];
     };
 	true
