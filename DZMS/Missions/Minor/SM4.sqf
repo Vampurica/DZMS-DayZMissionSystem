@@ -16,7 +16,7 @@ _coords = call DZMSFindPos;
 [_coords,_missName] ExecVM DZMSAddMinMarker;
 
 //Add the scenery
-_crash = createVehicle ["UH60Wreck_DZ", _coords,[], 0, "CAN_COLLIDE"];
+_crash = createVehicle ["UH60_NAVY_Wreck_burned_DZ", _coords,[], 0, "CAN_COLLIDE"];
 
 //DZMSProtectObj prevents it from disappearing
 [_crash] call DZMSProtectObj;
