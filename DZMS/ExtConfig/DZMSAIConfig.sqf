@@ -116,7 +116,7 @@ DZMSWeps1 = [
 
 DZMSWeps2 = [
 "FNFAL_DZ",
-"FN_FAL_ANPVS4_DZE",
+"FNFAL_ANPVS4_DZ",
 "Mk48_CCO_DZ",
 "M249_DZ",
 "L85_Holo_DZ",
@@ -134,7 +134,7 @@ DZMSWeps2 = [
 
 DZMSWeps3 = [
 "FNFAL_DZ",
-"FN_FAL_ANPVS4_DZE",
+"FNFAL_ANPVS4_DZ",
 "Mk48_CCO_DZ",
 "M249_DZ",
 "L85_Holo_DZ",

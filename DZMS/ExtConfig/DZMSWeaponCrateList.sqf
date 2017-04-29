@@ -13,7 +13,7 @@ DZMSsniperList = ["SVD_Gh_DZ","DMR_DZ","CZ550_DZ","M14_CCO_DZ","M24_DZ","M40A3_G
 DZMSmgList = ["M240_DZ","M249_DZ","Mk48_CCO_DZ","Bizon_SD_DZ","MP5_DZ","MP5_SD_DZ","RPK74_DZ"];
 
 // Primary Rifles
-DZMSprimaryList = ["AKM_DZ","AK74_DZ","AK74_Kobra_DZ","AKS74U_DZ","L85_Holo_DZ","Bizon_SD_DZ","FN_FAL_ANPVS4_DZE","FNFAL_DZ","G36A_Camo_DZ","G36C_camo","G36C_DZ","G36K_Camo_DZ","M1014_DZ","M16A2_DZ","M16A2_GL_DZ","M4A1_AIM_SD_camo","M4A1_CCO_DZ","M4A1_HWS_GL_camo","M4A1_DZ","M4A3_CCO_EP1","Remington870_FL_DZ","SA58_DZ","Sa58V_CCO_EP1","SA58_DZ","Sa58V_RCO_EP1"];
+DZMSprimaryList = ["AKM_DZ","AK74_DZ","AK74_Kobra_DZ","AKS74U_DZ","L85_Holo_DZ","Bizon_SD_DZ","FNFAL_ANPVS4_DZ","FNFAL_DZ","G36A_Camo_DZ","G36C_camo","G36C_DZ","G36K_Camo_DZ","M1014_DZ","M16A2_DZ","M16A2_GL_DZ","M4A1_AIM_SD_camo","M4A1_CCO_DZ","M4A1_HWS_GL_camo","M4A1_DZ","M4A3_CCO_EP1","Remington870_FL_DZ","SA58_DZ","Sa58V_CCO_EP1","SA58_DZ","Sa58V_RCO_EP1"];
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // Epoch Supplies. If you have Epoch, these are the supplies in the Construction Crates
