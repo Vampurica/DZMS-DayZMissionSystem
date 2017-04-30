@@ -54,9 +54,11 @@ if (isPlayer _player) then {
 };
 
 if (DZMSCleanDeath) then {
-	_unit call DZMSPurgeObject;
+	_unit call sched_co_deleteVehicle;
 	if (DZMSCleanDeath) exitWith {};
 };
+
+_unit setVariable ["bodyName","unknown",false]; //Only needed on server to prevent immediate cleanup in sched_corpses.sqf
 
 if (DZMSUseNVG) then {
 	_unit removeWeapon "NVGoggles";
@@ -69,4 +71,17 @@ if (DZMSUseRPG AND ("RPG7V" in (weapons _unit))) then {
 
 //Dead body timer and cleanup
 [DZMSBodyTime,10] call DZMSSleep;
-_unit call DZMSPurgeObject;
+
+//Delete flies and body
+PVCDZ_flies = [0,_unit];
+publicVariable "PVCDZ_flies";
+_sound = _unit getVariable ["sched_co_fliesSource", nil];
+
+if !(isNil "_sound") then {
+	detach _sound;
+	deleteVehicle _sound;
+};
+
+// Wait for PVEH to finish on all clients
+uiSleep 15;
+_unit call sched_co_deleteVehicle;

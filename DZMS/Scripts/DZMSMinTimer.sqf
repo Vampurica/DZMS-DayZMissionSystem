@@ -29,7 +29,7 @@ while {_run} do
 	_varName = DZMSMinorArray select _ranMis;
     
     // clean up all the existing units before starting a new one
-    {if (alive _x) then {_x call DZMSPurgeObject;};} forEach DZMSUnitsMinor;
+    {if (alive _x) then {_x call sched_co_deleteVehicle;};} forEach DZMSUnitsMinor;
     
     // rebuild the array for the next mission
     DZMSUnitsMinor = [];

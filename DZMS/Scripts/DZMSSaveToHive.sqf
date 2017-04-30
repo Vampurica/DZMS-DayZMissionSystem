@@ -22,7 +22,7 @@ if (_ranFuel < .1) then {_ranFuel = .1;};
 if (DZMSEpoch) then {
 
 	//The server is running DayZ Epoch, so we use the Epoch method.
-	_uid = _worldspace call dayz_objectUID3;
+	_uid = _worldspace call dayz_objectUID2;
 
 	_key = format["CHILD:308:%1:%2:%3:%4:%5:%6:%7:%8:%9:", dayZ_instance, _class, 0, 0, _worldspace, [], [], 1, _uid];
 	_key call server_hiveWrite;
@@ -59,7 +59,7 @@ if (DZMSEpoch) then {
 	_object allowDamage false;
 	_object setVariable ["lastUpdate", time];
 	_object setVariable ["CharacterID", "0", true];
-	PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor, _object];
+	dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];
 	
 	sleep 1;
 	_object call fnc_veh_ResetEH;

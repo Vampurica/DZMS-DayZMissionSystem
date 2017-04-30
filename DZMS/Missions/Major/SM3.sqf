@@ -41,11 +41,11 @@ _base4 setDir 59.42643;
 _base4 setVehicleLock "LOCKED";
 _base4 setPos [(_coords select 0) - 11.4253, (_coords select 1) - 7.628,0];
 
-_base5 = createVehicle ["MedBox0",[(_coords select 0) - 7.1519, (_coords select 1) + 1.8144,0],[], 0, "CAN_COLLIDE"];
+_base5 = createVehicle ["DZ_MedBox",[(_coords select 0) - 7.1519, (_coords select 1) + 1.8144,0],[], 0, "CAN_COLLIDE"];
 _base5 setDir -29.851013;
 [_base5] call DZMSProtectObj;
 
-_base6 = createVehicle ["MedBox0",[(_coords select 0) - 7.4116, (_coords select 1) + 2.5244,0],[], 0, "CAN_COLLIDE"];
+_base6 = createVehicle ["DZ_MedBox",[(_coords select 0) - 7.4116, (_coords select 1) + 2.5244,0],[], 0, "CAN_COLLIDE"];
 [_base6] call DZMSProtectObj;
 
 _base7 = createVehicle ["WeaponHolder_ItemToolbox",[(_coords select 0) - 7.7041, (_coords select 1) + 3.332,0],[], 0, "CAN_COLLIDE"];
