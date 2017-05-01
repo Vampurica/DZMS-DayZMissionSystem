@@ -25,7 +25,7 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 
 	// They weren't found, so let's set relationships
 	diag_log text format ["[DZMS]: Relations not found! Using DZMS Relations."];
-	
+
 	// Create the groups if they aren't created already
 	createCenter east;
 	// Make AI Hostile to Survivors
@@ -34,7 +34,7 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 	// Make AI Hostile to Zeds
 	EAST setFriend [CIVILIAN,0];
 	CIVILIAN setFriend [EAST,0];
-	
+
 } else {
 
 	// Let's inform the user which relations we are using
@@ -58,7 +58,7 @@ if ( (isnil("DZAI_isActive")) && (isnil("SAR_version")) && (isnil("WAIconfigload
 		diag_log text format ["[DZMS]: If Issues Arise, Decide on a Single AI System! (DayZAI, SargeAI, or WickedAI)"];
 	};
 	DZMSRelations = nil; //Destroy the Global Var
-	
+
 };
 
 // Let's Load the Mission Configuration
@@ -72,7 +72,7 @@ call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\ExtConfig\DZM
 diag_log text format ["[DZMS]: Currently Running Version: %1", DZMSVersion];
 
 // Lets check for a copy-pasted config file
-if (DZMSVersion != "1.1FIN") then {
+if (DZMSVersion != "1.2") then {
 	diag_log text format ["[DZMS]: Outdated Configuration Detected! Please Update DZMS!"];
 	diag_log text format ["[DZMS]: Old Versions are not supported by the Mod Author!"];
 };
