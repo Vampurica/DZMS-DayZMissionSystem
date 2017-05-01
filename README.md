@@ -41,7 +41,7 @@ Installation
 --------------------------
 Current Developers
 --------------------------
-* Vampire - Developer - http://opendayz.net/members/vampire.13088/
+* Vampire - Developer - https://epochmod.com/forum/profile/11819-thevampire/
 * ebayShopper - Developer - https://epochmod.com/forum/profile/4400-ebayshopper/
 
 --------------------------
