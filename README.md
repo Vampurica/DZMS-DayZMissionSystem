@@ -3,9 +3,9 @@
 
 A Logic and Usability Rewrite of the DayZChernarus Mission System.
 
-Current Version is v1.2 Final.
+Current Version is v1.2
 
-If you are interested in helping, please contact me on OpenDayz.net.
+If you are interested in helping, please contact me on EpochMod.com.
 
 --------------------------
 Installation
