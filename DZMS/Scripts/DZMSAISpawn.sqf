@@ -13,7 +13,7 @@ _unitArrayName = _this select 3;
 
 //diag_log text format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
 
-_wpRadius = 20;
+_wpRadius = 10;
 
 _xpos = _position select 0;
 _ypos = _position select 1;
@@ -41,7 +41,7 @@ for "_x" from 1 to _unitcount do {
 	_unit enableAI "MOVE";
 	_unit enableAI "ANIM";
 	_unit enableAI "FSM";
-	_unit setCombatMode "YELLOW";
+	_unit setCombatMode "SAFE";
 	_unit setBehaviour "COMBAT";
 	
 	//Remove the items he spawns with by default
@@ -116,10 +116,10 @@ if (DZMSUseRPG) then {
 };
 
 // These are 4 waypoints in a NorthSEW around the center
-_wppos1 = [_xpos, _ypos+20, 0];
-_wppos2 = [_xpos+20, _ypos, 0];
-_wppos3 = [_xpos, _ypos-20, 0];
-_wppos4 = [_xpos-20, _ypos, 0];
+_wppos1 = [_xpos, _ypos+60, 0];
+_wppos2 = [_xpos+60, _ypos, 0];
+_wppos3 = [_xpos, _ypos-60, 0];
+_wppos4 = [_xpos-60, _ypos, 0];
 
 // We add the 4 waypoints
 _wp1 = _unitGroup addWaypoint [_wppos1, _wpRadius];
