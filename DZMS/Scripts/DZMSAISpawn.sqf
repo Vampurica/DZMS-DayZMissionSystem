@@ -16,7 +16,7 @@ if (isNil "_isStatic") then {_isStatic = false;};
 
 //diag_log text format ["[DZMS]: AI Pos:%1 / AI UnitNum: %2 / AI SkillLev:%3",_position,_unitcount,_skill];
 
-_wpRadius = 20;
+_wpRadius = 10;
 
 _xpos = _position select 0;
 _ypos = _position select 1;
@@ -120,10 +120,10 @@ if (DZMSUseRPG && !_isStatic) then {
 };
 
 // These are 4 waypoints in a NorthSEW around the center
-_wppos1 = [_xpos, _ypos+20, 0];
-_wppos2 = [_xpos+20, _ypos, 0];
-_wppos3 = [_xpos, _ypos-20, 0];
-_wppos4 = [_xpos-20, _ypos, 0];
+_wppos1 = [_xpos, _ypos+60, 0];
+_wppos2 = [_xpos+60, _ypos, 0];
+_wppos3 = [_xpos, _ypos-60, 0];
+_wppos4 = [_xpos-60, _ypos, 0];
 
 // We add the 4 waypoints
 if (!_isStatic) then {

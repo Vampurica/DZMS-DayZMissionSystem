@@ -3,9 +3,9 @@
 
 A Logic and Usability Rewrite of the DayZChernarus Mission System.
 
-Current Version is v1.2 Final.
+Current Version is v1.2
 
-If you are interested in helping, please contact me on OpenDayz.net.
+If you are interested in helping, please contact me on EpochMod.com.
 
 --------------------------
 Installation
@@ -41,7 +41,7 @@ Installation
 --------------------------
 Current Developers
 --------------------------
-* Vampire - Developer - http://opendayz.net/members/vampire.13088/
+* Vampire - Developer - https://epochmod.com/forum/profile/11819-thevampire/
 * ebayShopper - Developer - https://epochmod.com/forum/profile/4400-ebayshopper/
 
 --------------------------
