@@ -66,6 +66,9 @@ DZMSStaticAI = false;
 // If set longer than the amount of time before a server restart, they respawn at restart
 DZMSStaticAITime = 7200;
 
+// How many AI in a group? (Past 6 in a group it's better to just add more positions)
+DZMSStaticAICnt = 4;
+
 // Array of Static AI Locations
 DZMSStaticSpawn = [
 	[0,0,0],

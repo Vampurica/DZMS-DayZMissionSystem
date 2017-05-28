@@ -116,7 +116,7 @@ if (DZMSStaticAI) then {
 		while {true} do {
 			{
 				if !((_x select 0 == 0) && (_x select 1 == 0)) then {
-					[_x,6,2,"DZMSStaticSpawn",true] call DZMSAISpawn;
+					[_x,DZMSStaticAICnt,2,"DZMSStaticSpawn",true] call DZMSAISpawn;
 				};
 				sleep 2;
 			} forEach DZMSStaticSpawn;
