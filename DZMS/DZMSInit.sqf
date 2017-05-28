@@ -95,8 +95,11 @@ if (DZMSEpoch) then {
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZMS\DZMSFunctions.sqf";
 
 // these arrays are used to hold units for each mission type
-DZMSUnitsMinor = [];
-DZMSUnitsMajor = [];
+DZMSUnitsMinor	= [];
+DZMSUnitsMajor	= [];
+DZMSStaticMinor = [];
+DZMSStaticMajor = [];
+DZMSStaticSpawn	= [];
 
 // Let's get the clocks running!
 [] ExecVM DZMSMajTimer;
@@ -106,3 +109,19 @@ DZMSMinDone = false;
 
 // Let's get the Marker Re-setter running for JIPs to stay updated
 [] ExecVM DZMSMarkerLoop;
+
+// Get the static AI spawned (if applicable)
+if (DZMSStaticAI) then {
+	[] spawn {
+		while {true} do {
+			{
+				if !((_x select 0 == 0) && (_x select 1 == 0)) then {
+					[_x,6,2,"DZMSStaticSpawn",true] call DZMSAISpawn;
+				};
+				sleep 2;
+			} forEach DZMSStaticSpawn;
+
+			sleep DZMSStaticAITime;
+		};
+	};
+};

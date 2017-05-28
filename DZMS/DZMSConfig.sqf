@@ -53,8 +53,23 @@ DZMSStaticPlc = false;
 
 // Array of static locations. X,Y,Z
 DZMSStatLocs = [
-[0,0,0],
-[0,0,0]
+	[0,0,0],
+	[0,0,0]
+];
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Do you want to place some static AI in a base or similar?
+// Leave this false unless you know what you are doing.
+DZMSStaticAI = false;
+
+// How long before they respawn? (in seconds) (default 2 hours)
+// If set longer than the amount of time before a server restart, they respawn at restart
+DZMSStaticAITime = 7200;
+
+// Array of Static AI Locations
+DZMSStaticSpawn = [
+	[0,0,0],
+	[0,0,0]
 ];
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
