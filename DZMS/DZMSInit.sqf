@@ -100,6 +100,7 @@ DZMSUnitsMajor	= [];
 DZMSStaticMinor = [];
 DZMSStaticMajor = [];
 DZMSStaticSpawn	= [];
+DZMS50CalSpawn = [];
 
 // Let's get the clocks running!
 [] ExecVM DZMSMajTimer;
