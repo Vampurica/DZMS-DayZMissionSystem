@@ -129,12 +129,14 @@ DZMSFindPos = {
 //Clears the cargo and sets fuel, direction, and orientation
 //Direction stops the awkwardness of every vehicle bearing 0
 DZMSSetupVehicle = {
-	private ["_object","_objectID","_ranFuel"];
+	private ["_object","_objectID","_ranFuel","_is50Cal"];
 	_object = _this select 0;
 
 	_objectID = str(round(random 999999));
 	_object setVariable ["ObjectID", _objectID, true];
 	_object setVariable ["ObjectUID", _objectID, true];	
+	
+	if (typeOf _object == "M2StaticMG") then {_is50Cal = true;}else{_is50Cal = false;};
 	
 	dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];
 	
@@ -145,15 +147,17 @@ DZMSSetupVehicle = {
 	
 	_ranFuel = random 1;
 	if (_ranFuel < .1) then {_ranFuel = .1;};
-	_object setFuel _ranFuel;
-	_object setvelocity [0,0,1];
-	_object setDir (round(random 360));
-	
-	//If saving vehicles to the database is disabled, lets warn players it will disappear
-	if (!(DZMSSaveVehicles)) then {
-		_object addEventHandler ["GetIn",{
-			_nil = [nil,(_this select 2),"loc",rTITLETEXT,"Warning: This vehicle will disappear on server restart!","PLAIN DOWN",5] call RE;
-		}];
+	if (!_is50Cal) then {
+		_object setFuel _ranFuel;
+		_object setvelocity [0,0,1];
+		_object setDir (round(random 360));
+		
+		//If saving vehicles to the database is disabled, lets warn players it will disappear
+		if (!(DZMSSaveVehicles)) then {
+			_object addEventHandler ["GetIn",{
+				_nil = [nil,(_this select 2),"loc",rTITLETEXT,"Warning: This vehicle will disappear on server restart!","PLAIN DOWN",5] call RE;
+			}];
+		};
 	};
 
 	true
