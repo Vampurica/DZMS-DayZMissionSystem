@@ -45,17 +45,17 @@ _vehicle = createVehicle [_veh1,[(_coords select 0) + 5.7534, (_coords select 1)
 [_vehicle] call DZMSSetupVehicle;
 
 //DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
-_crate = createVehicle ["USBasicWeaponsBox",[(_coords select 0) + 2.6778,(_coords select 1) - 3.0889,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle [if (DZMSEpoch) then {"USBasicWeaponsBox"} else {"AmmoBoxBig"},[(_coords select 0) + 2.6778,(_coords select 1) - 3.0889,0],[], 0, "CAN_COLLIDE"];
 [_crate,"medical"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 _crate setDir -28.85478;
 
-_crate2 = createVehicle ["USBasicWeaponsBox",[(_coords select 0) + 1.4805,(_coords select 1) - 3.7432,0],[], 0, "CAN_COLLIDE"];
+_crate2 = createVehicle [if (DZMSEpoch) then {"USBasicWeaponsBox"} else {"AmmoBoxBig"},[(_coords select 0) + 1.4805,(_coords select 1) - 3.7432,0],[], 0, "CAN_COLLIDE"];
 [_crate2,"medical"] ExecVM DZMSBoxSetup;
 [_crate2] call DZMSProtectObj;
 _crate2 setDir 62.744293;
 
-_crate3 = createVehicle ["USBasicAmmunitionBox",[(_coords select 0) + 2.5405,(_coords select 1) - 4.1612,0],[], 0, "CAN_COLLIDE"];
+_crate3 = createVehicle [if (DZMSEpoch) then {"USBasicAmmunitionBox"} else {"AmmoBoxBig"},[(_coords select 0) + 2.5405,(_coords select 1) - 4.1612,0],[], 0, "CAN_COLLIDE"];
 [_crate3,"weapons"] ExecVM DZMSBoxSetup;
 [_crate3] call DZMSProtectObj;
 _crate3 setDir -27.93351;

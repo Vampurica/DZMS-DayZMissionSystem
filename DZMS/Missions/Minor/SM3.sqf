@@ -35,10 +35,10 @@ _vehicle = createVehicle [_veh1,[(_coords select 0) - 10.6206, (_coords select 1
 [_vehicle] call DZMSSetupVehicle;
 
 //We create and fill the crate
-_crate = createVehicle ["USBasicAmmunitionBox",[(_coords select 0) + 0.7408, (_coords select 1) + 1.565, 0.10033049],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle [if (DZMSEpoch) then {"USBasicAmmunitionBox"} else {"AmmoBoxBig"},[(_coords select 0) + 0.7408, (_coords select 1) + 1.565, 0.10033049],[], 0, "CAN_COLLIDE"];
 [_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
-_crate1 = createVehicle ["USBasicAmmunitionBox",[(_coords select 0) - 0.2387, (_coords select 1) + 1.043, 0.10033049],[], 0, "CAN_COLLIDE"];
+_crate1 = createVehicle [if (DZMSEpoch) then {"USBasicAmmunitionBox"} else {"AmmoBoxBig"},[(_coords select 0) - 0.2387, (_coords select 1) + 1.043, 0.10033049],[], 0, "CAN_COLLIDE"];
 [_crate1,"weapons"] ExecVM DZMSBoxSetup;
 [_crate1] call DZMSProtectObj;
 

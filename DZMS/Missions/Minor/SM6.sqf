@@ -22,15 +22,15 @@ _crash = createVehicle ["UralWreck",_coords,[], 0, "CAN_COLLIDE"];
 [_crash] call DZMSProtectObj;
 
 //Add and fill the boxes
-_crate = createVehicle ["USLaunchersBox",[(_coords select 0) + 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle [if (DZMSEpoch) then {"USLaunchersBox"} else {"AmmoBoxBig"},[(_coords select 0) + 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 [_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
-_crate1 = createVehicle ["USLaunchersBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate1 = createVehicle [if (DZMSEpoch) then {"USLaunchersBox"} else {"AmmoBoxBig"},[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 [_crate1,"weapons"] ExecVM DZMSBoxSetup;
 [_crate1] call DZMSProtectObj;
 
-_crate2 = createVehicle ["RULaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate2 = createVehicle [if (DZMSEpoch) then {"RULaunchersBox"} else {"AmmoBoxBig"},[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 [_crate2,"weapons"] ExecVM DZMSBoxSetup;
 [_crate2] call DZMSProtectObj;
 

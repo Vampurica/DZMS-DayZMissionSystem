@@ -30,7 +30,7 @@ _vehicle1 = createVehicle [_veh2,[(_coords select 0) - 6.2764, (_coords select 1
 [_vehicle] call DZMSSetupVehicle;
 [_vehicle1] call DZMSSetupVehicle;
 
-_crate = createVehicle ["USVehicleBox",_coords,[], 0, "CAN_COLLIDE"];
+_crate = createVehicle [if (DZMSEpoch) then {"USVehicleBox"} else {"AmmoBoxBig"},_coords,[], 0, "CAN_COLLIDE"];
 _crate1 = createVehicle ["DZ_AmmoBoxUS",[(_coords select 0) - 3.7251,(_coords select 1) - 2.3614, 0],[], 0, "CAN_COLLIDE"];
 _crate2 = createVehicle ["DZ_AmmoBoxRU",[(_coords select 0) - 3.4346, 0, 0],[], 0, "CAN_COLLIDE"];
 _crate3 = createVehicle ["DZ_AmmoBoxUS",[(_coords select 0) + 4.0996,(_coords select 1) + 3.9072, 0],[], 0, "CAN_COLLIDE"];

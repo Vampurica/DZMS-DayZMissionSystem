@@ -38,13 +38,13 @@ _vehicle1 = createVehicle [_veh2,[(_coords select 0) + 15, (_coords select 1) - 
 [_vehicle1] call DZMSSetupVehicle;
 
 //We create and fill the crates
-_crate = createVehicle ["USVehicleBox",[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle [if (DZMSEpoch) then {"USVehicleBox"} else {"AmmoBoxBig"},[(_coords select 0) - 3, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 
 //DZMSBoxFill fills the box, DZMSProtectObj prevents it from disappearing
 [_crate,"medical"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
-_crate2 = createVehicle ["USLaunchersBox",[(_coords select 0) - 8, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate2 = createVehicle [if (DZMSEpoch) then {"USLaunchersBox"} else {"AmmoBoxBig"},[(_coords select 0) - 8, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 [_crate2,"weapons"] ExecVM DZMSBoxSetup;
 [_crate2] call DZMSProtectObj;
 

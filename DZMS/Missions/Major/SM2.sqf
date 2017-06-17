@@ -88,7 +88,7 @@ while {_loop} do {
 		
 		_chute = createVehicle ["ParachuteMediumEast", [(_newPos select 0),(_newPos select 1),200], [], 0, "FLY"];
 		[_chute] call DZMSProtectObj;
-		_box = createVehicle ["USVehicleBox", [(_newPos select 0),(_newPos select 1),200],[], 0, "CAN_COLLIDE"];
+		_box = createVehicle [if (DZMSEpoch) then {"USVehicleBox"} else {"AmmoBoxBig"}, [(_newPos select 0),(_newPos select 1),200],[], 0, "CAN_COLLIDE"];
 		[_box] call DZMSProtectObj;
 		_box attachTo [_chute, [0, 0, 1]];
 		
@@ -115,7 +115,7 @@ while {_loop} do {
 		
 		_chute = createVehicle ["ParachuteMediumEast", _newPos, [], 0, "FLY"];
 		[_chute] call DZMSProtectObj;
-		_box = createVehicle ["USVehicleBox", _newPos,[], 0, "CAN_COLLIDE"];
+		_box = createVehicle [if (DZMSEpoch) then {"USVehicleBox"} else {"AmmoBoxBig"}, _newPos,[], 0, "CAN_COLLIDE"];
 		[_box] call DZMSProtectObj;
 		_box attachTo [_chute, [0, 0, 1]];
 		
@@ -140,7 +140,7 @@ while {_fallCount < 45} do {
 
 detach _box;
 _box setpos [(getpos _box select 0), (getpos _box select 1), 0];
-_boxFin = createVehicle ["USVehicleBox",[(getpos _box select 0),(getpos _box select 1), 0],[],0,"CAN_COLLIDE"];
+_boxFin = createVehicle [if (DZMSEpoch) then {"USVehicleBox"} else {"AmmoBoxBig"},[(getpos _box select 0),(getpos _box select 1), 0],[],0,"CAN_COLLIDE"];
 deletevehicle _box;
 deletevehicle _chute;
 [[(getpos _boxFin select 0), (getpos _boxFin select 1), 0],"AN2 Cargo"] ExecVM DZMSAddMajMarker;

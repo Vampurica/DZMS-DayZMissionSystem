@@ -26,7 +26,7 @@ if (DZMSEpoch) then {
 [_crash] call DZMSProtectObj;
 
 //We create and fill the crates
-_crate = createVehicle ["USLaunchersBox",[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
+_crate = createVehicle [if (DZMSEpoch) then {"USLaunchersBox"} else {"AmmoBoxBig"},[(_coords select 0) - 6, _coords select 1,0],[], 0, "CAN_COLLIDE"];
 [_crate,"weapons"] ExecVM DZMSBoxSetup;
 [_crate] call DZMSProtectObj;
 
